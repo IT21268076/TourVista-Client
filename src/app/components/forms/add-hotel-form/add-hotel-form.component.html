@@ -1,0 +1,49 @@
+<!-- <app-nav-bar></app-nav-bar> -->
+
+<form [formGroup]="hotelForm" (ngSubmit)="onSubmit()" class="hotel-form">
+  <div>
+    <h2 style="text-align: center;">Hotel Form</h2>
+  </div>
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" id="name" formControlName="name" required>
+  </div>
+
+  <div class="address-group">
+    <div class="form-group">
+      <label for="no">No:</label>
+      <input type="text" id="no" formControlName="no" required>
+    </div>
+    <div class="form-group">
+      <label for="street">Street:</label>
+      <input type="text" id="street" formControlName="street" required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="city">City:</label>
+    <input type="text" id="city" formControlName="city" required>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <input type="text" id="description" formControlName="description" required>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email" required>
+  </div>
+
+  <div class="form-group">
+    <label for="contactno">Contact No:</label>
+    <input type="text" id="contactNo" formControlName="contactNo" required>
+  </div>
+
+  <div class="form-group">
+    <label for="images">Upload Images:</label>
+    <input type="file" id="images" multiple (change)="onFileSelected($event)">
+  </div>
+
+  <button type="submit">Add Hotel</button>
+</form>

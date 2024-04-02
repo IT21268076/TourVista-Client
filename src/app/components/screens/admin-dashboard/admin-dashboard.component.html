@@ -1,0 +1,49 @@
+<app-nav-bar class="sticky top-0 z-50 "></app-nav-bar>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-900 font-sans leading-normal tracking-normal ">
+
+    <!-- Sidebar -->
+    <div class="bg-gray-800 h-screen w-64 fixed shadow rounded-md border-transparent">
+        <div class="flex items-center justify-center mt-6">
+            <img class="h-12 w-12 rounded-full object-cover" src="https://source.unsplash.com/100x100/?portrait"
+                alt="Admin Profile">
+        </div>
+
+        <nav class="mt-10">
+            <ul class="flex flex-col gap-2">
+                <li>
+                    <a (click)="loadComponent(addHotelComponent)" class="block py-2 px-4  text-white rounded-md border border-transparent hover:border-blue-600 transition duration-300">Add Hotel</a>
+                </li>
+                <li>
+                    <a (click)="openHotelEmailPopup()" class="block py-2 px-4  text-white rounded-md border border-transparent hover:border-blue-600 transition duration-300">Add Contract</a>
+                </li>
+            </ul>
+        </nav>
+        
+    </div>
+
+    <!-- Content Area -->
+    <div class="ml-64 rounded-md border-transparent ">
+        <div class="p-4 ">
+            <h1 class="text-2xl font-bold text-white">Dashboard</h1>
+        </div>
+        
+        <div class="ml-54">
+            <!-- Outlet for dynamically loaded components -->
+            <div class="dynamic-component-container" #dynamicComponentContainer></div>
+            
+        </div>
+    </div>
+
+    <script src="admin-dashboard.component.ts"></script>
+</body>
+
+

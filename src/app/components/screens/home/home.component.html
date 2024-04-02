@@ -1,0 +1,17 @@
+<app-nav-bar></app-nav-bar>
+<section>
+  <div class="search-container">
+    <form class="search-form" (ngSubmit)="onSubmit()">
+      <input type="text" class="location-input" placeholder="Location" name="location" [(ngModel)]="location" required>
+      <input type="date" class="date-input" placeholder="Check in" name="checkIn" [(ngModel)]="checkInDate" required>
+      <input type="date" class="date-input" placeholder="Check out" name="checkOut" [(ngModel)]="checkOutDate" required>
+      <input type="number" class="guests-input" placeholder="Guests" name="guests" required>
+      <button type="submit" class="search-button">Search</button>
+    </form>
+  </div>
+</section>
+
+<section>
+    
+</section>
+  

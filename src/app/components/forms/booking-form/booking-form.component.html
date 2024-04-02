@@ -1,0 +1,48 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="booking-card">
+  <h2 style="text-align: center;">Booking Details</h2>
+  <form (ngSubmit)="submitBookingForm()" #bookingForm="ngForm">
+    <div class="form-group">
+      <label for="type">Room Type :</label>
+      <input type="text" id="type" name="type" [(ngModel)]="type" readonly>
+    </div>
+    <div class="form-group">
+      <label for="price">Room Type Price:</label>
+      <input type="text" id="price" name="price" [(ngModel)]="roomTypePrice" readonly>
+    </div>
+    <div class="form-group">
+      <label for="seasonName">Season Name:</label>
+      <input type="text" id="seasonName" name="seasonName" [(ngModel)]="seasonName" readonly>
+    </div>
+    <div class="form-group">
+      <label for="checkInDate">Check-in Date:</label>
+      <input type="text" id="checkInDate" name="checkInDate" [(ngModel)]="checkInDate" readonly>
+    </div>
+    <div class="form-group">
+      <label for="checkOutDate">Check-out Date:</label>
+      <input type="text" id="checkOutDate" name="checkOutDate" [(ngModel)]="checkOutDate" readonly>
+    </div>
+    <div class="form-group">
+      <label>Supplements:</label>
+      <div *ngFor="let supplement of supplements; let i = index" class="checkbox-group">
+        <label>
+          <input type="checkbox" [name]="'selectedSupplement' + i" [(ngModel)]="selectedSupplements[i]" (change)="calculateTotalAmount()" [value]="supplement.name">
+          {{ supplement.name }} - {{ supplement.price }}
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Total Amount:</label>
+      <input type="text" id="totalAmount" name="totalAmount" [(ngModel)]="totalAmount" readonly>
+    </div>
+    <!-- Display discounts -->
+    <div class="form-group" *ngFor="let discount of discounts">
+      <p class="discount-info">
+        You have <span>{{ discount.amount }}</span> discount by <span>{{ discount.name }}</span> on <span>{{ discount.description }}</span> from <span>{{ discount.startDate | date }}</span> to <span>{{ discount.endDate | date }}</span>
+      </p>
+    </div>
+    <!-- Add other form fields as needed -->
+    <button type="submit" [disabled]="!selectedSupplements || selectedSupplements.length === 0">Confirm Booking</button>
+  </form>
+</div>

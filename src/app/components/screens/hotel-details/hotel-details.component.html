@@ -1,0 +1,61 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+    <div class="title">
+      <h2>{{ hotel.name }}</h2>
+    </div>
+    <section class="one">
+      <div class="hotel-image" >
+        <img *ngIf="hotel.hotelImages && hotel.hotelImages.length > 0" [src]="'data:image/png;base64,' + hotel.hotelImages[0].image" alt="Hotel Image">      
+    </div>
+      <div class="hotel-details">
+        <h2 style="margin-bottom: 3px;">{{ hotel.name }}</h2>
+        <p style="padding-left: 20px; font-size: 12px; margin-bottom: 2px;">Location : {{ hotel.no }}, {{hotel.street}}, {{hotel.city}}</p>
+        <p style="padding-left: 20px; font-size: 12px; margin-bottom: 2px;">Contact No : {{ hotel.contactNo }}</p>
+        <p style="padding-left: 15px;">{{ hotel.description }}</p>
+
+        <button mat-flat-button style="float: right;">Basic</button>
+      </div>
+    </section>
+
+    <div class="room-types">
+        <h2 style="text-align: center;"> Feel Free To Pick A Room </h2>
+    </div>
+
+    <section class="room-types">
+      <table class="room-types-table">
+          <thead>
+              <tr>
+                  <th>Room Type</th>
+                  <th>Price</th>
+                  <th>Season</th>
+                  <th>Supplements</th>
+                  <th>Supplements Price</th>
+                  <th>Actions</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let roomType of roomTypes">
+                  <td>{{ roomType.type }}</td>
+                  <td>{{ roomType.price }}</td> <!-- Assuming the first price is the base price -->
+                  <td>{{ roomType.seasonName }}</td>
+                  <td>
+                      <ul>
+                          <li *ngFor="let supplement of roomType.supplementSet">
+                              {{ supplement.name }} - {{ supplement.price }}
+                          </li>
+                      </ul>
+                  </td>
+                  <td>
+                      <ul>
+                          <li *ngFor="let supplement of roomType.supplementSet">
+                              {{ supplement.price }}
+                          </li>
+                      </ul>
+                  </td>
+                  <td><button mat-flat-button (click)="bookRoom(roomType)">Book</button></td>
+              </tr>
+          </tbody>
+      </table>
+  </section>
+</div>
+<!-- (click)="bookRoom(roomType.roomTypeId)" -->

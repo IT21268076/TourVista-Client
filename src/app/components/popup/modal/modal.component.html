@@ -1,0 +1,44 @@
+<div class="fixed inset-0 overflow-y-auto" *ngIf="errorOccurred">
+    <div class="flex items-center justify-center min-h-screen">
+        <!-- Modal backdrop -->
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" (click)="closeModal()"></div>
+        <!-- Modal content -->
+        <div class="bg-white rounded-lg p-6 w-full max-w-md mx-auto relative z-10">
+            <div class="mb-4">
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md" role="alert">
+                    <strong>Error!</strong> {{ errorMessage }}
+                </div>
+            </div>
+            <div class="text-right">
+                <!-- Close button -->
+                <button (click)="closeModal()"
+                    class="inline-block px-4 py-2 bg-red-500 text-white rounded-md transition-colors duration-300 hover:bg-red-600 focus:outline-none focus:bg-red-600">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fixed inset-0 overflow-y-auto" *ngIf="!errorOccurred">
+    <div class="flex items-center justify-center min-h-screen">
+        <!-- Modal backdrop -->
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" (click)="closeModal()"></div>
+        <!-- Modal content -->
+        <div class="bg-white rounded-lg p-6 w-full max-w-md mx-auto relative z-10">
+            <div class="mb-4">
+                <!-- Email input -->
+                <input type="email" [(ngModel)]="email" placeholder="Enter Hotel Email"
+                    class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
+                    required>
+            </div>
+            <div class="text-right">
+                <!-- Add Email button -->
+                <button (click)="addHotelEmail()"
+                    class="inline-block px-4 py-2 bg-blue-500 text-white rounded-md transition-colors duration-300 hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                    Add Email
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<table class="room-types-table">
+  <thead>
+    <tr>
+      <th>Room Type</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let roomType of roomTypes">
+      <td>{{ roomType.type }}</td>
+      <td>{{ roomType.roomSeasonPrices[0].price }}</td> <!-- Assuming the first price is the base price -->
+      <td><button mat-flat-button >Book</button></td>
+    </tr>
+  </tbody>
+</table>
+<!-- (click)="bookRoom(roomType.roomTypeId)" -->

@@ -1,0 +1,33 @@
+.card-container {
+    margin: 70px;
+    display: flex; /* Allow rows to wrap automatically */
+    flex-wrap: wrap;
+  }
+  
+.chips-container{
+    margin-top: 20px;
+    margin-left: 70px;
+}
+
+  .card-row {
+    display: flex; /* Display cards horizontally within each row */
+    flex-direction: row;  /* Arrange cards from left to right */
+    justify-content: space-between; /* Distribute cards evenly with space between */
+  }
+  
+  .example-card {
+    /* Existing styles for card appearance */
+    width: calc(30% - 30px); /* Adjust card width as needed */
+    margin: 35px; 
+    border-radius: 30px;
+    background-color: rgba(238, 238, 238, 0.186);
+  }
+
+  h2{
+    text-align: center;
+  }
+
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }

@@ -1,0 +1,58 @@
+.hotel-form {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 80px;
+    padding-top: 30px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(2, 210, 138, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #24AB70;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #1f4635;
+  }
+
+  .address-group {
+    display: flex;
+  }
+  
+  .address-group .form-group {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .address-group .form-group:last-child {
+    margin-right: 0;
+  }
+  
+  
