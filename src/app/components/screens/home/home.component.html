@@ -1,17 +1,118 @@
 <app-nav-bar></app-nav-bar>
-<section>
-  <div class="search-container">
-    <form class="search-form" (ngSubmit)="onSubmit()">
-      <input type="text" class="location-input" placeholder="Location" name="location" [(ngModel)]="location" required>
-      <input type="date" class="date-input" placeholder="Check in" name="checkIn" [(ngModel)]="checkInDate" required>
-      <input type="date" class="date-input" placeholder="Check out" name="checkOut" [(ngModel)]="checkOutDate" required>
-      <input type="number" class="guests-input" placeholder="Guests" name="guests" required>
-      <button type="submit" class="search-button">Search</button>
+
+<section class="relative h-screen h-[90vh]">
+  <!-- Background Image -->
+  <div class="absolute inset-0 bg-cover bg-center rounded-t-[45px] mt-10 ml-20 mr-20 " style="background-image: url('../../../../assets/images/back6.png');"></div>
+
+  <!-- Search Container -->
+  <div class="container relative z-10 flex justify-center items-center mx-auto h-full">
+    <form class="bar bg-white shadow-md rounded-full flex justify-between items-center max-w-7xl h-20 mt-[420px] pl-6" (ngSubmit)="onSubmit()">
+      <!-- Location -->
+      <div class="relative rounded-full px-6 py-2 hover:bg-gray-100">
+        <label for="location" class="block  mb-2">Where</label>
+        <input type="text" placeholder="Where you want to stay?" class="w-full bg-transparent focus:outline-none" name="location" [(ngModel)]="location" id="location" required>
+      </div>
+      <!-- Horizontal line -->
+      <hr class="w-px h-5 bg-gray-200">
+      <!-- Check-in -->
+      <div class="relative rounded-full px-6 py-2 hover:bg-gray-100">
+        <label for="checkIn" class="block mb-2">Check In</label>
+        <input type="date" placeholder="Check in" class="w-full bg-transparent focus:outline-none" name="checkIn" [(ngModel)]="checkInDate" id="checkIn" required>
+      </div>
+      <!-- Horizontal line -->
+      <hr class="w-px h-5 bg-gray-200">
+      <!-- Check-out -->
+      <div class="relative rounded-full px-6 py-2 hover:bg-gray-100">
+        <label for="checkOut" class="block mb-2">Check Out</label>
+        <input type="date" placeholder="Check out" class="w-full bg-transparent focus:outline-none" name="checkOut" [(ngModel)]="checkOutDate" id="checkOut" required>
+      </div>
+      
+      <!-- Horizontal line -->
+      <hr class="w-px h-5 bg-gray-200">
+      <!-- Guests -->
+      <div class="relative rounded-full px-6 py-2 hover:bg-gray-100">
+        <label for="guests" class="block mb-2">Who</label>
+        <input type="number" placeholder="Add guests" class="w-full bg-transparent focus:outline-none" name="guests"  id="guests" required>
+        <!-- Guests icon -->
+        <!-- <span class="absolute top-1/2 right-3 transform -translate-y-1/2 bg-red-500 text-white rounded-full p-2">2</span> -->
+      </div>
+      <!-- Search button -->
+      <button type="submit" class="py-7 px-7 bg-[#65B490] text-white rounded-full hover:bg-blue-600 transition duration-300">
+        <!-- Search icon -->
+        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+          <g id="SVGRepo_iconCarrier"> <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g>
+        </svg>
+        <!-- <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg> -->
+      </button>
     </form>
   </div>
 </section>
 
-<section>
-    
+<section class="relative">
+    <!--
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/aspect-ratio'),
+    ],
+  }
+  ```
+-->
+<div class="bg-gray-100">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
+      <h2 class="text-2xl font-bold text-gray-900">Collections</h2>
+
+      <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
+        <div class="group relative">
+          <div class="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
+            <img src="https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg" alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug." class="h-full w-full object-cover object-center">
+          </div>
+          <h3 class="mt-6 text-sm text-gray-500">
+            <a href="#">
+              <span class="absolute inset-0"></span>
+              Desk and Office
+            </a>
+          </h3>
+          <p class="text-base font-semibold text-gray-900">Work from home accessories</p>
+        </div>
+        <div class="group relative">
+          <div class="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
+            <img src="https://tailwindui.com/img/ecommerce-images/home-page-02-edition-02.jpg" alt="Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant." class="h-full w-full object-cover object-center">
+          </div>
+          <h3 class="mt-6 text-sm text-gray-500">
+            <a href="#">
+              <span class="absolute inset-0"></span>
+              Self-Improvement
+            </a>
+          </h3>
+          <p class="text-base font-semibold text-gray-900">Journals and note-taking</p>
+        </div>
+        <div class="group relative">
+          <div class="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
+            <img src="https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg" alt="Collection of four insulated travel bottles on wooden shelf." class="h-full w-full object-cover object-center">
+          </div>
+          <h3 class="mt-6 text-sm text-gray-500">
+            <a href="#">
+              <span class="absolute inset-0"></span>
+              Travel
+            </a>
+          </h3>
+          <p class="text-base font-semibold text-gray-900">Daily commute essentials</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </section>
   

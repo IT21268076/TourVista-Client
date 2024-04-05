@@ -1,1 +1,16 @@
-<p>my-bookings works!</p>
+<app-nav-bar></app-nav-bar>
+<div class="container mx-auto">
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-2xl font-bold">My Bookings</h1>
+      <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300" (click)="switchToUserProfile()">Switch to User Profile</button>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div *ngFor="let booking of bookings" class="bg-white rounded-lg shadow-md p-4 cursor-pointer" (click)="navigateToBookingDetails(booking.bookingId)">
+        <p class="text-lg font-semibold mb-2">Booking ID: {{ booking.bookingId }}</p>
+        <p>Check-in Date: {{ booking.checkInDate }}</p>
+        <p>Check-out Date: {{ booking.checkOutDate }}</p>
+        <!-- Add more details as needed -->
+      </div>
+    </div>
+  </div>
+  

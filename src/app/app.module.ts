@@ -29,7 +29,7 @@ import { BookingDetailComponent } from './components/popup/booking-detail/bookin
 import { AdminDashboardComponent } from './components/screens/admin-dashboard/admin-dashboard.component';
 import { ContractFormComponent } from './components/forms/contract-form/contract-form.component';
 import { ModalComponent } from './components/popup/modal/modal.component';
-//import { MyBookingsComponent } from './components/screens/my-bookings/my-bookings.component';
+import { MyBookingsComponent } from './components/screens/my-bookings/my-bookings.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,7 @@ import { ModalComponent } from './components/popup/modal/modal.component';
     AdminDashboardComponent,
     ContractFormComponent,
     ModalComponent,
-    //MyBookingsComponent,
+    MyBookingsComponent,
     
   ],
   imports: [

@@ -8,6 +8,7 @@ import { BookingFormComponent } from './components/forms/booking-form/booking-fo
 import { AddHotelFormComponent } from './components/forms/add-hotel-form/add-hotel-form.component';
 import { AdminDashboardComponent } from './components/screens/admin-dashboard/admin-dashboard.component';
 import { ContractFormComponent } from './components/forms/contract-form/contract-form.component';
+import { MyBookingsComponent } from './components/screens/my-bookings/my-bookings.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'add-hotel', component: AddHotelFormComponent},
   {path: 'admin-dashboard', component: AdminDashboardComponent},
   {path: 'add-contract', component: ContractFormComponent},
+  {path: 'my-bookings/:userId', component: MyBookingsComponent},
 ];
 
 @NgModule({

@@ -1,25 +1,36 @@
-// // my-bookings.component.ts
-// import { Component, OnInit } from '@angular/core';
-// import { Booking } from '../models/booking';
-// import { BookingService } from '../services/booking.service';
+import { Component, OnInit } from '@angular/core';
+import { MyBookings } from '../../../models/myBookingsModel';
+import { BookingService } from '../../../services/booking.service';
 
-// @Component({
-//   selector: 'app-my-bookings',
-//   templateUrl: './my-bookings.component.html',
-//   styleUrls: ['./my-bookings.component.css']
-// })
-// export class MyBookingsComponent implements OnInit {
-//   bookings: Booking[] = [];
+@Component({
+  selector: 'app-booking',
+  templateUrl: './my-bookings.component.html',
+  styleUrls: ['./my-bookings.component.css']
+})
+export class MyBookingsComponent implements OnInit {
 
-//   constructor(private bookingService: BookingService) { }
+  userId: string = ''; // Initialize with the relevant user ID
+  bookings: MyBookings[] = [];
 
-//   ngOnInit(): void {
-//     // Assuming userId is obtained from authentication
-//     const userId = 'user123';
+  constructor(private bookingService: BookingService) { }
 
-//     this.bookingService.getBookingsForUser(userId)
-//       .subscribe(bookings => {
-//         this.bookings = bookings;
-//       });
-//   }
-// }
+  ngOnInit(): void {
+    this.loadUserBookings();
+  }
+
+  loadUserBookings() {
+    this.bookingService.getUserBookings(this.userId)
+      .subscribe(data => {
+        this.bookings = data;
+      });
+  }
+
+  switchToUserProfile() {
+    // Implement navigation to user profile page
+  }
+
+  navigateToBookingDetails(bookingId: number) {
+    // Implement navigation to full booking details page using Angular Router
+  }
+
+}

@@ -1,49 +1,52 @@
 <!-- <app-nav-bar></app-nav-bar> -->
+<div class="flex justify-center ">
 
-<form [formGroup]="hotelForm" (ngSubmit)="onSubmit()" class="hotel-form">
-  <div>
-    <h2 style="text-align: center;">Hotel Form</h2>
-  </div>
-  <div class="form-group">
-    <label for="name">Name:</label>
-    <input type="text" id="name" formControlName="name" required>
+<form class="hotel-form bg-gray-800 p-8 rounded-lg shadow-lg w-[70%]" [formGroup]="hotelForm" (ngSubmit)="onSubmit()">
+  <div class="mb-6">
+    <h2 class="text-2xl font-bold text-center text-white">Hotel Form</h2>
   </div>
 
-  <div class="address-group">
-    <div class="form-group">
-      <label for="no">No:</label>
-      <input type="text" id="no" formControlName="no" required>
+  <div class="mb-4">
+    <label for="name" class="block text-white">Name:</label>
+    <input type="text" id="name" formControlName="name" required class="w-full px-3 py-2 rounded-lg border border-gray-700 bg-gray-900 text-white focus:outline-none focus:border-blue-500">
+  </div>
+
+  <div class="mb-4 flex flex-wrap -mx-2">
+    <div class="w-1/2 px-2">
+      <label for="no" class="block text-white">No:</label>
+      <input type="text" id="no" formControlName="no" required class="w-full px-3 py-2 rounded-lg border border-gray-700 bg-gray-900 text-white focus:outline-none focus:border-blue-500">
     </div>
-    <div class="form-group">
-      <label for="street">Street:</label>
-      <input type="text" id="street" formControlName="street" required>
+    <div class="w-1/2 px-2">
+      <label for="street" class="block text-white">Street:</label>
+      <input type="text" id="street" formControlName="street" required class="w-full px-3 py-2 rounded-lg border border-gray-700 bg-gray-900 text-white focus:outline-none focus:border-blue-500">
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="city">City:</label>
-    <input type="text" id="city" formControlName="city" required>
+  <div class="mb-4">
+    <label for="city" class="block text-white">City:</label>
+    <input type="text" id="city" formControlName="city" required class="w-full px-3 py-2 rounded-lg border border-gray-700 bg-gray-900 text-white focus:outline-none focus:border-blue-500">
   </div>
 
-  <div class="form-group">
-    <label for="description">Description:</label>
-    <input type="text" id="description" formControlName="description" required>
+  <div class="mb-4">
+    <label for="description" class="block text-white">Description:</label>
+    <input type="text" id="description" formControlName="description" required class="w-full px-3 py-2 rounded-lg border border-gray-700 bg-gray-900 text-white focus:outline-none focus:border-blue-500">
   </div>
 
-  <div class="form-group">
-    <label for="email">Email:</label>
-    <input type="email" id="email" formControlName="email" required>
+  <div class="mb-4">
+    <label for="email" class="block text-white">Email:</label>
+    <input type="email" id="email" formControlName="email" required class="w-full px-3 py-2 rounded-lg border border-gray-700 bg-gray-900 text-white focus:outline-none focus:border-blue-500">
   </div>
 
-  <div class="form-group">
-    <label for="contactno">Contact No:</label>
-    <input type="text" id="contactNo" formControlName="contactNo" required>
+  <div class="mb-4">
+    <label for="contactno" class="block text-white">Contact No:</label>
+    <input type="text" id="contactNo" formControlName="contactNo" required class="w-full px-3 py-2 rounded-lg border border-gray-700 bg-gray-900 text-white focus:outline-none focus:border-blue-500">
   </div>
 
-  <div class="form-group">
-    <label for="images">Upload Images:</label>
-    <input type="file" id="images" multiple (change)="onFileSelected($event)">
+  <div class="mb-4">
+    <label for="images" class="block text-white">Upload Images:</label>
+    <input type="file" id="images" multiple (change)="onFileSelected($event)" class="w-full px-3 py-2 rounded-lg border border-gray-700 bg-gray-900 text-white focus:outline-none focus:border-blue-500">
   </div>
 
-  <button type="submit">Add Hotel</button>
+  <button type="submit" class="w-full py-2 rounded-lg bg-blue-500 text-white font-bold hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Add Hotel</button>
 </form>
+</div>

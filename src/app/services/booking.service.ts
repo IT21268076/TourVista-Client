@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environment';
+import { MyBookings } from '../models/myBookingsModel';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,9 @@ export class BookingService {
   // getBookingsForUser(userId: string): Observable<Booking[]> {
   //   return this.http.get<Booking[]>(`${this.baseUrl}/bookings?userId=${userId}`);
   // }
+
+  getUserBookings(userId: string): Observable<MyBookings[]> {
+    return this.http.get<MyBookings[]>(`${this.backendUrl}/user/${userId}/bookings`);
+  }
 
 }
