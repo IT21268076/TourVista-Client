@@ -9,12 +9,12 @@
   <!-- Hotel Details Section -->
   <section class="flex flex-wrap items-center justify-center mb-8">
     <div class="w-full lg:w-1/2 p-4">
-      <div class="hotel-image rounded-lg overflow-hidden">
+      <div class="hotel-image rounded-xl overflow-hidden">
         <img *ngIf="hotel.hotelImages && hotel.hotelImages.length > 0" [src]="'data:image/png;base64,' + hotel.hotelImages[0].image" alt="Hotel Image">
       </div>
     </div>
     <div class="w-full lg:w-1/2 p-4">
-      <div class="hotel-details rounded-lg bg-[#767677] p-6">
+      <div class="hotel-details rounded-xl bg-gray-200 p-6">
         <h2 class="text-2xl font-bold mb-4">{{ hotel.name }}</h2>
         <p class="mb-4">{{ hotel.description }}</p>
         <p class="mb-2">Location : {{ hotel.no }}, {{ hotel.street }}, {{ hotel.city }}</p>
@@ -25,28 +25,27 @@
 
   <!-- Room Types Section -->
   <div class="room-types mb-8 text-center">
-    <h2 class="text-3xl font-bold mb-4 text-white">Feel Free To Pick A Room</h2>
+    <h2 class="text-3xl font-bold mb-4 text-gray-700">Feel Free To Pick A Room</h2>
   </div>
   
-
   <!-- Room Types Table -->
-  <section class="room-types rounded-lg overflow-hidden">
-    <table class="room-types-table w-full border-collapse">
+  <section class="room-types rounded-t-xl overflow-hidden">
+    <table class="room-types-table w-full  h-10 border-collapse">
       <thead class="bg-[#478F6F] text-white font-regular">
         <tr>
           <th class="px-4 py-2">Room Type</th>
           <th class="px-4 py-2">Price</th>
-          <th class="px-4 py-2">Season</th>
+          <!-- <th class="px-4 py-2">Season</th> -->
           <th class="px-4 py-2">Supplements</th>
           <th class="px-4 py-2">Supplements Price</th>
           <th class="px-4 py-2">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let roomType of roomTypes" class="border-b border-gray-300">
+        <tr *ngFor="let roomType of roomTypes" class="border-b border-gray-300 text-center">
           <td class="px-4 py-2">{{ roomType.type }}</td>
           <td class="px-4 py-2">{{ roomType.price }}</td>
-          <td class="px-4 py-2">{{ roomType.seasonName }}</td>
+          <!-- <td class="px-4 py-2">{{ roomType.seasonName }}</td> -->
           <td class="px-4 py-2">
             <ul>
               <li *ngFor="let supplement of roomType.supplementSet">{{ supplement.name }} - {{ supplement.price }}</li>
@@ -58,7 +57,7 @@
             </ul>
           </td>
           <td class="px-4 py-2">
-            <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+            <button class="bg-[#24ab70] hover:bg-[#478F6F] text-white font-bold py-2 px-4 rounded" (click)="bookRoom(roomType)">
               Book
             </button>
           </td>

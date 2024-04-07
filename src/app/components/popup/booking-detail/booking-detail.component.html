@@ -1,44 +1,43 @@
-<div class="booking-details">
-    <h2>Booking Details</h2>
-    <div class="info-row">
-      <div class="info-item">
-        <p><strong>Room Type :</strong> {{ roomType.type }}</p>
-        <p><strong>Room Type Price:</strong> {{ roomType.price }}</p>
-        <p><strong>Season Name:</strong> {{ roomType.seasonName }}</p>
-      </div>
-      <div class="info-item">
-        <p><strong>Check-in Date:</strong> {{ checkInDate }}</p>
-        <p><strong>Check-out Date:</strong> {{ checkOutDate }}</p>
-      </div>
+<div class="booking-details p-8 bg-gray-100 rounded-3xl shadow-lg w-[60vw] mx-auto">
+  <h2 class="text-2xl font-bold mb-8 text-center ">Booking Details</h2>
+  <div class="info-row grid grid-cols-2 gap-4">
+    <div class="info-item">
+      <p class="text-lg font-regular"><strong>Room Type :</strong> {{ roomType.type }}</p>
+      <p class="text-lg font-regular"><strong>Room Type Price:</strong> {{ roomType.price }}</p>
+      <p class="text-lg font-regular"><strong>Season :</strong> {{ roomType.seasonName }}</p>
     </div>
-  
-    <!-- Display supplements -->
-    <div class="supplements">
-      <h3>Select Supplements</h3>
-      <ul>
-        <li *ngFor="let supplement of supplements; let i = index">
-          <label>
-            <input type="checkbox" [name]="'selectedSupplement' + i" [(ngModel)]="selectedSupplements[i].selected" (change)="calculateTotalAmount()" [value]="supplement.name">
-            {{ supplement.name }} - {{ supplement.price }}
-          </label>
-        </li>
-      </ul>
-    </div><br>
-
-    <!-- Display discounts -->
-    <div class="discounts">
-      <p *ngFor="let discount of roomType.discounts">
-        You have {{ discount.amount }}% discount on {{ discount.description }} by {{ discount.name }} from {{ discount.startDate | date }} to {{ discount.endDate | date }}
-      </p>
+    <div class="info-item">
+      <p class="text-lg font-regular"><strong>Check-in Date:</strong> {{ checkInDate }}</p>
+      <p class="text-lg font-regular"><strong>Check-out Date:</strong> {{ checkOutDate }}</p>
     </div>
-  
-    <div class="totalAmount">
-      <label>Total Amount:</label>
-      <input type="text" id="totalAmount" name="totalAmount" [(ngModel)]="totalAmount" readonly>
-    </div>
-  
-    <!-- Add other form fields as needed -->
-  
-    <button mat-flat-button color="primary" [mat-dialog-close]="true" [disabled]="!selectedSupplements || selectedSupplements.length === 0" (click)="onConfirm()">Confirm Booking</button>
   </div>
-  
+
+  <!-- Display supplements -->
+  <div class="supplements mt-6">
+    <h3 class="text-xl font-bold mb-2">Select Supplements</h3>
+    <ul class="">
+      <li *ngFor="let supplement of supplements; let i = index" class="mb-2">
+        <label class="flex items-center">
+          <input type="checkbox" [name]="'selectedSupplement' + i" [(ngModel)]="selectedSupplements[i].selected" (change)="calculateTotalAmount()" [value]="supplement.name" class="mr-2">
+          <span class="text-md font-semibold px-2">{{ supplement.name }} - ${{ supplement.price }}</span>
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Display discounts -->
+  <div class="discounts mt-6">
+    <p *ngFor="let discount of roomType.discounts" class="mb-2">
+      You have {{ discount.amount }}% discount on {{ discount.description }} by {{ discount.name }} from {{ discount.startDate | date }} to {{ discount.endDate | date }}
+    </p>
+  </div>
+
+  <div class="totalAmount mt-6">
+    <label class="block text-lg font-semibold mb-2">Total Amount:</label>
+    <input type="text" id="totalAmount" name="totalAmount" [(ngModel)]="totalAmount" readonly class="w-full p-2 border border-gray-300 rounded">
+  </div>
+
+  <!-- Add other form fields as needed -->
+
+  <button [mat-dialog-close]="true" [disabled]="!selectedSupplements || selectedSupplements.length === 0" (click)="onConfirm()" class="mt-6 bg-[#24ab70] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Confirm Booking</button>
+</div>

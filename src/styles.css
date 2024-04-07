@@ -3,5 +3,5 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-html, body { height: 100%; background-color: #414141b0;}
+html, body { height: 100%; background-color: #EEEEEE;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

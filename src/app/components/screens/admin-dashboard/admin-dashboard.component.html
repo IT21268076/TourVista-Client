@@ -10,7 +10,7 @@
     <app-nav-bar class="sticky top-0 z-50"></app-nav-bar>
 
     <!-- Main Content Area with Dual Sidebars -->
-    <div class="flex h-screen text-gray-400 bg-gray-900">
+    <div class="flex h-screen text-gray-400 bg-gray-900 -mt-3">
 
         <!-- First Sidebar Component (Smaller) -->
         <div class="flex flex-col items-center w-16 pb-4 overflow-auto border-r border-gray-800 text-gray-500">
@@ -21,13 +21,13 @@
                 </svg>
             </a>
             <!-- Add Hotel Link -->
-            <a class="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-800" href="#" (click)="loadComponent(addHotelComponent)">
+            <a class="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-800"  (click)="loadComponent(addHotelComponent)">
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
             </a>
             <!-- Add Contract Link -->
-            <a class="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-800" href="#" (click)="openHotelEmailPopup()">
+            <a class="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-800"  (click)="openHotelEmailPopup()">
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
@@ -38,7 +38,10 @@
         <!-- Second Sidebar Component (Larger) -->
         <div class="flex flex-col items-center w-48 pb-4 overflow-auto border-r border-gray-800 text-gray-500">
             <!-- Second Sidebar Path Texts -->
-            <a (click)="loadComponent(addHotelComponent)" class="block py-2 px-4  text-white rounded-md border border-transparent hover:border-blue-600 transition duration-300">Add Hotel</a>
+            <p class="py-2 ">
+                <img class="max-w-[50px]" src="../../../../assets/images/logo3.png" alt="Example Image">
+              </p>
+            <a (click)="loadComponent(addHotelComponent)" class="block py-2 px-4 text-white rounded-md border border-transparent hover:border-blue-600 transition duration-300">Add Hotel</a>
             
             <a (click)="openHotelEmailPopup()" class="block py-2 px-4  text-white rounded-md border border-transparent hover:border-blue-600 transition duration-300">Add Contract</a>
             <!-- Add more path texts here -->
@@ -47,7 +50,7 @@
         <!-- Main Content Area -->
         <div class="flex flex-col flex-grow">
             <div class="flex items-center justify-between px-8 h-16 border-b border-gray-800">
-                <h1 class="text-lg font-medium text-white">Page Title</h1>
+                <h1 class="text-lg font-medium text-white">Admin Dashboard</h1>
                 <!-- Dropdown Menu -->
                 <button class="relative text-sm focus:outline-none group">
                     <div class="flex items-center justify-between w-full h-16 px-4 border-b border-gray-800 hover:bg-gray-800">
@@ -59,9 +62,8 @@
                         </svg>
                     </div>
                     <div class="absolute z-10 flex-col items-start hidden w-full pb-1 bg-gray-800 shadow-lg group-focus:flex">
-                        <a class="w-full px-4 py-2 text-left hover:bg-gray-900" href="#">Menu Item 1</a>
-                        <a class="w-full px-4 py-2 text-left hover:bg-gray-900" href="#">Menu Item 2</a>
-                        <a class="w-full px-4 py-2 text-left hover:bg-gray-900" href="#">Menu Item 3</a>
+                        <a class="w-full px-4 py-2 text-left hover:bg-gray-900" (click)="loadComponent(addHotelComponent)">Add hotel</a>
+                        <a class="w-full px-4 py-2 text-left hover:bg-gray-900" (click)="openHotelEmailPopup()">Add Contract</a>
                     </div>
                 </button>
             </div>

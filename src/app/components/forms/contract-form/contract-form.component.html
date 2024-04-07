@@ -1,60 +1,114 @@
-<form [formGroup]="contractForm" (ngSubmit)="onSubmit()" class="max-w-3xl mx-auto px-4 py-8">
-    <!-- Contract fields -->
-    <div class="mb-4">
-        <label for="startDate" class="block text-gray-700">Start Date:</label>
-        <input type="date" id="startDate" formControlName="startDate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-    </div>
-    <div class="mb-4">
-        <label for="endDate" class="block text-gray-700">End Date:</label>
-        <input type="date" id="endDate" formControlName="endDate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-    </div>
+<form [formGroup]="contractForm" (ngSubmit)="onSubmit()" class="max-w-7xl mx-auto px-8 pt-6 pb-8 mb-4 bg-gray-100 shadow-md rounded flex flex-col my-2">
 
-    <!-- Discounts -->
-    <div formArrayName="discounts" class="mb-4">
-        <div *ngFor="let discountGroup of discountsFormArray.controls; let i = index" class="mb-4">
-            <div [formGroupName]="i" class="flex items-center">
-                <label class="block text-gray-700">Name:</label>
-                <input type="text" formControlName="name" class="ml-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                <input type="number" formControlName="amount" class="ml-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                <input type="text" formControlName="description" class="ml-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                <input type="date" formControlName="startDate" class="ml-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                <input type="date" formControlName="endDate" class="ml-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-
-                <button type="button" (click)="removeDiscount(i)" class="ml-2 px-4 py-1 bg-red-500 text-white rounded-md hover:bg-red-600">Remove Discount</button>
+    <!-- <div class="bg-white px-8 pt-6 pb-8 mb-4 flex flex-col my-2"> -->
+        <!-- Instructions for User -->
+        <div class="mb-6">
+            <p class="text-gray-700 text-lg mb-4">Instructions for User:</p>
+            <p class="text-gray-600">Please fill in the contract details below:</p>
+        </div>
+    
+        <!-- Contract fields -->
+        <div class="-mx-3 md:flex mb-6 bg-gray-200 rounded-3xl p-4">
+            <p class="text-gray-700 text-lg mb-2">Contract Fields:</p>
+            <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                <label for="startDate" class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Start Date:</label>
+                <input type="date" id="startDate" formControlName="startDate" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+            </div>
+            <div class="md:w-1/2 px-3">
+                <label for="endDate" class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">End Date:</label>
+                <input type="date" id="endDate" formControlName="endDate" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
             </div>
         </div>
-        <button type="button" (click)="addDiscount()" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Add Discount</button>
-    </div>
-
-    <!-- Seasons -->
-    <div formArrayName="seasons" class="mb-4">
-        <div *ngFor="let seasonGroup of seasonsFormArray.controls; let i = index" class="mb-8">
-            <div [formGroupName]="i" class="mb-4">
+    
+        <!-- Discounts -->
+        <div formArrayName="discounts" class="mb-6">
+            <ng-container *ngFor="let discountGroup of discountsFormArray.controls; let i = index">
+                <div class="bg-gray-200 rounded-3xl p-4 mb-6">
+                    <p class="text-gray-700 text-lg mb-2">Discount {{ i + 1 }}:</p>
+                    <div [formGroupName]="i" class="-mx-3 md:flex mb-6 bg-grey-lighter rounded-md p-4">
+                        <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Name:</label>
+                            <input type="text" formControlName="name" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                        </div>
+                        <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Percentage:</label>
+                            <input type="number" formControlName="amount" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                        </div>
+                        <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Description:</label>
+                            <input type="text" formControlName="description" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                        </div>
+                        <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Start date:</label>
+                            <input type="date" formControlName="startDate" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                        </div>
+                        <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">End date:</label>
+                            <input type="date" formControlName="endDate" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                        </div>
+                        <button type="button" (click)="removeDiscount(i)" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </ng-container>
+            <button type="button" (click)="addDiscount()" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Add Discount</button>
+        </div>
+    
+    
+        <!-- Seasons -->
+        <div formArrayName="seasons" *ngFor="let seasonGroup of seasonsFormArray.controls; let i = index" class="mb-8 bg-gray-200 rounded-3xl p-4">
+            <div class="bg-gray-200 rounded-3xl p-4 mb-6">
+                <p class="text-gray-700 text-lg mb-2">Seasons {{ i + 1 }}:</p>
+                <div [formGroupName]="i" class="mb-6">
+                
                 <!-- Season fields -->
-                <div class="flex items-center">
-                    <label class="block text-gray-700">Season Name:</label>
-                    <input type="text" formControlName="seasonName" class="ml-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    <label class="block text-gray-700">Start Date:</label>
-                    <input type="date" formControlName="startDate" class="ml-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    <label class="block text-gray-700">End Date:</label>
-                    <input type="date" formControlName="endDate" class="ml-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    <label class="block text-gray-700">Markup Percentage:</label>
-                    <input type="number" formControlName="markUpPercentage" class="ml-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    <button type="button" (click)="removeSeason(i)" class="ml-2 px-4 py-1 bg-red-500 text-white rounded-md hover:bg-red-600">Remove Season</button>
+                <div class=" -mx-3 md:flex mb-6 bg-grey-lighter rounded-md p-4">
+                    <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Season Name:</label>
+                        <input type="text" formControlName="seasonName" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                    </div>
+                    <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Start Date:</label>
+                        <input type="date" formControlName="startDate" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                    </div>
+                    <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">End Date:</label>
+                        <input type="date" formControlName="endDate" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                    </div>
+                    <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Markup Percentage:</label>
+                        <input type="number" formControlName="markUpPercentage" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                    </div>
+                    <button type="button" (click)="removeSeason(i)" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
                 </div>
 
                 <!-- Room Types -->
-                <div formArrayName="roomTypes" class="mb-4">
-                    <div *ngFor="let roomTypeGroup of getRoomTypesFormArray(i).controls; let j = index" class="mb-4">
-                        <div [formGroupName]="j" class="mb-4">
+                <div formArrayName="roomTypes" class="mb-6 ">
+                    <div *ngFor="let roomTypeGroup of getRoomTypesFormArray(i).controls; let j = index" class="mb-6">
+                        <div [formGroupName]="j" class="mb-8 bg-gray-300 rounded-3xl p-8">
                             <!-- Room Type fields -->
-                            <div class="flex items-center">
-                                <label class="block text-gray-700">Room Type:</label>
-                                <input type="text" formControlName="type" class="ml-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <label class="block text-gray-700">Maximum No. of Guests:</label>
-                                <input type="number" formControlName="maxNoOfGuests" class="ml-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                
-                                <button type="button" (click)="removeRoomType(i, j)" class="ml-2 px-4 py-1 bg-red-500 text-white rounded-md hover:bg-red-600">Remove Room Type</button>
+                            <p class="text-gray-700 text-lg mb-2">Room type {{ j + 1 }}:</p>
+                            <div class="-mx-3 md:flex mb-6 bg-grey-lighter rounded-md p-4">
+                                <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Room Type:</label>
+                                    <input type="text" formControlName="type" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                                </div>
+                                <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Maximum No. of Guests:</label>
+                                    <input type="number" formControlName="maxNoOfGuests" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                                </div>
+                                <button type="button" (click)="removeRoomType(i, j)" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </button>
                             </div>
 
                             <!-- Room Season Prices -->
@@ -62,8 +116,11 @@
                                 <div *ngFor="let roomSeasonPriceGroup of getRoomTypesFormArray(i)?.at(j)?.get('roomSeasonPrices')?.value; let k = index" class="mb-2">
                                     <div [formGroupName]="k" class="flex items-center">
                                         <!-- Room Season Price fields -->
-                                        <label class="block text-gray-700">Price:</label>
-                                        <input type="number" formControlName="price" class="ml-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                        
+                                        <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Price:</label>
+                                            <input type="number" formControlName="price" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -73,17 +130,25 @@
                 </div>
 
                 <!-- Supplements -->
-                <div formArrayName="supplements" class="mb-4">
-                    <div *ngFor="let supplementGroup of getSupplementsFormArray(i).controls; let j = index" class="mb-4">
-                        <div [formGroupName]="j" class="mb-4">
+                <div formArrayName="supplements" class="mb-6">
+                    <div *ngFor="let supplementGroup of getSupplementsFormArray(i).controls; let j = index" class="mb-6">
+                        <div [formGroupName]="j" class="mb-8 bg-gray-300 rounded-3xl p-8">
                             <!-- Supplement fields -->
-                            <div class="flex items-center">
-                                <label class="block text-gray-700">Supplement Name:</label>
-                                <input type="text" formControlName="name" class="ml-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <label class="block text-gray-700">Description:</label>
-                                <input type="text" formControlName="description" class="ml-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-
-                                <button type="button" (click)="removeSupplement(i, j)" class="ml-2 px-4 py-1 bg-red-500 text-white rounded-md hover:bg-red-600">Remove Supplement</button>
+                            <p class="text-gray-700 text-lg mb-2">Supplement {{ j + 1 }}:</p>
+                            <div class="flex items-center mb-4">
+                                <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Supplement Name:</label>
+                                    <input type="text" formControlName="name" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                                </div>
+                                <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Description:</label>
+                                    <input type="text" formControlName="description" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                                </div>
+                                <button type="button" (click)="removeSupplement(i, j)" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </button>
                             </div>
 
                             <!-- Supplement Season Prices -->
@@ -91,8 +156,10 @@
                                 <div *ngFor="let supplementSeasonPriceGroup of getSupplementsFormArray(i).at(j).get('supplementsSeasonPrices')?.value; let k = index" class="mb-2">
                                     <div [formGroupName]="k" class="flex items-center">
                                         <!-- Supplement Season Price fields -->
-                                        <label class="block text-gray-700">Price:</label>
-                                        <input type="number" formControlName="price" class="ml-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                        <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Price:</label>
+                                            <input type="number" formControlName="price" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -102,8 +169,12 @@
                 </div>
             </div>
         </div>
-        <button type="button" (click)="addSeason()" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Add Season</button>
-    </div>
+        </div>
 
-    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Submit</button>
+        <button type="button" (click)="addSeason()" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Add Season</button>
+    
+        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Submit</button>
+    
+<!-- </div>
+     -->
 </form>

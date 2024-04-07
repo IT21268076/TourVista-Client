@@ -50,6 +50,7 @@ export class HotelService {
   }
 
   addHotel(hotelData: any): Observable<any> {
+    console.log(hotelData);
     return this.http.post<any>(`${this.backendUrl}/hotel/create`, hotelData);
   }
 }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -30,6 +30,9 @@ import { AdminDashboardComponent } from './components/screens/admin-dashboard/ad
 import { ContractFormComponent } from './components/forms/contract-form/contract-form.component';
 import { ModalComponent } from './components/popup/modal/modal.component';
 import { MyBookingsComponent } from './components/screens/my-bookings/my-bookings.component';
+import { LoginComponent } from './components/forms/login/login.component';
+import { AuthInterceptor } from './auth.interceptor';
+import { LogInterceptor } from './log.interceptor';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,7 @@ import { MyBookingsComponent } from './components/screens/my-bookings/my-booking
     ContractFormComponent,
     ModalComponent,
     MyBookingsComponent,
+    LoginComponent,
     
   ],
   imports: [
@@ -67,7 +71,10 @@ import { MyBookingsComponent } from './components/screens/my-bookings/my-booking
     CommonModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LogInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
