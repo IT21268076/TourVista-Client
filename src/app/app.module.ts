@@ -24,7 +24,7 @@ import { AddHotelFormComponent } from './components/forms/add-hotel-form/add-hot
 import { HotelDetailsComponent } from './components/screens/hotel-details/hotel-details.component';
 import { BookingFormComponent } from './components/forms/booking-form/booking-form.component';
 import { ViewBookingComponent } from './components/screens/view-booking/view-booking.component';
-import { RoomTypeTableComponent } from './components/screens/room-type-table/room-type-table.component';
+// import { RoomTypeTableComponent } from './components/screens/room-type-table/room-type-table.component';
 import { BookingDetailComponent } from './components/popup/booking-detail/booking-detail.component';
 import { AdminDashboardComponent } from './components/screens/admin-dashboard/admin-dashboard.component';
 import { ContractFormComponent } from './components/forms/contract-form/contract-form.component';
@@ -33,6 +33,7 @@ import { MyBookingsComponent } from './components/screens/my-bookings/my-booking
 import { LoginComponent } from './components/forms/login/login.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { LogInterceptor } from './log.interceptor';
+import { RegisterComponent } from './components/forms/register/register.component';
 
 @NgModule({
   declarations: [
@@ -45,13 +46,14 @@ import { LogInterceptor } from './log.interceptor';
     HotelDetailsComponent,
     BookingFormComponent,
     ViewBookingComponent,
-    RoomTypeTableComponent,
+    // RoomTypeTableComponent,
     BookingDetailComponent,
     AdminDashboardComponent,
     ContractFormComponent,
     ModalComponent,
     MyBookingsComponent,
     LoginComponent,
+    RegisterComponent,
     
   ],
   imports: [

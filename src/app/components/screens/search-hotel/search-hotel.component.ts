@@ -12,7 +12,8 @@ export class SearchHotelComponent implements OnInit {
   location: string = '';
   checkInDate: string = '';
   checkOutDate: string = '';
-  guests: number = 1;
+  noOfGuests!: number;
+  roomCount!: number;
   cards: any[] = [];
   image: any;
 
@@ -24,7 +25,8 @@ export class SearchHotelComponent implements OnInit {
       this.location = params['location'];
       this.checkInDate = params['checkInDate'];
       this.checkOutDate = params['checkOutDate'];
-      //const guests = params['guests'];
+      this.noOfGuests = params['noOfGuests'];
+      this.roomCount = params['roomCount'];
 
       // Call the method to fetch hotels with parameters
       this.fetchHotels(this.location, this.checkInDate, this.checkOutDate);
@@ -66,7 +68,7 @@ export class SearchHotelComponent implements OnInit {
             hotelId: hotel.hotelId, 
             image: hotel.images.length > 0 ? hotel.images[0].image : null, // Assuming the first image URL is used
             name: hotel.name,
-            address: hotel.address,
+            location: hotel.location,
             description: hotel.description
           };
         });
@@ -85,7 +87,9 @@ export class SearchHotelComponent implements OnInit {
     this.router.navigate(['/hotel-details', hotelId], {
       queryParams: {
         checkInDate: this.checkInDate,
-        checkOutDate: this.checkOutDate
+        checkOutDate: this.checkOutDate,
+        noOfGuests: this.noOfGuests,
+        roomCount: this.roomCount
       }
     });
   }

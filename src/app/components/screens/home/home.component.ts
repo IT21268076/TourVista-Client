@@ -13,6 +13,8 @@ export class HomeComponent {
   location: string = '';
   checkInDate: Date | null = null;
   checkOutDate: Date | null = null;
+  noOfGuests!: number;
+  roomCount!: number;
   isLoading: boolean = false; // Flag to indicate search in progress
   errorMessage: string | null = null;
 
@@ -30,7 +32,8 @@ export class HomeComponent {
         location: this.location,
         checkInDate: this.checkInDate,
         checkOutDate: this.checkOutDate,
-        //guests: this.guests
+        noOfGuests: this.noOfGuests,
+        roomCount: this.roomCount
       }
     });
   }

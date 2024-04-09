@@ -28,7 +28,7 @@ export class BookingService {
   // }
 
   getUserBookings(userId: string): Observable<MyBookings[]> {
-    return this.http.get<MyBookings[]>(`${this.backendUrl}/user/${userId}/bookings`);
+    return this.http.get<MyBookings[]>(`${this.backendUrl}/booking/user/${userId}/bookings`);
   }
 
 }

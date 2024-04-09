@@ -23,6 +23,9 @@ export class BookingDetailComponent implements OnInit {
   totalAmount!: number;
   checkInDate!: string;
   checkOutDate!: string;
+  noOfGuests!: number;
+  roomCount!: number;
+  userId: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -41,8 +44,11 @@ export class BookingDetailComponent implements OnInit {
     this.roomTypePrice = this.data.roomTypePrice;
     this.supplements = this.data.supplements;
     this.discounts = this.data.discounts;
+    this.noOfGuests = this.data.noOfGuests;
+    this.roomCount = this.data.roomCount;
+    this.userId = localStorage.getItem('userId');
 
-    console.log(this.data.roomType);
+    console.log(this.roomType);
   
     // Initialize selectedSupplements with empty objects
     // this.selectedSupplements = this.supplements.map(supplement => ({ name: supplement.name, price: supplement.price, selected: false }));
@@ -91,10 +97,13 @@ export class BookingDetailComponent implements OnInit {
     // Prepare the JSON data
     const jsonData = {
       //roomType: this.roomType,
+      userId: this.userId,
       type: this.roomType.type,
       roomTypeId: this.roomTypeId, 
       seasonId: this.seasonId,
       roomTypePrice: this.roomTypePrice,
+      noOfGuests: this.noOfGuests,
+      numberOfRooms: this.roomCount,
       seasonName: this.seasonName,
       checkInDate: this.checkInDate,
       checkOutDate: this.checkOutDate,

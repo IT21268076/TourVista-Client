@@ -9,12 +9,13 @@ import { BookingService } from '../../../services/booking.service';
 })
 export class MyBookingsComponent implements OnInit {
 
-  userId: string = ''; // Initialize with the relevant user ID
+  userId: any; // Initialize with the relevant user ID
   bookings: MyBookings[] = [];
 
   constructor(private bookingService: BookingService) { }
 
   ngOnInit(): void {
+    this.userId = localStorage.getItem('userId');
     this.loadUserBookings();
   }
 

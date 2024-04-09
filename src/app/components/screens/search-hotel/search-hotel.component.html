@@ -1,42 +1,26 @@
 <app-nav-bar></app-nav-bar>
-<h2 style="color: rgba(0, 0, 0, 0.705);">Search results</h2>
-<!-- <div class="chips-container">
-  <mat-chip-listbox aria-label="Selected options">
-    <mat-chip-option>{{ location }}</mat-chip-option>
-    <mat-chip-option>{{ checkInDate }}</mat-chip-option>
-    <mat-chip-option>{{ checkOutDate }}</mat-chip-option>
-    <mat-chip-option>{{ guests }} Guests</mat-chip-option>
-  </mat-chip-listbox>
-</div> -->
-<!-- <div class="card-container">
-  <mat-card class="example-card" *ngFor="let card of cards">
-    <img mat-card-image *ngFor="let imageUrl of card.images" [src]="imageUrl" alt="Hotel Image">
-    <mat-card-content>
-      <p><b>{{ card.name }}</b></p>
-      <p>{{ card.address }}</p>
-      <p>{{ card.description }}</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button (click)="redirectToHotelDetails(card.hotelId)">More</button>
-      <button mat-button>Expand</button>
-    </mat-card-actions>
-  </mat-card>
-</div> -->
+<div class="mx-20">
+<h2 class="text-xl text-gray-700 text-center">Search results</h2>
 
-<div class="card-container">
-  <mat-card class="example-card" *ngFor="let card of cards">
-    <img mat-card-image [src]="card.image" alt="Hotel Image"> <!-- Update the src binding -->
-    <mat-card-content>
-      <p><b>{{ card.name }}</b></p>
-      <p>{{ card.city }}</p>
-      <p>{{ card.description }}</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button (click)="redirectToHotelDetails(card.hotelId)">More</button>
-      <button mat-button>Expand</button>
-    </mat-card-actions>
-  </mat-card>
- 
+<div class="chips-container ml-5 mb-10 flex space-x-2">
+ <span class="bg-gray-300 text-gray-700 px-3 py-2 rounded-3xl">{{ location }}</span>
+ <span class="bg-gray-300 text-gray-700 px-3 py-2 rounded-3xl">{{ checkInDate }}</span>
+ <span class="bg-gray-300 text-gray-700 px-3 py-2 rounded-3xl">{{ checkOutDate }}</span>
+ <span class="bg-gray-300 text-gray-700 px-3 py-2 rounded-3xl">{{ noOfGuests }} Guests</span>
 </div>
+
+<div class="card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+ <div *ngFor="let card of cards" class="bg-white w-4/5 shadow-xl rounded-3xl overflow-hidden cursor-pointer" (click)="redirectToHotelDetails(card.hotelId)">
+    <img class="w-full h-48 object-cover" [src]="'data:image/png;base64,' + card.image" alt="Hotel Image">
+    <div class="p-4">
+      <p class="font-bold text-xl mb-2">{{ card.name }}</p>
+      <p class="text-gray-700 text-base ">{{ card.location }}</p>
+      <p class="text-gray-600 ">{{ card.description }}</p>
+    </div>
+ </div>
+</div>
+</div>
+
+
 
 

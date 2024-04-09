@@ -102,6 +102,8 @@ export class HotelDetailsComponent implements OnInit {
   hotel: any = {};
   checkInDate: any;
   checkOutDate: any;
+  noOfGuests: any;
+  roomCount: any;
   roomTypes: any[] = [];
   hotelId: any;
 
@@ -123,6 +125,8 @@ export class HotelDetailsComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.checkInDate = params['checkInDate'];
       this.checkOutDate = params['checkOutDate'];
+      this.noOfGuests = params['noOfGuests'];
+      this.roomCount = params['roomCount'];
     });
 
     this.fetchRoomTypesAndPrices(this.hotelId);
@@ -141,7 +145,7 @@ export class HotelDetailsComponent implements OnInit {
   }
 
   fetchRoomTypesAndPrices(hotelId: string) {
-    this.hotelService.getRoomTypesAndPrices(hotelId, this.checkInDate, this.checkOutDate).subscribe(
+    this.hotelService.getRoomTypesAndPrices(hotelId, this.checkInDate, this.checkOutDate, this.noOfGuests, this.roomCount).subscribe(
       (response: any[]) => {
         this.roomTypes = response;
         console.log(response)
@@ -164,6 +168,8 @@ export class HotelDetailsComponent implements OnInit {
         roomTypeId: roomType.roomTypeId, 
         roomTypePrice: roomType.price, 
         seasonName: roomType.seasonName,
+        noOfGuests: this.noOfGuests,
+        roomCount: this.roomCount,
         supplements: JSON.stringify(roomType.supplementSet),
         discounts: JSON.stringify(roomType.discounts)
       }

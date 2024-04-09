@@ -35,7 +35,7 @@
         <tr>
           <th class="px-4 py-2">Room Type</th>
           <th class="px-4 py-2">Price</th>
-          <!-- <th class="px-4 py-2">Season</th> -->
+          <th class="px-4 py-2">Maximum Adults</th>
           <th class="px-4 py-2">Supplements</th>
           <th class="px-4 py-2">Supplements Price</th>
           <th class="px-4 py-2">Actions</th>
@@ -45,15 +45,15 @@
         <tr *ngFor="let roomType of roomTypes" class="border-b border-gray-300 text-center">
           <td class="px-4 py-2">{{ roomType.type }}</td>
           <td class="px-4 py-2">{{ roomType.price }}</td>
-          <!-- <td class="px-4 py-2">{{ roomType.seasonName }}</td> -->
+          <td class="px-4 py-2">{{ roomType.maxNooOfGuests }}</td>
           <td class="px-4 py-2">
             <ul>
-              <li *ngFor="let supplement of roomType.supplementSet">{{ supplement.name }} - {{ supplement.price }}</li>
+              <li *ngFor="let supplement of roomType.supplementSet">{{ supplement.name }} - ${{ supplement.price }}</li>
             </ul>
           </td>
           <td class="px-4 py-2">
             <ul>
-              <li *ngFor="let supplement of roomType.supplementSet">{{ supplement.price }}</li>
+              <li *ngFor="let supplement of roomType.supplementSet">${{ supplement.price }}</li>
             </ul>
           </td>
           <td class="px-4 py-2">

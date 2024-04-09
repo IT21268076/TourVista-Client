@@ -256,7 +256,8 @@ export class ContractFormComponent implements OnInit {
 
   private createRoomSeasonPriceFormGroup(): FormGroup {
     return this.formBuilder.group({
-      price: ['', Validators.required]
+      price: ['', Validators.required],
+      roomCount: ['', Validators.required]
     });
   }
 

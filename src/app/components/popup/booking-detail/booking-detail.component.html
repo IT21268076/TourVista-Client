@@ -5,10 +5,12 @@
       <p class="text-lg font-regular"><strong>Room Type :</strong> {{ roomType.type }}</p>
       <p class="text-lg font-regular"><strong>Room Type Price:</strong> {{ roomType.price }}</p>
       <p class="text-lg font-regular"><strong>Season :</strong> {{ roomType.seasonName }}</p>
+      <p class="text-lg font-regular"><strong>No of Rooms : </strong> <input type="number" id="roomCount" name="roomCount" [(ngModel)]="roomCount" class="w-1/4 p-2 border border-gray-300 rounded"></p>
     </div>
     <div class="info-item">
       <p class="text-lg font-regular"><strong>Check-in Date:</strong> {{ checkInDate }}</p>
       <p class="text-lg font-regular"><strong>Check-out Date:</strong> {{ checkOutDate }}</p>
+      <p class="text-lg font-regular"><strong>No of Adults:</strong> {{ noOfGuests }}</p>
     </div>
   </div>
 

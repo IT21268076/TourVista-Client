@@ -32,9 +32,15 @@
       <!-- Guests -->
       <div class="relative rounded-full px-6 py-2 hover:bg-gray-100">
         <label for="guests" class="block mb-2">Who</label>
-        <input type="number" placeholder="Add guests" class="w-full bg-transparent focus:outline-none" name="guests"  id="guests" required>
-        <!-- Guests icon -->
-        <!-- <span class="absolute top-1/2 right-3 transform -translate-y-1/2 bg-red-500 text-white rounded-full p-2">2</span> -->
+        <input type="number" placeholder="Add guests" class="w-full bg-transparent focus:outline-none" name="guests" [(ngModel)]="noOfGuests" id="guests" required>
+      </div>
+
+      <!-- Horizontal line -->
+      <hr class="w-px h-5 bg-gray-200">
+      <!-- Guests -->
+      <div class="relative rounded-full px-6 py-2 hover:bg-gray-100">
+        <label for="guests" class="block mb-2">Rooms</label>
+        <input type="number" placeholder="How Many Rooms?" class="w-full bg-transparent focus:outline-none" name="roomCount" [(ngModel)]="roomCount" id="roomCount" >
       </div>
       <!-- Search button -->
       <button type="submit" class="py-7 px-7 bg-[#65B490] text-white rounded-full hover:bg-blue-600 transition duration-300">
@@ -70,7 +76,7 @@
 <div class="bg-gray-100">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
-      <h2 class="text-2xl font-bold text-gray-900">Collections</h2>
+      <h2 class="text-2xl font-bold text-gray-900">Popular Hotels</h2>
 
       <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
         <div class="group relative">

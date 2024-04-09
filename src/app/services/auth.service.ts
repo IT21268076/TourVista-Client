@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -32,11 +33,24 @@ export class AuthService {
         return this.currentUserSubject.value;
     }
 
+    register(userData: any): Observable<any> {
+        console.log(userData)
+        return this.http.post<any>(`http://localhost:8080/register`, userData)
+          .pipe(
+            catchError(error => {
+              // Handle errors here, such as logging the error and returning a custom error message
+              console.error('Registration failed:', error);
+              return throwError(error);
+            })
+          );
+      }
+
     login(username: string, password: string) {
         return this.http.post<any>(`http://localhost:8080/login`, { username, password })
             .pipe(map(user => {
                 // Store only the JWT token in local storage
                 localStorage.setItem('currentUser', user.token);
+                localStorage.setItem('userId', user.userId);
                 // Optionally, update the currentUserSubject with user information
                 this.currentUserSubject.next(user);
                 return user;
