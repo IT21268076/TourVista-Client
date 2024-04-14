@@ -31,4 +31,8 @@ export class BookingService {
     return this.http.get<MyBookings[]>(`${this.backendUrl}/booking/user/${userId}/bookings`);
   }
 
+  getBookingDetails(bookingId: any) {
+    return this.http.get<MyBookings>(`${this.backendUrl}/booking/${bookingId}`);
+  }
+
 }

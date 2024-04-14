@@ -130,6 +130,7 @@ export class HotelDetailsComponent implements OnInit {
     });
 
     this.fetchRoomTypesAndPrices(this.hotelId);
+    
   }
 
   fetchHotelDetails(hotelId: string) {
@@ -169,6 +170,7 @@ export class HotelDetailsComponent implements OnInit {
         roomTypePrice: roomType.price, 
         seasonName: roomType.seasonName,
         noOfGuests: this.noOfGuests,
+        markUpPercentage: roomType.markUpPercentage,
         roomCount: this.roomCount,
         supplements: JSON.stringify(roomType.supplementSet),
         discounts: JSON.stringify(roomType.discounts)

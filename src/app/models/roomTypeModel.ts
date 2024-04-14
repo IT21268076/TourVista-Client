@@ -5,6 +5,7 @@ export class RoomType {
     type: string;
     maxNooOfGuests: number;
     price: number;
+    markUpPercentage: any;
     supplementSet: Supplement[];
     discounts: Discount[];
 
@@ -15,6 +16,7 @@ export class RoomType {
         type: string,
         maxNooOfGuests: number,
         price: number,
+        markUpPercentage: any,
         supplementSet: Supplement[],
         discountSet: Discount[]
     ) {
@@ -23,6 +25,7 @@ export class RoomType {
         this.seasonName = seasonName;
         this.type = type;
         this.maxNooOfGuests = maxNooOfGuests;
+        this.markUpPercentage = markUpPercentage;
         this.price = price;
         this.supplementSet = supplementSet;
         this.discounts = discountSet

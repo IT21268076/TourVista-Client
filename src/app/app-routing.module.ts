@@ -12,17 +12,21 @@ import { MyBookingsComponent } from './components/screens/my-bookings/my-booking
 import { LoginComponent } from './components/forms/login/login.component';
 import { AuthGuard } from './services/authGuard';
 import { RegisterComponent } from './components/forms/register/register.component';
+import { MyBookingDetailsComponent } from './components/screens/my-booking-details/my-booking-details.component';
+import { ContractListComponent } from './components/screens/contract-list/contract-list.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'search', component: SearchHotelComponent},
-  {path: 'hotel-details/:hotelId', component: HotelDetailsComponent},
+  {path: 'hotel-details/:hotelId', component: HotelDetailsComponent, canActivate: [AuthGuard], data: { roles: ['USER']}},
   {path: 'roomType', component: HotelDetailsComponent, canActivate: [AuthGuard], data: { roles: ['USER']}},
-  {path: 'booking', component: BookingFormComponent, canActivate: [AuthGuard]},
+  {path: 'booking', component: BookingFormComponent, canActivate: [AuthGuard], data: { roles: ['USER']}},
   {path: 'add-hotel', component: AddHotelFormComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN']}},
-  {path: 'admin-dashboard', component: AdminDashboardComponent}, //canActivate: [AuthGuard], data: { roles: ['ADMIN']}},
+  {path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN']}},
   {path: 'add-contract', component: ContractFormComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN']}},
-  {path: 'my-bookings', component: MyBookingsComponent},
+  {path: 'view-contracts/:hotelId', component: ContractListComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN']}},
+  {path: 'my-bookings', component: MyBookingsComponent, canActivate: [AuthGuard], data: { roles: ['USER']}},
+  {path: 'my-booking-details/:bookingId', component: MyBookingDetailsComponent, canActivate: [AuthGuard], data: { roles: ['USER']}},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent}
 ];

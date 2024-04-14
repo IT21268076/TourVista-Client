@@ -44,6 +44,7 @@ export class ModalComponent {
     );
   }
 
+
   closeModal(): void {
     // Close the modal by removing it from the DOM
     this.errorOccurred = false;

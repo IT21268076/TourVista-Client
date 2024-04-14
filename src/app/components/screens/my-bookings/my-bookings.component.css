@@ -1,0 +1,71 @@
+/* Styles for the cover image container */
+.cover-image-container {
+    position: relative;
+    height: 200px; /* Adjust height as needed */
+    overflow: hidden;
+  }
+  
+  .cover-image {
+    width: 100%;
+  }
+  
+  /* Edit icon */
+  .edit-icon {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Tab switch buttons */
+  .tab-switch-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .tab-button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  .tab-button.active {
+    color: blue; /* Change color for active tab */
+  }
+  
+  /* Content container */
+  .content-container {
+    padding: 20px;
+  }
+  
+  /* Booking card */
+  .booking-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+  
+  .booking-details {
+    flex: 1;
+  }
+  
+  .booking-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .cancel-button {
+    margin-right: 10px;
+  }
+  
+  /* Additional styles as needed */
+  

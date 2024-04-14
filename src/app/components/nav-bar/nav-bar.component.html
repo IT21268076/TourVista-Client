@@ -1,4 +1,4 @@
-<p>
+<!-- <p>
     <mat-toolbar style="background-color: rgba(0, 0, 0, 0.726);">
       <div class="logo-container">
         <img src="..\..\..\assets\images\logo3.png" >
@@ -19,4 +19,42 @@
       
     </mat-toolbar>
   </p>
+   -->
+
+   <mat-toolbar style="background-color: rgba(0, 0, 0, 0.726);">
+    <div class="logo-container">
+       <img src="..\..\..\assets\images\logo3.png">
+    </div>
+    <span style="color: aliceblue;">Tour Vista</span>
+    <span class="example-spacer"></span>
+    <a style="color: aliceblue;" mat-button routerLink="/">Home</a>  
+    <a style="color: aliceblue;" mat-button routerLink="/about">About Us</a>  
+    <a style="color: aliceblue;" mat-button routerLink="/tours">Tours</a>
+    <span class="example-spacer"></span>
+    <button mat-button routerLink="/login" *ngIf="!isLoggedIn" style="font-weight: lighter; font-size: 13px; color:white; background-color: #24ab70; border-radius: 35px;">
+       <mat-icon>login</mat-icon> Login
+    </button>
+    <button mat-button routerLink="/register"  *ngIf="!isLoggedIn" style="font-weight: lighter; font-size: 13px; margin: 10px;color:white; background-color: rgba(36, 171, 112, 1); border-radius: 35px;">
+       <mat-icon>person_add</mat-icon> Signup
+    </button>
+    <button mat-button *ngIf="isLoggedIn" (click)="onLogout()" style="font-weight: lighter; font-size: 13px; color:white; background-color: rgba(36, 171, 112, 1); border-radius: 35px;">
+       <mat-icon>logout</mat-icon> Logout
+    </button>
+    
+    <button mat-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" aria-label="Menu" style="font-weight: lighter; font-size: 13px; color:white; background-color: rgba(36, 171, 112, 1); border-radius: 35px;">
+      <mat-icon>menu</mat-icon>
+   </button>
+   <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="onPathSelected('myBookings')">
+       <mat-icon class="text-lg text-white">book</mat-icon>
+       <span>My Bookings</span>
+    </button>
+    <button mat-menu-item (click)="onPathSelected('myProfile')">
+       <mat-icon>account_circle</mat-icon>
+       <span>My Profile</span>
+    </button>
+  </mat-menu>
   
+   </mat-toolbar>
+   
+   

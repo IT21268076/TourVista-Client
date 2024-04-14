@@ -1,7 +1,7 @@
 <app-nav-bar></app-nav-bar>
 
 <section class="border-red-500 bg-gray-200 min-h-screen flex items-center justify-center">
-    <div class="bg-gray-100 flex rounded-2xl shadow-lg max-w-4xl w-full">
+    <div class="bg-gray-100 flex rounded-2xl shadow-lg max-w-4xl w-full my-8">
         <div class="md:w-2/3 px-6 p-5"> <!-- Adjusted width to accommodate 2/3 of the container for the form -->
             <h2 class="text-2xl font-bold text-[#002D74]">Register</h2>
             <p class="text-sm mt-4 text-[#002D74]">Create a new account</p>
@@ -15,19 +15,19 @@
                     <input type="text" [(ngModel)]="firstName" name="firstName" id="firstName" placeholder="Enter First Name" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required>
                 </div>
                 <div>
-                    <label class="block text-gray-700">Last Name</label>
+                    <label class="block text-gray-700 mt-2">Last Name</label>
                     <input type="text" [(ngModel)]="lastName" name="lastName" id="lastName" placeholder="Enter Last Name" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required>
                 </div>
                 <div>
-                    <label class="block text-gray-700">Email Address</label>
+                    <label class="block text-gray-700 mt-2">Email Address</label>
                     <input type="email" [(ngModel)]="email" name="email" id="email" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required>
                 </div>
                 <div>
-                    <label class="block text-gray-700">Password</label>
+                    <label class="block text-gray-700 mt-2">Password</label>
                     <input type="password" [(ngModel)]="password" name="password" id="password" placeholder="Enter Password" minlength="3" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" required>
                 </div>
                 <div>
-                    <label class="block text-gray-700">Mobile Number</label>
+                    <label class="block text-gray-700 mt-2">Mobile Number</label>
                     <input type="tel" [(ngModel)]="mobileNo" name="mobileNo" id="mobileNo" placeholder="Enter Mobile Number" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required>
                 </div>
 

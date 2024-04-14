@@ -1,30 +1,65 @@
-<form [formGroup]="contractForm" (ngSubmit)="onSubmit()" class="max-w-7xl mx-auto px-8 pt-6 pb-8 mb-4 bg-gray-100 shadow-md rounded flex flex-col my-2">
+<form [formGroup]="contractForm" (ngSubmit)="onSubmit()" class="max-w-6xl mx-auto px-8 pt-6 pb-8 mb-4 bg-gray-100 shadow-md rounded flex flex-col my-2">
 
     <!-- <div class="bg-white px-8 pt-6 pb-8 mb-4 flex flex-col my-2"> -->
-        <!-- Instructions for User -->
-        <div class="mb-6">
-            <p class="text-gray-700 text-lg mb-4">Instructions for User:</p>
-            <p class="text-gray-600">Please fill in the contract details below:</p>
-        </div>
     
         <!-- Contract fields -->
         <div class="-mx-3 md:flex mb-6 bg-gray-200 rounded-3xl p-4">
-            <p class="text-gray-700 text-lg mb-2">Contract Fields:</p>
-            <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-                <label for="startDate" class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Start Date:</label>
-                <input type="date" id="startDate" formControlName="startDate" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
-            </div>
-            <div class="md:w-1/2 px-3">
-                <label for="endDate" class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">End Date:</label>
-                <input type="date" id="endDate" formControlName="endDate" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+            <p class="text-gray-700 text-lg mb-2 pr-8">Contract Fields:</p>
+            <div class="md:grid md:grid-cols-3 md:gap-4">
+                <!-- Instructions for User -->
+                <div class="mb-6">
+                    <p class="text-gray-700 text-lg mb-4">Instructions for User:</p>
+                    <p class="text-gray-600">Please fill in the contract details below:</p>
+                </div>
+                <!-- Start Date -->
+                <div class="mb-6 md:mb-0">
+                    <label for="startDate" class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Start Date:</label>
+                    <input type="date" id="startDate" formControlName="startDate" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                </div>
+
+                <!-- End Date -->
+                <div class="mb-6 md:mb-0">
+                    <label for="endDate" class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">End Date:</label>
+                    <input type="date" id="endDate" formControlName="endDate" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                </div>
+
+                <!-- Prepayment Percentage -->
+                <div class="mb-6 md:mb-0">
+                    <label for="prepaymentPercentage" class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Prepayment Percentage:</label>
+                    <input type="number" id="prepaymentPercentage" formControlName="prepaymentPercentage" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                </div>
+
+                <!-- Cancellation Fee -->
+                <div class="mb-6 md:mb-0">
+                    <label for="cancellationFee" class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Cancellation Fee:</label>
+                    <input type="number" id="cancellationFee" formControlName="cancellationFee" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                </div>
+
+                <!-- Number of Balance Payment Dates -->
+                <div class="mb-6 md:mb-0">
+                    <label for="noOfBalancePaymentDates" class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Number of Balance Payment Dates:</label>
+                    <input type="number" id="noOfBalancePaymentDates" formControlName="noOfBalancePaymentDates" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                </div>
+
+                <!-- Number of Dates of Cancellation -->
+                <div class="mb-6 md:mb-0">
+                    <label for="noOfDatesOfCancellation" class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Number of Dates of Cancellation:</label>
+                    <input type="number" id="noOfDatesOfCancellation" formControlName="noOfDatesOfCancellation" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                </div>
             </div>
         </div>
+
     
         <!-- Discounts -->
         <div formArrayName="discounts" class="mb-6">
             <ng-container *ngFor="let discountGroup of discountsFormArray.controls; let i = index">
                 <div class="bg-gray-200 rounded-3xl p-4 mb-6">
                     <p class="text-gray-700 text-lg mb-2">Discount {{ i + 1 }}:</p>
+                    <div class="mb-6">
+                        <p class="text-gray-700 text-lg mb-4">Instructions for User:</p>
+                        <p class="text-gray-600">Please fill in the discount details below</p>
+                        <p class="text-gray-600">You can add many discounts if any by clicking add discount button</p>
+                    </div>
                     <div [formGroupName]="i" class="-mx-3 md:flex mb-6 bg-grey-lighter rounded-md p-4">
                         <div class="md:w-1/5 px-3 mb-6 md:mb-0">
                             <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Name:</label>
@@ -62,6 +97,13 @@
         <div formArrayName="seasons" *ngFor="let seasonGroup of seasonsFormArray.controls; let i = index" class="mb-8 bg-gray-200 rounded-3xl p-4">
             <div class="bg-gray-200 rounded-3xl p-4 mb-6">
                 <p class="text-gray-700 text-lg mb-2">Seasons {{ i + 1 }}:</p>
+                <div class="mb-6">
+                    <p class="text-gray-700 text-lg mb-4">Instructions for User:</p>
+                    <p class="text-gray-600">Please fill in the Season details below</p>
+                    <p class="text-gray-600">Please fille the roomtypes and supplements according to the season</p>
+                    <p class="text-gray-600">You can add many seasons if any by clicking add season button</p>
+                    <p class="text-gray-600">You can remove any seasons by clicking remove button</p>
+                </div>
                 <div [formGroupName]="i" class="mb-6">
                 
                 <!-- Season fields -->
@@ -92,6 +134,13 @@
                 <!-- Room Types -->
                 <div formArrayName="roomTypes" class="mb-6 ">
                     <div *ngFor="let roomTypeGroup of getRoomTypesFormArray(i).controls; let j = index" class="mb-6">
+                        <div class="mb-6">
+                            <p class="text-gray-700 text-lg mb-4">Instructions for User:</p>
+                            <p class="text-gray-600">Please fill in the Room type details below</p>
+                            <p class="text-gray-600">Please fille the Room types according to the season</p>
+                            <p class="text-gray-600">You can add many Room Types if any by clicking Add Room type button</p>
+                            <p class="text-gray-600">You can remove any Room Type by clicking remove button</p>
+                        </div>
                         <div [formGroupName]="j" class="mb-8 bg-gray-300 rounded-3xl p-8">
                             <!-- Room Type fields -->
                             <p class="text-gray-700 text-lg mb-2">Room type {{ j + 1 }}:</p>
@@ -114,6 +163,7 @@
                             <!-- Room Season Prices -->
                             <div formArrayName="roomSeasonPrices">
                                 <div *ngFor="let roomSeasonPriceGroup of getRoomTypesFormArray(i)?.at(j)?.get('roomSeasonPrices')?.value; let k = index" class="mb-2">
+                                    
                                     <div [formGroupName]="k" class="flex items-center">
                                         <!-- Room Season Price fields -->
                                         
@@ -121,10 +171,15 @@
                                             <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Price:</label>
                                             <input type="number" formControlName="price" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
                                         </div>
-                                        <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                                        <!-- <div class="md:w-1/5 px-3 mb-6 md:mb-0">
                                             <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Room count:</label>
+                                            <input type="number" formControlName="roomCount" id="roomCount" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                                        </div> -->
+                                        <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">Room Count:</label>
                                             <input type="number" formControlName="roomCount" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -136,6 +191,13 @@
                 <!-- Supplements -->
                 <div formArrayName="supplements" class="mb-6">
                     <div *ngFor="let supplementGroup of getSupplementsFormArray(i).controls; let j = index" class="mb-6">
+                        <div class="mb-6">
+                            <p class="text-gray-700 text-lg mb-4">Instructions for User:</p>
+                            <p class="text-gray-600">Please fill in the Supplement details below</p>
+                            <p class="text-gray-600">Please fill the Supplements according to the season</p>
+                            <p class="text-gray-600">You can add many Supplements if any by clicking Add Supplement button</p>
+                            <p class="text-gray-600">You can remove any Supplement by clicking remove button</p>
+                        </div>
                         <div [formGroupName]="j" class="mb-8 bg-gray-300 rounded-3xl p-8">
                             <!-- Supplement fields -->
                             <p class="text-gray-700 text-lg mb-2">Supplement {{ j + 1 }}:</p>
@@ -173,11 +235,10 @@
                 </div>
             </div>
         </div>
+        <button type="button" (click)="addSeason()" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Add Season</button>
         </div>
 
-        <button type="button" (click)="addSeason()" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Add Season</button>
-    
-        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Submit</button>
+        <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Submit</button>
     
 <!-- </div>
      -->

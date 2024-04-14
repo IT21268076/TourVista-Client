@@ -96,6 +96,7 @@
 import { Component, ComponentFactoryResolver, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { AddHotelFormComponent } from '../../forms/add-hotel-form/add-hotel-form.component';
 import { ContractFormComponent } from '../../forms/contract-form/contract-form.component';
+import { ContractListComponent } from '../contract-list/contract-list.component';
 import { ModalComponent } from '../../popup/modal/modal.component';
 import { HotelService } from 'src/app/services/hotel.service'; // Import HotelService
 import { Subscription } from 'rxjs'; // Import Subscription
@@ -111,6 +112,7 @@ export class AdminDashboardComponent {
   // Declare component properties
   addHotelComponent = AddHotelFormComponent;
   addContractComponent = ContractFormComponent;
+  contractListComponent = ContractListComponent;
   hotelEmailPopupComponent = ModalComponent;
   hotelIdSubscription!: Subscription; // Subscription to handle hotelId obtained from popup
 
@@ -122,6 +124,8 @@ export class AdminDashboardComponent {
     const componentRef: ComponentRef<any> = this.dynamicComponentContainer.createComponent(componentFactory);
     if (component === this.addContractComponent && hotelId) {
       (componentRef.instance as ContractFormComponent).hotelId = hotelId; // Set hotelId for ContractFormComponent
+    } else if (component === this.contractListComponent && hotelId){
+      (componentRef.instance as ContractListComponent).hotelId = hotelId;
     }
   }
 
@@ -130,6 +134,7 @@ export class AdminDashboardComponent {
     const popupRef = this.dynamicComponentContainer.createComponent(popupFactory);
     popupRef.instance.hotelIdObtained.subscribe((hotelId: number) => {
       this.loadComponent(this.addContractComponent, hotelId);
+      this.loadComponent(this.contractListComponent, hotelId);
       popupRef.destroy(); // Close the popup after obtaining the hotelId
     });
   }

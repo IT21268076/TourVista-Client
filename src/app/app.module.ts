@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -12,6 +12,11 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+// import { register } from 'swiper/element/bundle';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +39,11 @@ import { LoginComponent } from './components/forms/login/login.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { LogInterceptor } from './log.interceptor';
 import { RegisterComponent } from './components/forms/register/register.component';
+import { MyBookingDetailsComponent } from './components/screens/my-booking-details/my-booking-details.component';
+import { ContractListComponent } from './components/screens/contract-list/contract-list.component';
+
+
+// register();
 
 @NgModule({
   declarations: [
@@ -54,7 +64,8 @@ import { RegisterComponent } from './components/forms/register/register.componen
     MyBookingsComponent,
     LoginComponent,
     RegisterComponent,
-    
+    MyBookingDetailsComponent,
+    ContractListComponent
   ],
   imports: [
     BrowserModule,
@@ -71,12 +82,18 @@ import { RegisterComponent } from './components/forms/register/register.componen
     HttpClientModule,
     MatDialogModule, 
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSidenavModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatMenuModule
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LogInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

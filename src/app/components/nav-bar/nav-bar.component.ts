@@ -1,8 +1,7 @@
-import {Component} from '@angular/core';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import {Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,10 +9,38 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./nav-bar.component.css'],
   
 })
-export class NavBarComponent {
-  constructor(private authService: AuthService) {}
+export class NavBarComponent implements OnInit{
 
-  onLogout() {
-    this.authService.logout();
+   constructor(private authService: AuthService, private router: Router) {}
+
+  isLoggedIn!: boolean;
+
+ ngOnInit(): void {
+    this.checkLoginStatus();
  }
+
+ checkLoginStatus(): void {
+    this.isLoggedIn = !!localStorage.getItem('currentUser');
+ }
+ 
+  onLogout(): void {
+    this.authService.logout();
+    this.isLoggedIn = false;
+ }
+
+ 
+ onPathSelected(path: string): void {
+   // Handle the path selection here
+   switch (path) {
+     case 'myBookings':
+       this.router.navigate(['/my-bookings']);
+       break;
+     case 'myProfile':
+       this.router.navigate(['/profile']);
+       break;
+     default:
+       break;
+   }
+ }
+ 
 }

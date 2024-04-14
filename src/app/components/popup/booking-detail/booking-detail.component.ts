@@ -25,7 +25,13 @@ export class BookingDetailComponent implements OnInit {
   checkOutDate!: string;
   noOfGuests!: number;
   roomCount!: number;
+  cancellationFee!: number;
+  noOfBalancePaymentDates: any;
+  noOfDatesOfCancellation: any;
+  prepaymentPercentage: any;
+  markUpPercentage: any;
   userId: any;
+  errorMessage: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -46,6 +52,11 @@ export class BookingDetailComponent implements OnInit {
     this.discounts = this.data.discounts;
     this.noOfGuests = this.data.noOfGuests;
     this.roomCount = this.data.roomCount;
+    this.cancellationFee = this.data.roomType.cancellationFee;
+    this.noOfBalancePaymentDates = this.data.roomType.noOfBalancePaymentDates;
+    this.noOfDatesOfCancellation = this.data.roomType.noOfDatesOfCancellation;
+    this.prepaymentPercentage = this.data.roomType.prepaymentPercentage;
+    this.markUpPercentage = this.data.roomType.markUpPercentage;
     this.userId = localStorage.getItem('userId');
 
     console.log(this.roomType);
@@ -76,19 +87,48 @@ export class BookingDetailComponent implements OnInit {
       this.calculateTotalAmount();
   }
 
+  // calculateTotalAmount(): void {
+  //   let supplementsPrice = 0;
+
+  //   // Calculate total supplements price based on selected supplements
+  //   this.selectedSupplements.forEach((supplement, index) => {
+  //     if (supplement.selected) {
+  //       supplementsPrice += supplement.price;
+  //     }
+  //   });
+
+  //   const roomPrice = Number(this.roomTypePrice);
+  //   this.totalAmount = roomPrice + supplementsPrice;
+  // }
+
   calculateTotalAmount(): void {
     let supplementsPrice = 0;
-
+    let discountAmount = 0;
+   
     // Calculate total supplements price based on selected supplements
     this.selectedSupplements.forEach((supplement, index) => {
-      if (supplement.selected) {
-        supplementsPrice += supplement.price;
-      }
+       if (supplement.selected) {
+         supplementsPrice += supplement.price;
+       }
     });
-
-    const roomPrice = Number(this.roomTypePrice);
-    this.totalAmount = roomPrice + supplementsPrice;
-  }
+   
+    // Calculate the number of nights
+    const checkInDate = new Date(this.checkInDate);
+    const checkOutDate = new Date(this.checkOutDate);
+    const numberOfNights = Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
+   
+    // Calculate the base price without discounts
+    const basePrice = (Number(this.roomTypePrice) * this.roomCount ) * this.markUpPercentage / 100 * numberOfNights * this.noOfGuests;
+   
+    // Calculate discount amount
+    this.discounts.forEach(discount => {
+       discountAmount += basePrice * discount.amount / 100;
+    });
+   
+    // Calculate the total amount
+    this.totalAmount = (basePrice * numberOfNights) + supplementsPrice - discountAmount;
+   }
+   
 
   onConfirm(): void {
     // Close the dialog with 'confirmed' result
@@ -119,11 +159,16 @@ export class BookingDetailComponent implements OnInit {
       .subscribe(
         response => {
           console.log('Backend response:', response);
-          // Handle the response if needed
+          // Close the dialog with 'confirmed' result
+          this.dialogRef.close('confirmed');
+          // Show an alert for successful bookings
+          alert("Booking confirmed!");
         },
         error => {
           console.error('Error:', error);
-          // Handle the error if needed
+          // Do not close the dialog and display the error message within the popup
+          // Assuming you have a variable to hold the error message, e.g., this.errorMessage
+          this.errorMessage = error.error.message || 'An error occurred while processing your booking.';
         }
       );
   }

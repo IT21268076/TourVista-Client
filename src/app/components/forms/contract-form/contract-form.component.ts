@@ -184,7 +184,7 @@ import { ContractService } from 'src/app/services/contract.service';
 })
 export class ContractFormComponent implements OnInit {
   contractForm!: FormGroup;
-  hotelId: number = 1; // Default hotel ID
+  hotelId: any; 
 
   constructor(
     private formBuilder: FormBuilder,
@@ -199,10 +199,10 @@ export class ContractFormComponent implements OnInit {
     this.contractForm = this.formBuilder.group({
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      prepaymentPercentage: ['', Validators.required],
-      cancellationFee: ['', Validators.required],
-      noOfBalancePaymentDates: ['', Validators.required],
-      noOfDatesOfCancellation: ['', Validators.required],
+      prepaymentPercentage: [''],
+      cancellationFee: [''],
+      noOfBalancePaymentDates: [''],
+      noOfDatesOfCancellation: [''],
       hotel: this.formBuilder.group({
         hotelId: [this.hotelId, Validators.required] // Set hotelId based on the value obtained from the popup
       }),
@@ -278,7 +278,7 @@ export class ContractFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (!this.contractForm.valid) {
+    if (this.contractForm.valid) {
       const contractData = this.contractForm.value;
       console.log(contractData);
 
@@ -293,7 +293,7 @@ export class ContractFormComponent implements OnInit {
         }
       );
     } else {
-      // Form is invalid, handle validation errors
+        console.log("Contract not added properly please try again...")
     }
   }
 

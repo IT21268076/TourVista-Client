@@ -14,4 +14,8 @@ export class ContractService {
   addContract(contractData: any): Observable<any> {
     return this.http.post<any>(`${this.backendUrl}/contract`, contractData);
   }
+
+  getContractByHotel(hotelId: any) : Observable<any> {
+    return this.http.get<any>(`${this.backendUrl}/contract/${hotelId}`);
+  }
 }

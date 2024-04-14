@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
         const currentUser = this.authService.currentUserValue;
         const token = localStorage.getItem('currentUser');
 
-        if (currentUser && token) {
+        if (token) {
             const userRole = this.authService.getUserRole(token);
             // Extract the roles from the route's data
             const allowedRoles = route.data['roles'];

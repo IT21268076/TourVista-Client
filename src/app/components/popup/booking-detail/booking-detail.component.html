@@ -1,27 +1,27 @@
-<div class="booking-details p-8 bg-gray-100 rounded-3xl shadow-lg w-[60vw] mx-auto">
+<div class="booking-details px-12 py-6 bg-gray-100 rounded-3xl shadow-lg w-full h-auto mx-auto">
   <h2 class="text-2xl font-bold mb-8 text-center ">Booking Details</h2>
   <div class="info-row grid grid-cols-2 gap-4">
     <div class="info-item">
-      <p class="text-lg font-regular"><strong>Room Type :</strong> {{ roomType.type }}</p>
-      <p class="text-lg font-regular"><strong>Room Type Price:</strong> {{ roomType.price }}</p>
-      <p class="text-lg font-regular"><strong>Season :</strong> {{ roomType.seasonName }}</p>
-      <p class="text-lg font-regular"><strong>No of Rooms : </strong> <input type="number" id="roomCount" name="roomCount" [(ngModel)]="roomCount" class="w-1/4 p-2 border border-gray-300 rounded"></p>
+      <p class="text-md font-regular"><strong>Room Type :</strong> {{ roomType.type }}</p>
+      <p class="text-md font-regular"><strong>Room Type Price:</strong> {{ roomType.price }}</p>
+      <p class="text-md font-regular"><strong>Season :</strong> {{ roomType.seasonName }}</p>
+      <p class="text-md font-regular"><strong>No of Rooms : </strong> <input type="number" id="roomCount" name="roomCount" [(ngModel)]="roomCount" (ngModelChange)="calculateTotalAmount()" class="w-1/4 p-2 border border-gray-300 rounded"></p>
     </div>
     <div class="info-item">
-      <p class="text-lg font-regular"><strong>Check-in Date:</strong> {{ checkInDate }}</p>
-      <p class="text-lg font-regular"><strong>Check-out Date:</strong> {{ checkOutDate }}</p>
-      <p class="text-lg font-regular"><strong>No of Adults:</strong> {{ noOfGuests }}</p>
+      <p class="text-md font-regular"><strong>Check-in Date:</strong> {{ checkInDate | date}}</p>
+      <p class="text-md font-regular"><strong>Check-out Date:</strong> {{ checkOutDate | date}}</p>
+      <p class="text-md font-regular"><strong>No of Adults:</strong> <input type="number" id="roomCount" name="roomCount" [(ngModel)]="noOfGuests" (ngModelChange)="calculateTotalAmount()" class="w-1/4 p-2 border border-gray-300 rounded"></p>
     </div>
   </div>
 
   <!-- Display supplements -->
   <div class="supplements mt-6">
-    <h3 class="text-xl font-bold mb-2">Select Supplements</h3>
+    <p class="text-md font-semibold mb-2">Select Supplements</p>
     <ul class="">
       <li *ngFor="let supplement of supplements; let i = index" class="mb-2">
         <label class="flex items-center">
           <input type="checkbox" [name]="'selectedSupplement' + i" [(ngModel)]="selectedSupplements[i].selected" (change)="calculateTotalAmount()" [value]="supplement.name" class="mr-2">
-          <span class="text-md font-semibold px-2">{{ supplement.name }} - ${{ supplement.price }}</span>
+          <span class="text-md font-regular px-2">{{ supplement.name }} - ${{ supplement.price }}</span>
         </label>
       </li>
     </ul>
@@ -29,9 +29,36 @@
 
   <!-- Display discounts -->
   <div class="discounts mt-6">
+    <p class="font-bold">Offers</p>
     <p *ngFor="let discount of roomType.discounts" class="mb-2">
       You have {{ discount.amount }}% discount on {{ discount.description }} by {{ discount.name }} from {{ discount.startDate | date }} to {{ discount.endDate | date }}
     </p>
+  </div>
+
+  <!-- Display cancellation policies -->
+  <div class="cancellationPolicies mt-6">
+    <p class="font-bold">Cancellation Policies: </p>
+    <li>
+      <span class="font-semibold">Cancellation Deadline:</span> Cancellations made <span class="font-semibold">{{noOfDatesOfCancellation}}</span> prior to the arrival date are eligible for a full refund.
+    </li>
+    <li>
+      <span class="font-semibold">Cancellation Fee:</span> Cancellations made <span class="font-semibold">{{noOfDatesOfCancellation}}</span> prior to the arrival date will be subjected to a cancellation fee of {{cancellationFee}}% of the total reservation cost.
+    </li>
+  </div>
+
+  <!-- Display payment policies -->
+  <div class="paymentPolicies mt-6">
+    <p class="font-bold">Payment Policies: </p>
+    <li>
+      <span class="font-semibold">Prepayment:</span> A deposit of <span class="font-semibold">{{prepaymentPercentage}}%</span> of the total stay may be charged at the time of booking.
+    </li>
+    <li>
+      <span class="font-semibold">Balance Payment:</span> The remaining balance will be charged <span class="font-semibold">{{noOfBalancePaymentDates}} days</span> prior to the arrival date. 
+    </li>
+  </div>
+  
+  <div class="mt-4">
+    <p class="font-bold text-[#65B490]">Kindly note that we charge a service fair of {{markUpPercentage}}%</p>
   </div>
 
   <div class="totalAmount mt-6">
@@ -39,7 +66,9 @@
     <input type="text" id="totalAmount" name="totalAmount" [(ngModel)]="totalAmount" readonly class="w-full p-2 border border-gray-300 rounded">
   </div>
 
-  <!-- Add other form fields as needed -->
-
+  <div *ngIf="errorMessage" class="error-message mt-4">
+    <p class="text-red-500">{{ errorMessage }}</p>
+   </div>
+   
   <button [mat-dialog-close]="true" [disabled]="!selectedSupplements || selectedSupplements.length === 0" (click)="onConfirm()" class="mt-6 bg-[#24ab70] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Confirm Booking</button>
 </div>
