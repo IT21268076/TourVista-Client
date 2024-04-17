@@ -9,6 +9,9 @@ import { Router } from '@angular/router'; // Import Router for navigation
   styleUrls: ['./search-hotel.component.css']
 })
 export class SearchHotelComponent implements OnInit {
+  Router(Router: any, arg1: string) {
+    throw new Error('Method not implemented.');
+  }
   location: string = '';
   checkInDate: string = '';
   checkOutDate: string = '';
@@ -66,7 +69,7 @@ export class SearchHotelComponent implements OnInit {
         this.cards = response.map((hotel: any) => {
           return {
             hotelId: hotel.hotelId, 
-            image: hotel.images.length > 0 ? hotel.images[0].image : null, // Assuming the first image URL is used
+            image: hotel.images?.length > 0 ? hotel.images[0].image : null, // Assuming the first image URL is used
             name: hotel.name,
             location: hotel.location,
             description: hotel.description

@@ -14,6 +14,7 @@ import { AuthGuard } from './services/authGuard';
 import { RegisterComponent } from './components/forms/register/register.component';
 import { MyBookingDetailsComponent } from './components/screens/my-booking-details/my-booking-details.component';
 import { ContractListComponent } from './components/screens/contract-list/contract-list.component';
+import { UpdateContractComponent } from './components/forms/update-contract/update-contract.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN']}},
   {path: 'add-contract', component: ContractFormComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN']}},
   {path: 'view-contracts/:hotelId', component: ContractListComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN']}},
+  {path: 'update-contract/:contractId', component: UpdateContractComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN']}},
   {path: 'my-bookings', component: MyBookingsComponent, canActivate: [AuthGuard], data: { roles: ['USER']}},
   {path: 'my-booking-details/:bookingId', component: MyBookingDetailsComponent, canActivate: [AuthGuard], data: { roles: ['USER']}},
   {path: 'login', component: LoginComponent},

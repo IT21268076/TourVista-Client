@@ -7,28 +7,26 @@
   </div>
 
   <!-- Hotel Details Section -->
-  <section class="flex flex-wrap items-center justify-center mb-8">
-    <div class="w-full lg:w-1/2 p-4">
-      <!-- <div class="hotel-image rounded-3xl overflow-hidden">
-        <img *ngIf="hotel.hotelImages && hotel.hotelImages.length > 0" [src]="'data:image/png;base64,' + hotel.hotelImages[0].image" alt="Hotel Image">
-      </div> -->
-      <swiper-container navigation="true" pagination="true" autoplay="true" delay="3000">
-        <swiper-slide *ngFor="let image of hotel.hotelImages">
-           <div class="hotel-image rounded-3xl overflow-hidden">
-             <img [src]="'data:image/png;base64,' + image.image" alt="Hotel Image">
-           </div>
-        </swiper-slide>
-       </swiper-container>
-    </div>
-    <div class="w-full lg:w-1/2 p-4">
-      <div class="hotel-details rounded-3xl bg-gray-200 p-6">
-        <h2 class="text-2xl font-bold mb-4">{{ hotel.name }}</h2>
-        <p class="mb-4 ">{{ hotel.description }}</p>
-        <p class="mb-2 font-bold">Location : {{ hotel.no }} , {{ hotel.street }} , {{ hotel.city }}</p>
-        <p class="mb-2 font-bold">Contact No : +{{ hotel.contactNo }}</p>
-      </div>
-    </div>
-  </section>
+<section class="flex flex-wrap items-center justify-center mb-8">
+  <div class="w-full lg:w-1/2 p-4 h-[500px]"> <!-- Fixed height added here -->
+     <swiper-container navigation="true" pagination="true" autoplay="true" delay="3000">
+       <swiper-slide *ngFor="let image of hotel.hotelImages">
+          <div class="hotel-image rounded-3xl overflow-hidden">
+            <img class="w-full h-full object-cover" [src]="'data:image/png;base64,' + image.image" alt="Hotel Image">
+          </div>
+       </swiper-slide>
+      </swiper-container>
+  </div>
+  <div class="w-full lg:w-1/2 p-4 h-[500px]"> <!-- Fixed height added here -->
+     <div class="hotel-details rounded-3xl bg-gray-200 h-full p-6">
+       <h2 class="text-2xl font-bold mb-4">{{ hotel.name }}</h2>
+       <p class="mb-4">{{ hotel.description }}</p>
+       <p class="mb-2 font-bold">Location : {{ hotel.no }} , {{ hotel.street }} , {{ hotel.city }}</p>
+       <p class="mb-2 font-bold">Contact No : +{{ hotel.contactNo }}</p>
+     </div>
+  </div>
+ </section>
+ 
 
   <!-- Room Types Section -->
   <div class="room-types mb-8 text-center">
@@ -43,6 +41,7 @@
           <th class="px-4 py-2">Room Type</th>
           <th class="px-4 py-2">Price</th>
           <th class="px-4 py-2">Maximum Adults</th>
+          <th class="px-4 py-2">Available Rooms</th>
           <th class="px-4 py-2">Supplements</th>
           <th class="px-4 py-2">Supplements Price</th>
           <th class="px-4 py-2">Actions</th>
@@ -53,9 +52,10 @@
           <td class="px-4 py-2">{{ roomType.type }}</td>
           <td class="px-4 py-2">$ {{ roomType.price }}</td>
           <td class="px-4 py-2">{{ roomType.maxNooOfGuests }}</td>
+          <td class="px-4 py-2">{{ roomType.noOfAvailableRooms }}</td>
           <td class="px-4 py-2">
             <ul>
-              <li *ngFor="let supplement of roomType.supplementSet">{{ supplement.name }} - ${{ supplement.price }}</li>
+              <li *ngFor="let supplement of roomType.supplementSet">{{ supplement.name }} - {{ supplement.description }}</li>
             </ul>
           </td>
           <td class="px-4 py-2">

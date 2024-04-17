@@ -1,18 +1,25 @@
 <div class="booking-details px-12 py-6 bg-gray-100 rounded-3xl shadow-lg w-full h-auto mx-auto">
   <h2 class="text-2xl font-bold mb-8 text-center ">Booking Details</h2>
-  <div class="info-row grid grid-cols-2 gap-4">
+  <div class="info-row grid grid-cols-2 gap-4 p-4">
     <div class="info-item">
-      <p class="text-md font-regular"><strong>Room Type :</strong> {{ roomType.type }}</p>
-      <p class="text-md font-regular"><strong>Room Type Price:</strong> {{ roomType.price }}</p>
-      <p class="text-md font-regular"><strong>Season :</strong> {{ roomType.seasonName }}</p>
-      <p class="text-md font-regular"><strong>No of Rooms : </strong> <input type="number" id="roomCount" name="roomCount" [(ngModel)]="roomCount" (ngModelChange)="calculateTotalAmount()" class="w-1/4 p-2 border border-gray-300 rounded"></p>
+      <p class="text-md font-regular text-gray-700 mb-2"><strong>Room Type:</strong> {{ roomType.type }}</p>
+      <p class="text-md font-regular text-gray-700 mb-2"><strong>Room Type Price:</strong> ${{ roomType.price }}</p>
+      <p class="text-md font-regular text-gray-700 mb-2"><strong>No of Adults:</strong></p>
+      <input type="number" id="roomCount" name="roomCount" [(ngModel)]="noOfGuests" (ngModelChange)="calculateTotalAmount()" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 mb-4">
+      <p class="text-md font-regular text-gray-700 mb-2"><strong>No of Rooms:</strong></p>
+      <input type="number" id="roomCount" name="roomCount" [(ngModel)]="roomCount" (ngModelChange)="calculateTotalAmount()" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 mb-4">
     </div>
     <div class="info-item">
-      <p class="text-md font-regular"><strong>Check-in Date:</strong> {{ checkInDate | date}}</p>
-      <p class="text-md font-regular"><strong>Check-out Date:</strong> {{ checkOutDate | date}}</p>
-      <p class="text-md font-regular"><strong>No of Adults:</strong> <input type="number" id="roomCount" name="roomCount" [(ngModel)]="noOfGuests" (ngModelChange)="calculateTotalAmount()" class="w-1/4 p-2 border border-gray-300 rounded"></p>
+      <p class="text-md font-regular text-gray-700 mb-2"><strong>Season:</strong> {{ roomType.seasonName }}</p>
+      <p class="text-md font-regular text-gray-700 mb-2"><strong>Available Rooms:</strong> {{ roomType.noOfAvailableRooms }}</p>
+      <p class="text-md font-regular text-gray-700 mb-2"><strong>Check-in Date:</strong></p>
+      <input type="date" id="checkInDate" [(ngModel)]="checkInDate" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 mb-4">
+      <p class="text-md font-regular text-gray-700 mb-2"><strong>Check-out Date:</strong></p>
+      <input type="date" id="checkOutDate" [(ngModel)]="checkOutDate" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 mb-4">
     </div>
-  </div>
+</div>
+
+
 
   <!-- Display supplements -->
   <div class="supplements mt-6">
@@ -39,10 +46,10 @@
   <div class="cancellationPolicies mt-6">
     <p class="font-bold">Cancellation Policies: </p>
     <li>
-      <span class="font-semibold">Cancellation Deadline:</span> Cancellations made <span class="font-semibold">{{noOfDatesOfCancellation}}</span> prior to the arrival date are eligible for a full refund.
+      <span class="font-semibold">Cancellation Deadline:</span> Cancellations made <span class="font-semibold">{{noOfDatesOfCancellation}} days</span> prior to the arrival date are eligible for a full refund.
     </li>
     <li>
-      <span class="font-semibold">Cancellation Fee:</span> Cancellations made <span class="font-semibold">{{noOfDatesOfCancellation}}</span> prior to the arrival date will be subjected to a cancellation fee of {{cancellationFee}}% of the total reservation cost.
+      <span class="font-semibold">Cancellation Fee:</span> Cancellations made <span class="font-semibold">{{noOfDatesOfCancellation}} days</span> prior to the arrival date will be subjected to a cancellation fee of {{cancellationFee}}% of the total reservation cost.
     </li>
   </div>
 
@@ -68,7 +75,9 @@
 
   <div *ngIf="errorMessage" class="error-message mt-4">
     <p class="text-red-500">{{ errorMessage }}</p>
+    <p class="text-red-500">Please Try lower room amount</p>
    </div>
    
-  <button [mat-dialog-close]="true" [disabled]="!selectedSupplements || selectedSupplements.length === 0" (click)="onConfirm()" class="mt-6 bg-[#24ab70] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Confirm Booking</button>
-</div>
+   <button [disabled]="!selectedSupplements || selectedSupplements.length === 0" (click)="onConfirm()" class="mt-6 bg-[#24ab70] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Confirm Booking</button>
+
+  </div>

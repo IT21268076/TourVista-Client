@@ -12,7 +12,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-// import { register } from 'swiper/element/bundle';
+import { register } from 'swiper/element/bundle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -41,9 +41,10 @@ import { LogInterceptor } from './log.interceptor';
 import { RegisterComponent } from './components/forms/register/register.component';
 import { MyBookingDetailsComponent } from './components/screens/my-booking-details/my-booking-details.component';
 import { ContractListComponent } from './components/screens/contract-list/contract-list.component';
+import { UpdateContractComponent } from './components/forms/update-contract/update-contract.component';
 
 
-// register();
+register();
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { ContractListComponent } from './components/screens/contract-list/contra
     LoginComponent,
     RegisterComponent,
     MyBookingDetailsComponent,
-    ContractListComponent
+    ContractListComponent,
+    UpdateContractComponent
   ],
   imports: [
     BrowserModule,

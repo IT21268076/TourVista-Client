@@ -41,6 +41,7 @@ export class AddHotelFormComponent implements OnInit {
           // Optionally, you can reset the file input too
           const fileInput = document.getElementById('images') as HTMLInputElement;
           fileInput.value = '';
+          alert("Hotel Added Successfully!!");
         },
         error => {
           console.error('Error adding hotel:', error);

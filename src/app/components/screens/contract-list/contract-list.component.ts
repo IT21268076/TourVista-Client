@@ -25,7 +25,6 @@ export class ContractListComponent implements OnInit{
 
   ngOnInit(): void {
     this.hotelId;
-    console.log("hotel Id in ch", this.hotelId)
     this.loadContracts(this.hotelId);
 
   }
@@ -45,12 +44,20 @@ export class ContractListComponent implements OnInit{
 
   editContract(contractId: number) {
     console.log('Edit contract:', contractId);
-    // Implement your edit logic here
+    this.router.navigate([`/update-contract/${contractId}`]);
   }
 
   deleteContract(contractId: number) {
     console.log('Delete contract:', contractId);
-    // Implement your delete logic here
+    this.contractService.deleteContract(contractId)
+    .subscribe(response =>{
+      alert("contract deleted");
+      this.loadContracts(this.hotelId);
+    },
+    error => {
+      alert("Eroor occured while deleting" );
+    }
+  );
   }
 
   

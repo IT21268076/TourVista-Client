@@ -100,6 +100,7 @@ import { ContractListComponent } from '../contract-list/contract-list.component'
 import { ModalComponent } from '../../popup/modal/modal.component';
 import { HotelService } from 'src/app/services/hotel.service'; // Import HotelService
 import { Subscription } from 'rxjs'; // Import Subscription
+import { NavBarComponent } from '../../nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -129,14 +130,23 @@ export class AdminDashboardComponent {
     }
   }
 
-  openHotelEmailPopup() {
+  openHotelEmailPopupForView() {
     const popupFactory = this.componentFactoryResolver.resolveComponentFactory(this.hotelEmailPopupComponent);
     const popupRef = this.dynamicComponentContainer.createComponent(popupFactory);
     popupRef.instance.hotelIdObtained.subscribe((hotelId: number) => {
-      this.loadComponent(this.addContractComponent, hotelId);
+      // this.loadComponent(this.addContractComponent, hotelId);
       this.loadComponent(this.contractListComponent, hotelId);
       popupRef.destroy(); // Close the popup after obtaining the hotelId
     });
   }
   
+  openHotelEmailPopupForAdd() {
+    const popupFactory = this.componentFactoryResolver.resolveComponentFactory(this.hotelEmailPopupComponent);
+    const popupRef = this.dynamicComponentContainer.createComponent(popupFactory);
+    popupRef.instance.hotelIdObtained.subscribe((hotelId: number) => {
+      this.loadComponent(this.addContractComponent, hotelId);
+      // this.loadComponent(this.contractListComponent, hotelId);
+      popupRef.destroy(); // Close the popup after obtaining the hotelId
+    });
+  }
 }

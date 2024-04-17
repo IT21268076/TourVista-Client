@@ -1,6 +1,6 @@
 <app-nav-bar></app-nav-bar>
 
-<div class="mx-40 px-8 py-6 rounded-3xl shadow-lg bg-gray-100">
+<div class="mx-40 my-10 px-8 py-6 rounded-3xl shadow-lg bg-gray-100">
     <h1 class="text-3xl font-bold mb-8 text-center">{{booking.hotelName}}</h1>
     <div class="flex flex-wrap -mx-2 mt-8">
        
@@ -9,35 +9,35 @@
          <img [src]="'data:image/png;base64,' + booking.hotelImage" alt="Hotel Image" class="w-full h-64 object-cover rounded-lg">
        </div>
        <!-- Details Section -->
-       <div class="w-full md:w-1/2 px-12">
+       <div class="w-full md:w-1/2 px-8">
          <div class="flex flex-wrap -mx-2">
            <div class="w-full md:w-1/2 px-2">
-             <p class="font-bold">Room Type:</p>
-             <p>{{ booking.roomType }}</p>
+             <p class="font-bold">Room Type </p>
+             <p class="pl-8">{{ booking.roomType }}</p>
            </div>
            <div class="w-full md:w-1/2 px-2">
-             <p class="font-bold">Status:</p>
-             <p>{{ booking.status }}</p>
+             <p class="font-bold">Status</p>
+             <p class="pl-8">{{ booking.status }}</p>
            </div>
            <div class="w-full md:w-1/2 px-2">
-             <p class="font-bold">Check-In:</p>
-             <p>{{ booking.checkInDate | date:'mediumDate' }}</p>
+             <p class="font-bold">Check-In</p>
+             <p class="pl-8">{{ booking.checkInDate | date:'mediumDate' }}</p>
            </div>
            <div class="w-full md:w-1/2 px-2">
-             <p class="font-bold">Check-Out:</p>
-             <p>{{ booking.checkOutDate | date:'mediumDate' }}</p>
+             <p class="font-bold">Check-Out</p>
+             <p class="pl-8">{{ booking.checkOutDate | date:'mediumDate' }}</p>
            </div>
            <div class="w-full md:w-1/2 px-2">
-             <p class="font-bold">Guests:</p>
-             <p>{{ booking.noOfGuests }}</p>
+             <p class="font-bold">Guests</p>
+             <p class="pl-8">{{ booking.noOfGuests }}</p>
            </div>
            <div class="w-full md:w-1/2 px-2">
-             <p class="font-bold">Room Count:</p>
-             <p>{{ booking.roomCount }}</p>
+             <p class="font-bold">Room Count</p>
+             <p class="pl-8">{{ booking.roomCount }}</p>
            </div>
            <div class="w-full md:w-1/2 px-2">
              <p class="font-bold">No of Nights:</p>
-             <p>{{ calculateNights(booking.checkInDate, booking.checkOutDate) }}</p>
+             <p class="pl-8">{{ calculateNights(booking.checkInDate, booking.checkOutDate) }}</p>
            </div>
          </div>
        </div>
@@ -48,7 +48,7 @@
            <!-- Total Payment -->
            <div class="bg-gray-100 p-4 rounded-lg shadow-md">
               <h3 class="font-semibold text-lg mb-2">Total Payment</h3>
-              <p class="text-gray-700">${{ booking.totalAmount }}</p>
+              <p class="text-gray-700 font-bold">${{ booking.totalAmount }}</p>
            </div>
            <!-- Discounts -->
             <div class="bg-gray-100 p-4 rounded-lg shadow-md">

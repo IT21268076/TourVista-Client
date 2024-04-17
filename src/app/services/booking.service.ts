@@ -15,7 +15,7 @@ export class BookingService {
 
   confirmBooking(roomTypeId: number, seasonId: number, bookingData: any): Observable<any> {
     const url = `${this.backendUrl}/booking`; 
-    return this.http.post<any>(`${this .backendUrl}/booking`, bookingData, { 
+    return this.http.post<any>(`${this.backendUrl}/booking`, bookingData, { 
       params: { 
         roomTypeId: roomTypeId.toString(), 
         seasonId: seasonId.toString() 

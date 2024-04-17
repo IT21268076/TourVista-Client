@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddHotelFormComponent } from './add-hotel-form.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AddHotelFormComponent', () => {
   let component: AddHotelFormComponent;
@@ -8,7 +9,8 @@ describe('AddHotelFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddHotelFormComponent ]
+      declarations: [ AddHotelFormComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
 

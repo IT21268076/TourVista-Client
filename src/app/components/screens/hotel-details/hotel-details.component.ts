@@ -99,6 +99,7 @@ import { Discount, RoomType } from '../../../models/roomTypeModel';
 })
 export class HotelDetailsComponent implements OnInit {
 
+
   hotel: any = {};
   checkInDate: any;
   checkOutDate: any;
@@ -170,6 +171,7 @@ export class HotelDetailsComponent implements OnInit {
         roomTypePrice: roomType.price, 
         seasonName: roomType.seasonName,
         noOfGuests: this.noOfGuests,
+        noOfAvailableRooms: roomType.noOfAvailableRooms,
         markUpPercentage: roomType.markUpPercentage,
         roomCount: this.roomCount,
         supplements: JSON.stringify(roomType.supplementSet),
@@ -180,15 +182,17 @@ export class HotelDetailsComponent implements OnInit {
     
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'confirmed') {
-        // The user clicked the OK button
-        console.log('Booking confirmed!');
-        // Redirect to bookings component or perform other actions
-        alert("Booking confirmed!")
+         // The user clicked the OK button
+         console.log('Booking confirmed!');
+         // Redirect to bookings component or perform other actions
+         alert("Booking confirmed!");
+         // Perform any additional actions needed after confirmation
       } else {
-        // The dialog was auto-closed (not confirmed)
-        console.log('Booking not confirmed.');
-        // Show an alert or perform other actions
-        alert("Retry - Booking not confirmed!!!")
+         // The dialog was auto-closed (not confirmed)
+         console.log('Booking not confirmed.');
+         // Show an alert or perform other actions
+         alert("Retry - Booking not confirmed!!!");
+         // Optionally, you can reopen the dialog or perform other actions here
       }
     });
   }

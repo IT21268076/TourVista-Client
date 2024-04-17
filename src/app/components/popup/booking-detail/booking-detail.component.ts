@@ -1,3 +1,4 @@
+// import { RoomType } from './../../../models/bookingModel';
 import { Supplement } from './../../../models/roomTypeModel';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -24,6 +25,7 @@ export class BookingDetailComponent implements OnInit {
   checkInDate!: string;
   checkOutDate!: string;
   noOfGuests!: number;
+  noOfAvailableRooms!: number;
   roomCount!: number;
   cancellationFee!: number;
   noOfBalancePaymentDates: any;
@@ -32,6 +34,7 @@ export class BookingDetailComponent implements OnInit {
   markUpPercentage: any;
   userId: any;
   errorMessage: any;
+  close: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -51,6 +54,7 @@ export class BookingDetailComponent implements OnInit {
     this.supplements = this.data.supplements;
     this.discounts = this.data.discounts;
     this.noOfGuests = this.data.noOfGuests;
+    this.noOfAvailableRooms = this.data.roomType.noOfAvailableRooms;
     this.roomCount = this.data.roomCount;
     this.cancellationFee = this.data.roomType.cancellationFee;
     this.noOfBalancePaymentDates = this.data.roomType.noOfBalancePaymentDates;
@@ -131,8 +135,6 @@ export class BookingDetailComponent implements OnInit {
    
 
   onConfirm(): void {
-    // Close the dialog with 'confirmed' result
-    this.dialogRef.close('confirmed');
 
     // Prepare the JSON data
     const jsonData = {
@@ -143,6 +145,7 @@ export class BookingDetailComponent implements OnInit {
       seasonId: this.seasonId,
       roomTypePrice: this.roomTypePrice,
       noOfGuests: this.noOfGuests,
+      noOfAvailableRooms: this.roomType.noOfAvailableRooms,
       numberOfRooms: this.roomCount,
       seasonName: this.seasonName,
       checkInDate: this.checkInDate,
@@ -161,15 +164,15 @@ export class BookingDetailComponent implements OnInit {
           console.log('Backend response:', response);
           // Close the dialog with 'confirmed' result
           this.dialogRef.close('confirmed');
-          // Show an alert for successful bookings
-          alert("Booking confirmed!");
+          
         },
         error => {
           console.error('Error:', error);
           // Do not close the dialog and display the error message within the popup
           // Assuming you have a variable to hold the error message, e.g., this.errorMessage
           this.errorMessage = error.error.message || 'An error occurred while processing your booking.';
+          
         }
       );
-  }
+    }
 }

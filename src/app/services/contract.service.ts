@@ -7,6 +7,7 @@ import { environment } from 'src/environment';
   providedIn: 'root'
 })
 export class ContractService {
+  
   private backendUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
@@ -16,6 +17,19 @@ export class ContractService {
   }
 
   getContractByHotel(hotelId: any) : Observable<any> {
-    return this.http.get<any>(`${this.backendUrl}/contract/${hotelId}`);
+    return this.http.get<any>(`${this.backendUrl}/contract/hotel/${hotelId}`);
   }
+
+  getContractById(contractId : any) : Observable<any>{
+    return this.http.get<any>(`${this.backendUrl}/contract/${contractId}`);
+  }
+
+  updateContract(contractId: number, contractData: any): Observable<any> {
+    return this.http.put<any>(`${this.backendUrl}/contract/${contractId}`, contractData);
+  }
+
+  deleteContract(contractId: number): Observable<any> {
+    return this.http.delete<any>(`${this.backendUrl}/contract/${contractId}`);
+  }
+
 }

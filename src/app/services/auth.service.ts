@@ -4,13 +4,14 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     private currentUserSubject: BehaviorSubject<any>;
     public currentUser: Observable<any>;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         // Retrieve the JWT token from local storage
         const token = localStorage.getItem('currentUser');
 
@@ -61,6 +62,7 @@ export class AuthService {
         // Remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
+        this.router.navigate(['/']);
     }
 
     getUserRole(token: string): string {
