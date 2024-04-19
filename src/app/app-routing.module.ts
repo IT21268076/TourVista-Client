@@ -1,3 +1,4 @@
+import { PaymentComponent } from './components/forms/payment/payment.component';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/screens/home/home.component';
@@ -19,8 +20,8 @@ import { UpdateContractComponent } from './components/forms/update-contract/upda
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'search', component: SearchHotelComponent},
-  {path: 'hotel-details/:hotelId', component: HotelDetailsComponent, canActivate: [AuthGuard], data: { roles: ['USER']}},
-  {path: 'roomType', component: HotelDetailsComponent, canActivate: [AuthGuard], data: { roles: ['USER']}},
+  {path: 'hotel-details/:hotelId', component: HotelDetailsComponent},
+  {path: 'roomType', component: HotelDetailsComponent},
   {path: 'booking', component: BookingFormComponent, canActivate: [AuthGuard], data: { roles: ['USER']}},
   {path: 'add-hotel', component: AddHotelFormComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN']}},
   {path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN']}},
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'update-contract/:contractId', component: UpdateContractComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN']}},
   {path: 'my-bookings', component: MyBookingsComponent, canActivate: [AuthGuard], data: { roles: ['USER']}},
   {path: 'my-booking-details/:bookingId', component: MyBookingDetailsComponent, canActivate: [AuthGuard], data: { roles: ['USER']}},
+  {path: 'payment/:bookingId', component: PaymentComponent, canActivate: [AuthGuard], data: { roles: ['USER']}},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent}
 ];

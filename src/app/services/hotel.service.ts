@@ -39,8 +39,8 @@ export class HotelService {
     return this.http.get<any>(`${this.backendUrl}/hotel/${hotelId}`);
   }
 
-  getRoomTypesAndPrices(hotelId: string, checkInDate: string, checkOutDate: string, noOfGuests: number, roomCount: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.backendUrl}/roomType`, {
+  getRoomTypesAndPrices(hotelId: string, checkInDate: string, checkOutDate: string, noOfGuests: number, roomCount: number): Observable<any> {
+    return this.http.get<any>(`${this.backendUrl}/roomType`, {
       params: {
         hotelId: hotelId,
         checkInDate: checkInDate,
@@ -54,5 +54,9 @@ export class HotelService {
   addHotel(hotelData: any): Observable<any> {
     console.log(hotelData);
     return this.http.post<any>(`${this.backendUrl}/hotel/create`, hotelData);
+  }
+
+  getAllHotels(): Observable<any> {
+    return this.http.get<any>(`${this.backendUrl}/hotel`);
   }
 }

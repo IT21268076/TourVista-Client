@@ -32,9 +32,9 @@ export class ContractListComponent implements OnInit{
   loadContracts(hotelId: any) {
     console.log(hotelId)
     this.contractService.getContractByHotel(hotelId)
-      .subscribe(data => {
+      .subscribe((data: any) => {
         console.log(data);
-        this.contracts = data;
+        this.contracts = data.data;
       },
       error => {
         console.log("Eoor fetching contracts: ", error)

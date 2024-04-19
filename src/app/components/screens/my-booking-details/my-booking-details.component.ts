@@ -31,7 +31,7 @@ export class MyBookingDetailsComponent implements OnInit {
   this.bookingService.getBookingDetails(this.bookingId)
     .subscribe((data: any) => {
       console.log(data);
-      this.booking = data;
+      this.booking = data.data;
     });
 }
 

@@ -5,9 +5,7 @@
            <table class="min-w-full divide-y divide-gray-200">
              <thead class="bg-gray-50">
                <tr>
-                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                   Contract Name
-                 </th>
+                 
                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                    Start Date
                  </th>
@@ -37,14 +35,12 @@
              <tbody class="bg-white divide-y divide-gray-200">
                <ng-container *ngFor="let contract of contracts">
                  <tr>
+                   
                    <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">{{ contract.name }}</div>
+                    <div class="text-sm text-gray-500">{{ contract.startDate | date:'longDate' }}</div>
                    </td>
                    <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-500">{{ contract.startDate }}</div>
-                   </td>
-                   <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">{{ contract.endDate }}</div>
+                    <div class="text-sm text-gray-900">{{ contract.endDate | date:'longDate' }}</div>
                    </td>
                    <td class="px-6 py-4 whitespace-nowrap">
                     <ul class="list-none">
@@ -55,14 +51,14 @@
                  </td>
                  <td class="px-6 py-4 whitespace-nowrap">
                     <ul class="list-none">
-                      <li class="text-sm text-gray-500" *ngFor="let roomtype of contract.roomTypes">
+                      <li class="text-sm text-gray-500" *ngFor="let roomtype of contract.roomTypes | unique: 'type'">
                         {{ roomtype.type }}
                       </li>
                     </ul>
                  </td>
                  <td class="px-6 py-4 whitespace-nowrap">
                     <ul class="list-none">
-                      <li class="text-sm text-gray-900" *ngFor="let supplement of contract.supplements">
+                      <li class="text-sm text-gray-900" *ngFor="let supplement of contract.supplements | unique: 'name'">
                         {{ supplement.name }}
                       </li>
                     </ul>
@@ -76,6 +72,18 @@
                  </td>
                    <td class="px-6 py-4 whitespace-nowrap">
                     <div class="text-sm text-gray-500">{{ contract.prepayment }}</div>
+                    <li>
+                      <span class="font-semibold">Prepayment percentage: </span><span class="font-semibold">{{contract.prepaymentPercentage}}%</span> of the total.
+                    </li>
+                    <li>
+                      <span class="font-semibold">Balance Payment Dates: </span> <span class="font-semibold">{{contract.noOfBalancePaymentDates}} days</span> prior to the arrival date. 
+                    </li>
+                    <li>
+                      <span class="font-semibold">Cancellation Deadline: </span>  <span class="font-semibold">{{contract.noOfDatesOfCancellation}} days</span> prior to the arrival date for a full refund.
+                    </li>
+                    <li>
+                      <span class="font-semibold">Cancellation Fee: </span> <span class="font-semibold">{{contract.cancellationFee}}%</span>.
+                    </li>
                    </td>
                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <button (click)="editContract(contract.contractId)" class="text-indigo-600 hover:text-indigo-900">Edit</button>

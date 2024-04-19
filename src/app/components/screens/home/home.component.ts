@@ -1,3 +1,4 @@
+import { HotelService } from 'src/app/services/hotel.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router'; // Import Router for navigation
 //import { SearchService }  from '../../../services/search-bar.service'; // Import search service
@@ -17,10 +18,13 @@ export class HomeComponent {
   roomCount!: number;
   isLoading: boolean = false; // Flag to indicate search in progress
   errorMessage: string | null = null;
+  hotels: any;
+  hotelImage: any[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private hotelService: HotelService) {}
 
   ngOnInit(): void {
+    this.fetchAllHotels();
   }
 
   onSubmit() {
@@ -38,5 +42,13 @@ export class HomeComponent {
     });
   }
 
+  fetchAllHotels(){
+    this.hotelService.getAllHotels().subscribe(
+      (response: any) => {
+        this.hotels = response.data;
+        console.log(this.hotels);
+      }
+    )
+  }
   
 }

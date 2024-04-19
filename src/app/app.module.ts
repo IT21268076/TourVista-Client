@@ -2,6 +2,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -10,17 +12,16 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
-import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { register } from 'swiper/element/bundle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomeComponent } from './components/screens/home/home.component';
 import { BookingComponent } from './components/screens/booking/booking.component';
@@ -42,6 +43,9 @@ import { RegisterComponent } from './components/forms/register/register.componen
 import { MyBookingDetailsComponent } from './components/screens/my-booking-details/my-booking-details.component';
 import { ContractListComponent } from './components/screens/contract-list/contract-list.component';
 import { UpdateContractComponent } from './components/forms/update-contract/update-contract.component';
+import { UniquePipe } from './components/popup/unique.pipe';
+import { PaymentComponent } from './components/forms/payment/payment.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 register();
@@ -49,6 +53,7 @@ register();
 @NgModule({
   declarations: [
     AppComponent,
+    UniquePipe,
     NavBarComponent,
     HomeComponent,
     BookingComponent,
@@ -67,7 +72,9 @@ register();
     RegisterComponent,
     MyBookingDetailsComponent,
     ContractListComponent,
-    UpdateContractComponent
+    UpdateContractComponent,
+    PaymentComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +95,12 @@ register();
     MatSidenavModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatMenuModule
+    MatMenuModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    })
     
   ],
   providers: [

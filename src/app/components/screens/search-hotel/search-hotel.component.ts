@@ -62,11 +62,11 @@ export class SearchHotelComponent implements OnInit {
 
   fetchHotels(location: string, checkInDate: string, checkOutDate: string) {
     this.hotelService.getHotels(location, checkInDate, checkOutDate).subscribe(
-      (response: any[]) => {
-        console.log(response);
+      (response: any) => {
+        console.log();
         
         // Assuming response is an array of hotel objects
-        this.cards = response.map((hotel: any) => {
+        this.cards = response.data.map((hotel: any) => {
           return {
             hotelId: hotel.hotelId, 
             image: hotel.images?.length > 0 ? hotel.images[0].image : null, // Assuming the first image URL is used

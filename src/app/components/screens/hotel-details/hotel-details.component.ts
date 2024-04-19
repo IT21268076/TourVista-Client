@@ -91,6 +91,7 @@ import { HotelService } from '../../../services/hotel.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BookingDetailComponent } from '../../popup/booking-detail/booking-detail.component';
 import { Discount, RoomType } from '../../../models/roomTypeModel';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-hotel-details',
@@ -112,7 +113,8 @@ export class HotelDetailsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private hotelService: HotelService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -123,6 +125,7 @@ export class HotelDetailsComponent implements OnInit {
       }
     });
 
+    
     this.route.queryParams.subscribe(params => {
       this.checkInDate = params['checkInDate'];
       this.checkOutDate = params['checkOutDate'];
@@ -137,11 +140,13 @@ export class HotelDetailsComponent implements OnInit {
   fetchHotelDetails(hotelId: string) {
     this.hotelService.getHotelDetails(hotelId).subscribe(
       (response: any) => {
-        this.hotel = response;
+        this.hotel = response.data;
+        this.toastr.info(`Welcome to the Hotel ${this.hotel.name} !`);
         console.log(this.hotel)
       },
       (error: any) => {
         console.error('Error fetching hotel details:', error);
+        this.toastr.error(`Error while fetching ${this.hotel.name} details`, 'Error');
       }
     );
   }
@@ -154,12 +159,15 @@ export class HotelDetailsComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error fetching room types and prices:', error);
+        this.toastr.error(`Error while fetching rooms`, 'Error');
       }
     );
   }
 
   // Open the booking detail dialog
   bookRoom(roomType: RoomType): void {
+    this.toastr.warning('Please read the details carefully before confirm');
+
     const dialogRef = this.dialog.open(BookingDetailComponent, {
       data: {
         roomType: roomType,
@@ -178,21 +186,27 @@ export class HotelDetailsComponent implements OnInit {
         discounts: JSON.stringify(roomType.discounts)
       }
     });
-
+    
+    
     
     dialogRef.afterClosed().subscribe(result => {
-      if (result === 'confirmed') {
-         // The user clicked the OK button
-         console.log('Booking confirmed!');
-         // Redirect to bookings component or perform other actions
-         alert("Booking confirmed!");
-         // Perform any additional actions needed after confirmation
+      if (Number.isInteger(result)) {
+        // The user clicked the OK button
+        console.log('Booking confirmed!');
+        
+        
+      } else if (result === undefined) {
+        // The dialog was closed without explicit confirmation
+        console.log('Booking not confirmed. Dialog closed without confirmation.');
+        // Show a message or perform other actions to indicate no confirmation
+        this.toastr.error('Booking was not confirmed. Dialog closed without confirmation.', 'Error');
+        // Optionally, you can reopen the dialog or perform other actions here
       } else {
-         // The dialog was auto-closed (not confirmed)
-         console.log('Booking not confirmed.');
-         // Show an alert or perform other actions
-         alert("Retry - Booking not confirmed!!!");
-         // Optionally, you can reopen the dialog or perform other actions here
+        // The dialog was closed with a different result (not 'confirmed')
+        console.log('Booking not confirmed. Dialog closed with unexpected result:', result);
+        // Show a message or perform other actions to handle unexpected results
+        this.toastr.error('Booking was not confirmed. Unexpected result received from dialog.', 'Error');
+        // Optionally, you can reopen the dialog or perform other actions here
       }
     });
   }

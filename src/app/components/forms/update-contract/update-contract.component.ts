@@ -41,7 +41,7 @@ export class UpdateContractComponent implements OnInit {
     this.contractService.getContractById(contractId).subscribe(
       (contractData: any) => {
         // Populate form with contract details
-        this.initContractForm(contractData);
+        this.initContractForm(contractData.data);
         console.log(contractData);
         
       },
@@ -246,7 +246,7 @@ export class UpdateContractComponent implements OnInit {
         (response: any) => {
           console.log('Contract updated successfully:', response);
           alert("Contract Updated Successfully!");
-          this.router.navigate([`/view-contracts/${this.hotelId}`]);
+          this.router.navigate(['/admin-dashboard']);
         },
         (error: any) => {
           console.error('Error updating contract:', error);

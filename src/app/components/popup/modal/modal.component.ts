@@ -23,9 +23,9 @@ export class ModalComponent {
     const url = `${this.backendUrl}/hotel/getIdByEmail/${this.email}`;
     this.http.get<number>(url)
       .subscribe(
-        (response: number | null) => {
+        (response: any) => {
           if (response !== null) {
-            const hotelId = response;
+            const hotelId = response.data;
             this.hotelIdObtained.emit(hotelId);
             console.log(hotelId);
             

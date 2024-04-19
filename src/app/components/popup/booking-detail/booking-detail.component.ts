@@ -5,6 +5,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Discount, RoomType } from '../../../models/roomTypeModel';
 import { HotelDetailsComponent } from '../../screens/hotel-details/hotel-details.component';
 import { BookingService } from 'src/app/services/booking.service';
+import { ToastrService } from 'ngx-toastr';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking-detail',
@@ -35,11 +37,14 @@ export class BookingDetailComponent implements OnInit {
   userId: any;
   errorMessage: any;
   close: any;
+  bookingId: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<HotelDetailsComponent>,
-    private bookingService: BookingService
+    private bookingService: BookingService,
+    private toastr: ToastrService,
+    private router: Router
   ) {
     this.calculateTotalAmount();
   }
@@ -132,8 +137,17 @@ export class BookingDetailComponent implements OnInit {
     // Calculate the total amount
     this.totalAmount = (basePrice * numberOfNights) + supplementsPrice - discountAmount;
    }
-   
 
+   proceedToPayment(bookingId: any, prepaymentPercentage: any, totalAmount: any): void {
+    let navigationExtras: NavigationExtras = {
+      queryParams: { 
+        'prepaymentPercentage': prepaymentPercentage,
+        'totalAmount': totalAmount 
+      }
+    };
+    this.router.navigate(['/payment', bookingId], navigationExtras);
+  }
+   
   onConfirm(): void {
 
     // Prepare the JSON data
@@ -160,17 +174,24 @@ export class BookingDetailComponent implements OnInit {
     // Make the HTTP POST request using the service
     this.bookingService.confirmBooking(this.roomTypeId, this.seasonId, jsonData)
       .subscribe(
-        response => {
+        (response: any) => {
           console.log('Backend response:', response);
+          this.bookingId = response.data;
+
+          this.toastr.success('Booking Saved Successfully', 'Success');
+          this.toastr.info(`Please pay ${this.prepaymentPercentage}% of total to confirm your reservations`);
           // Close the dialog with 'confirmed' result
-          this.dialogRef.close('confirmed');
+          this.dialogRef.close(this.bookingId);
           
+          this.proceedToPayment(this.bookingId, this.prepaymentPercentage, this.totalAmount);
         },
         error => {
           console.error('Error:', error);
+          this.toastr.error(error.error.message, 'Error');
           // Do not close the dialog and display the error message within the popup
           // Assuming you have a variable to hold the error message, e.g., this.errorMessage
           this.errorMessage = error.error.message || 'An error occurred while processing your booking.';
+          
           
         }
       );

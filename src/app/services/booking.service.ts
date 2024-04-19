@@ -27,12 +27,16 @@ export class BookingService {
   //   return this.http.get<Booking[]>(`${this.baseUrl}/bookings?userId=${userId}`);
   // }
 
-  getUserBookings(userId: string): Observable<MyBookings[]> {
-    return this.http.get<MyBookings[]>(`${this.backendUrl}/booking/user/${userId}/bookings`);
+  getUserBookings(userId: string): Observable<MyBookings> {
+    return this.http.get<MyBookings>(`${this.backendUrl}/booking/user/${userId}/bookings`);
   }
 
   getBookingDetails(bookingId: any) {
     return this.http.get<MyBookings>(`${this.backendUrl}/booking/${bookingId}`);
   }
 
+  makePayment(bookingId: any, data: any): Observable<any> {
+    console.log(bookingId);
+    return this.http.put<any>(`${this.backendUrl}/booking/${bookingId}`, data);
+  }
 }

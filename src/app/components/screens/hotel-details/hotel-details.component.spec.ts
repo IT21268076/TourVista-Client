@@ -77,7 +77,8 @@ describe('HotelDetailsComponent', () => {
     maxNooOfGuests: 0,
     markUpPercentage: undefined,
     supplementSet: [],
-    discounts: []
+    discounts: [],
+    noOfAvailableRooms: 0
   });
  
   expect(mockDialog.open).toHaveBeenCalled();

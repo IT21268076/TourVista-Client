@@ -66,7 +66,7 @@ describe('AdminDashboardComponent', () => {
       component.loadComponent(ContractFormComponent, hotelId);
     });
 
-    component.openHotelEmailPopup();
+    component.openHotelEmailPopupForAdd();
     fixture.detectChanges();
 
     expect(component.loadComponent).toHaveBeenCalledWith(ContractFormComponent, 1);
