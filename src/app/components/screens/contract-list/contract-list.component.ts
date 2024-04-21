@@ -2,6 +2,7 @@ import { ContractService } from 'src/app/services/contract.service';
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
  selector: 'app-contract-list',
@@ -21,7 +22,7 @@ export class ContractListComponent implements OnInit{
   seasons: any[] = [];
   hotelId: any;
 
- constructor(private route: ActivatedRoute, private contractService: ContractService, private router: Router) { }
+ constructor(private route: ActivatedRoute, private contractService: ContractService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.hotelId;
@@ -35,9 +36,11 @@ export class ContractListComponent implements OnInit{
       .subscribe((data: any) => {
         console.log(data);
         this.contracts = data.data;
+        this.toastr.success(`Contract loaded Successfully`, 'Success');
       },
       error => {
-        console.log("Eoor fetching contracts: ", error)
+        console.log("Eoor fetching contracts: ", error);
+        this.toastr.error(`Error while loadeding Contracts`, 'Error');
       }
     );
   }
@@ -51,11 +54,11 @@ export class ContractListComponent implements OnInit{
     console.log('Delete contract:', contractId);
     this.contractService.deleteContract(contractId)
     .subscribe(response =>{
-      alert("contract deleted");
+      this.toastr.success(`Contract deleted Successfully`, 'Success');
       this.loadContracts(this.hotelId);
     },
     error => {
-      alert("Eroor occured while deleting" );
+      this.toastr.error(`Error ehile deleting Contract`, 'Error');
     }
   );
   }

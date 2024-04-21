@@ -122,6 +122,10 @@ export class HotelDetailsComponent implements OnInit {
       this.hotelId = params.get('hotelId');
       if (this.hotelId) {
         this.fetchHotelDetails(this.hotelId);
+        this.fetchRoomTypesAndPrices(this.hotelId);
+        if (this.checkInDate){
+          this.fetchAllRoomTypes(this.hotelId);
+        }
       }
     });
 
@@ -133,8 +137,20 @@ export class HotelDetailsComponent implements OnInit {
       this.roomCount = params['roomCount'];
     });
 
-    this.fetchRoomTypesAndPrices(this.hotelId);
     
+    
+  }
+  fetchAllRoomTypes(hotelId: any) {
+    this.hotelService.getAllRoomTypesAndPrices(hotelId).subscribe(
+      (response: any[]) => {
+        this.roomTypes = response;
+        console.log(response)
+      },
+      (error: any) => {
+        console.error('Error fetching room types and prices:', error);
+        this.toastr.error(`Error while fetching rooms`, 'Error');
+      }
+    );
   }
 
   fetchHotelDetails(hotelId: string) {

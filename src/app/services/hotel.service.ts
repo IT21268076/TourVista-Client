@@ -8,6 +8,7 @@ import { environment } from 'src/environment';
 })
 
 export class HotelService {
+  
   private backendUrl = environment.baseUrl; 
 
   constructor(private http: HttpClient) { }
@@ -51,6 +52,14 @@ export class HotelService {
     });
   }
 
+  getAllRoomTypesAndPrices(hotelId: string): Observable<any> {
+    return this.http.get<any>(`${this.backendUrl}/roomType`, {
+      params: {
+        hotelId: hotelId
+      }
+    });
+  }
+
   addHotel(hotelData: any): Observable<any> {
     console.log(hotelData);
     return this.http.post<any>(`${this.backendUrl}/hotel/create`, hotelData);
@@ -58,5 +67,13 @@ export class HotelService {
 
   getAllHotels(): Observable<any> {
     return this.http.get<any>(`${this.backendUrl}/hotel`);
+  }
+
+  editHotel(hotelId: any, hotelData: any): Observable<any> {
+      return this.http.put<any>(`${this.backendUrl}/hotel/${hotelId}`, hotelData);
+  }
+
+  deleteHotel(hotelId: any) {
+    return this.http.delete<any>(`${this.backendUrl}/hotel/${hotelId}`)
   }
 }

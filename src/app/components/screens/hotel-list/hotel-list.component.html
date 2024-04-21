@@ -1,0 +1,70 @@
+<div class="flex flex-col" [@fadeIn]>
+    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">
+                  Image
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">
+                  Name
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">
+                  Location
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">
+                  Email
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">
+                  Contact no
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">
+                  Description
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase text-center">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <!-- Iterate over hotels array -->
+              <tr *ngFor="let hotel of hotels">
+                <td class="px-6 -mr-10 py-4 w-[300px]">
+                  <img *ngIf="hotel.hotelImages.length > 0" [src]="'data:image/png;base64,' + hotel.hotelImages[0].image" alt="Hotel Image" class=" h-32 object-cover">
+                </td>
+                <td class="px-6 py-4 ">{{ hotel.name }}</td>
+                <td class="px-6 py-4 w-[300px]">{{ hotel.no }} , {{hotel.street}} , {{hotel.city}}</td>
+                <td class="px-6 py-4 ">{{ hotel.email }}</td>
+                <td class="px-6 py-4 ">{{ hotel.contactNo }}</td>
+                <td class="px-6 py-4 w-[300px]">
+                    <div style="overflow: hidden">
+                      <ng-container *ngIf="!hotel.showFullDescription">
+                        <div *ngIf="hotel.description">
+                          <!-- Split the description into sentences and display the first two sentences -->
+                          <div *ngFor="let sentence of getFirstTwoSentences(hotel.description)">
+                            {{ sentence }}
+                          </div>
+                          <button (click)="toggleDescription(hotel)" class="text-blue-500 hover:text-blue-600">Read More</button>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="hotel.showFullDescription || hotel.description.length <= 100"> <!-- Display full description if it's shorter than or equal to 100 characters -->
+                        {{ hotel.description }}
+                        <button (click)="toggleDescription(hotel)" class="text-blue-500 hover:text-blue-600">Read Less</button>
+                      </ng-container>
+                    </div>
+                </td>
+                  
+                <td class="px-6 py-4  text-center text-sm font-medium">
+                  <button (click)="editHotel(hotel.id)" class="text-indigo-600 hover:text-indigo-900">Edit</button>
+                  <button (click)="deleteHotel(hotel.id)" class="text-red-600 hover:text-red-900 ml-4">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

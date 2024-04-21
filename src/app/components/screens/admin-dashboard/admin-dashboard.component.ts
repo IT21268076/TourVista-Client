@@ -100,7 +100,9 @@ import { ContractListComponent } from '../contract-list/contract-list.component'
 import { ModalComponent } from '../../popup/modal/modal.component';
 import { HotelService } from 'src/app/services/hotel.service'; // Import HotelService
 import { Subscription } from 'rxjs'; // Import Subscription
+import { HotelListComponent } from '../hotel-list/hotel-list.component';
 import { NavBarComponent } from '../../nav-bar/nav-bar.component';
+import { ViewHotelComponent } from '../view-hotel/view-hotel.component';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -115,6 +117,9 @@ export class AdminDashboardComponent {
   addContractComponent = ContractFormComponent;
   contractListComponent = ContractListComponent;
   hotelEmailPopupComponent = ModalComponent;
+  hotelListComponent = HotelListComponent;
+  viewHotelComponent = ViewHotelComponent;
+
   hotelIdSubscription!: Subscription; // Subscription to handle hotelId obtained from popup
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private hotelService: HotelService) {}
@@ -127,7 +132,8 @@ export class AdminDashboardComponent {
       (componentRef.instance as ContractFormComponent).hotelId = hotelId; // Set hotelId for ContractFormComponent
     } else if (component === this.contractListComponent && hotelId){
       (componentRef.instance as ContractListComponent).hotelId = hotelId;
-    }
+    } else if (component === this.viewHotelComponent && hotelId)
+      (componentRef.instance as ViewHotelComponent).hotelId = hotelId;
   }
 
   openHotelEmailPopupForView() {
@@ -140,6 +146,16 @@ export class AdminDashboardComponent {
     });
   }
   
+  openHotelEmailPopupForViewHotel() {
+    const popupFactory = this.componentFactoryResolver.resolveComponentFactory(this.hotelEmailPopupComponent);
+    const popupRef = this.dynamicComponentContainer.createComponent(popupFactory);
+    popupRef.instance.hotelIdObtained.subscribe((hotelId: number) => {
+      // this.loadComponent(this.addContractComponent, hotelId);
+      this.loadComponent(this.viewHotelComponent, hotelId);
+      popupRef.destroy(); // Close the popup after obtaining the hotelId
+    });
+  }
+
   openHotelEmailPopupForAdd() {
     const popupFactory = this.componentFactoryResolver.resolveComponentFactory(this.hotelEmailPopupComponent);
     const popupRef = this.dynamicComponentContainer.createComponent(popupFactory);

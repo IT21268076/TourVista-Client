@@ -46,6 +46,8 @@ import { UpdateContractComponent } from './components/forms/update-contract/upda
 import { UniquePipe } from './components/popup/unique.pipe';
 import { PaymentComponent } from './components/forms/payment/payment.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { HotelListComponent } from './components/screens/hotel-list/hotel-list.component';
+import { ViewHotelComponent } from './components/screens/view-hotel/view-hotel.component';
 
 
 register();
@@ -74,7 +76,9 @@ register();
     ContractListComponent,
     UpdateContractComponent,
     PaymentComponent,
-    FooterComponent
+    FooterComponent,
+    HotelListComponent,
+    ViewHotelComponent
   ],
   imports: [
     BrowserModule,

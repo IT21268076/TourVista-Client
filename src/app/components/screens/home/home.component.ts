@@ -50,5 +50,9 @@ export class HomeComponent {
       }
     )
   }
+
+  navigateToHotel(hotelId: any) {
+    this.router.navigate([`/hotel-details/${hotelId}`])
+  }
   
 }

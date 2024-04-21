@@ -1,0 +1,56 @@
+<!-- view-hotel.component.html -->
+
+<div *ngIf="hotel" class="max-w-4xl mx-auto mt-10 p-6 bg-white rounded shadow-md">
+    <h2 class="text-2xl font-bold mb-4 text-center">{{ hotel.name }}</h2>
+    
+    <div class=" mb-4 w-full p-4 "> 
+        <swiper-container navigation="true" pagination="true" autoplay="true" delay="3000">
+          <swiper-slide *ngFor="let image of hotel.hotelImages">
+             <div class="hotel-image rounded-3xl overflow-hidden">
+               <img class="w-full h-full object-cover" [src]="'data:image/png;base64,' + image.image" alt="Hotel Image">
+             </div>
+          </swiper-slide>
+         </swiper-container>
+     </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
+      <input type="text" [(ngModel)]="hotel.name" class="w-full px-3 py-2 border rounded shadow appearance-none">
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Address:</label>
+        <div class="flex">
+          <div class="mr-2 flex-grow">
+            <label class="block text-gray-700 text-sm font-bold mb-2">No:</label>
+            <input type="text" [(ngModel)]="hotel.no" class="w-full px-3 py-2 border rounded shadow appearance-none">
+          </div>
+          <div class="mr-2 flex-grow">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Street:</label>
+            <input type="text" [(ngModel)]="hotel.street" class="w-full px-3 py-2 border rounded shadow appearance-none">
+          </div>
+          <div class="flex-grow">
+            <label class="block text-gray-700 text-sm font-bold mb-2">City:</label>
+            <input type="text" [(ngModel)]="hotel.city" class="w-full px-3 py-2 border rounded shadow appearance-none">
+          </div>
+        </div>
+    </div>
+      
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+        <input type="text" [(ngModel)]="hotel.email" class="w-full px-3 py-2 border rounded shadow appearance-none">
+      </div>
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Contact no:</label>
+        <input type="text" [(ngModel)]="hotel.contactNo" class="w-full px-3 py-2 border rounded shadow appearance-none">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
+      <textarea [(ngModel)]="hotel.description" class="w-full px-3 py-2 border rounded shadow appearance-none"></textarea>
+    </div>
+    <!-- Add more fields as needed -->
+  
+    <div class="flex">
+      <button (click)="editHotel(hotel.id)" class="mr-2 px-4 py-2 bg-blue-500 text-white rounded shadow-md hover:bg-blue-600">Edit Hotel</button>
+      <button (click)="deleteHotel(hotel.id)" class="px-4 py-2 bg-red-500 text-white rounded shadow-md hover:bg-red-600">Delete Hotel</button>
+    </div>
+  </div>
+  
