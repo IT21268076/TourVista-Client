@@ -122,24 +122,23 @@ export class HotelDetailsComponent implements OnInit {
       this.hotelId = params.get('hotelId');
       if (this.hotelId) {
         this.fetchHotelDetails(this.hotelId);
-        this.fetchRoomTypesAndPrices(this.hotelId);
+        
         if (this.checkInDate){
           this.fetchAllRoomTypes(this.hotelId);
         }
       }
     });
 
-    
     this.route.queryParams.subscribe(params => {
       this.checkInDate = params['checkInDate'];
       this.checkOutDate = params['checkOutDate'];
       this.noOfGuests = params['noOfGuests'];
       this.roomCount = params['roomCount'];
     });
-
-    
-    
+ 
+    this.fetchRoomTypesAndPrices(this.hotelId);
   }
+
   fetchAllRoomTypes(hotelId: any) {
     this.hotelService.getAllRoomTypesAndPrices(hotelId).subscribe(
       (response: any[]) => {

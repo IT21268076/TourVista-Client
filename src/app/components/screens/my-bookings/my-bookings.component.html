@@ -49,7 +49,7 @@
        <div *ngIf="activeTab === 'bookingHistory'">
           <!-- Booking History Content Here -->
           <div class="grid grid-cols-1 gap-6">
-            <div *ngFor="let booking of bookings" class="bg-white rounded-3xl h-50 mx-40 shadow-md p-4" (click)="navigateToBookingDetails(booking.bookingId)">
+            <div *ngFor="let booking of bookings" class="bg-white rounded-3xl h-50 mx-5 shadow-md p-4" (click)="navigateToBookingDetails(booking.bookingId)">
               
               <div class="flex justify-between items-center mt-2">
                 

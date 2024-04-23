@@ -40,7 +40,7 @@ export class ContractListComponent implements OnInit{
       },
       error => {
         console.log("Eoor fetching contracts: ", error);
-        this.toastr.error(`Error while loadeding Contracts`, 'Error');
+        this.toastr.error(`Error while loading Contracts`, 'Error');
       }
     );
   }
@@ -58,7 +58,7 @@ export class ContractListComponent implements OnInit{
       this.loadContracts(this.hotelId);
     },
     error => {
-      this.toastr.error(`Error ehile deleting Contract`, 'Error');
+      this.toastr.error(`Error while deleting Contract`, 'Error');
     }
   );
   }

@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
@@ -15,7 +16,8 @@ export class ContractFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private contractService: ContractService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -110,14 +112,14 @@ export class ContractFormComponent implements OnInit {
       console.log(contractData);
 
       this.contractService.addContract(contractData).subscribe(
-        response => {
+        (response: any) => {
           console.log('Contract added successfully:', response);
-          alert("Contract added successfully:");
-          this.router.navigate([`/admin-dashboard`]);
+          this.toastr.success('Contract Created successfully', 'Success');
+          this.router.navigate(['/admin-dashboard']);
         },
-        error => {
+        (error: any) => {
           console.error('Error adding contract:', error);
-          // Handle error scenario (e.g., show error message)
+          this.toastr.error(`${error.error.message}`, 'Error');
         }
       );
     } else {

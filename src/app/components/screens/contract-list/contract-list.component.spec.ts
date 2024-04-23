@@ -1,68 +1,92 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { of } from 'rxjs';
+import { ContractListComponent } from './contract-list.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContractService } from 'src/app/services/contract.service';
-import { ContractListComponent } from './contract-list.component';
+import { of, throwError } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import BrowserAnimationsModule
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 describe('ContractListComponent', () => {
- let component: ContractListComponent;
- let fixture: ComponentFixture<ContractListComponent>;
- let mockContractService: any;
- let mockRouter: any;
- let mockActivatedRoute: any;
+  let component: ContractListComponent;
+  let fixture: ComponentFixture<ContractListComponent>;
+  let contractService: any;
+  let router: any;
+  let toastr: any;
 
- beforeEach(async () => {
-    mockContractService = jasmine.createSpyObj(['getContractByHotel']);
-    mockRouter = jasmine.createSpyObj(['navigate']);
-    mockActivatedRoute = {
-      paramMap: of({ get: () => '1' })
+  beforeEach(async () => {
+    const contractServiceStub = {
+      getContractByHotel: () => of({ data: [] }),
+      deleteContract: () => of({}),
+    };
+
+    const routerStub = {
+      navigate: jasmine.createSpy('navigate')
+    };
+
+    const toastrStub = {
+      success: jasmine.createSpy('success'),
+      error: jasmine.createSpy('error')
     };
 
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
       declarations: [ContractListComponent],
+      imports: [BrowserAnimationsModule], // Add BrowserAnimationsModule to imports
       providers: [
-        { provide: ContractService, useValue: mockContractService },
-        { provide: Router, useValue: mockRouter },
-        { provide: ActivatedRoute, useValue: mockActivatedRoute }
+        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: new Map().set('hotelId', '123') } } },
+        { provide: ContractService, useValue: contractServiceStub },
+        { provide: Router, useValue: routerStub },
+        { provide: ToastrService, useValue: toastrStub }
       ]
     }).compileComponents();
 
+    contractService = TestBed.inject(ContractService);
+    router = TestBed.inject(Router);
+    toastr = TestBed.inject(ToastrService);
+  });
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(ContractListComponent);
     component = fixture.componentInstance;
- });
+    fixture.detectChanges();
+  });
 
- it('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
- });
+  });
 
- it('should fetch contracts on init', () => {
-  const contracts = [{ id: 1, hotelId: '1', name: 'Test Contract' }];
-  mockContractService.getContractByHotel.and.returnValue(of(contracts));
- 
-  component.ngOnInit();
- 
-  expect(mockContractService.getContractByHotel).toHaveBeenCalledWith('1');
-  expect(component.contracts).toEqual(contracts);
- });
- 
- it('should log contractId when editContract is called', () => {
-  spyOn(console, 'log');
-  const contractId = 1;
- 
-  component.editContract(contractId);
- 
-  expect(console.log).toHaveBeenCalledWith('Edit contract:', contractId);
- });
- 
- it('should log contractId when deleteContract is called', () => {
-  spyOn(console, 'log');
-  const contractId = 1;
- 
-  component.deleteContract(contractId);
- 
-  expect(console.log).toHaveBeenCalledWith('Delete contract:', contractId);
- });
- 
+  it('should load contracts successfully', () => {
+    spyOn(contractService, 'getContractByHotel').and.returnValue(of({ data: [] }));
+    component.loadContracts(123); // Pass hotelId
+    expect(contractService.getContractByHotel).toHaveBeenCalledWith(123);
+    expect(toastr.success).toHaveBeenCalledWith('Contract loaded Successfully', 'Success');
+  });
+
+  it('should handle error when loading contracts', () => {
+    spyOn(contractService, 'getContractByHotel').and.returnValue(throwError('Error fetching contracts'));
+    component.loadContracts(123); // Pass hotelId
+    expect(contractService.getContractByHotel).toHaveBeenCalledWith(123);
+    expect(toastr.error).toHaveBeenCalledWith('Error while loading Contracts', 'Error');
+  });
+
+  it('should navigate to edit contract', () => {
+    component.editContract(456); // Pass contractId
+    expect(router.navigate).toHaveBeenCalledWith(['/update-contract/456']);
+  });
+
+  it('should delete contract successfully', () => {
+    spyOn(contractService, 'deleteContract').and.returnValue(of({}));
+    spyOn(component, 'loadContracts');
+    component.deleteContract(789); // Pass contractId
+    expect(contractService.deleteContract).toHaveBeenCalledWith(789);
+    expect(toastr.success).toHaveBeenCalledWith('Contract deleted Successfully', 'Success');
+    expect(component.loadContracts).toHaveBeenCalled(); // Ensure loadContracts is called to refresh the list
+  });
+
+  it('should handle error when deleting contract', () => {
+    spyOn(contractService, 'deleteContract').and.returnValue(throwError('Error deleting contract'));
+    component.deleteContract(789); // Pass contractId
+    expect(contractService.deleteContract).toHaveBeenCalledWith(789);
+    expect(toastr.error).toHaveBeenCalledWith('Error while deleting Contract', 'Error');
+  });
 });

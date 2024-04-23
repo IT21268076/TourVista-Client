@@ -32,7 +32,8 @@ export class ViewHotelComponent implements OnInit{
         this.hotel = data.data;
       },
       error => {
-        console.log("Erroe fetching hotel: ", error)
+        console.log("Error fetching hotel: ", error);
+        this.toastr.error('Error fetching hotel', 'Error');
       }
     );
   }
@@ -50,24 +51,24 @@ export class ViewHotelComponent implements OnInit{
     };
 
     console.log('Edit Hotel:', hotelId);
-    this.hotelService.editHotel(this.hotelId, this.hotelData)
+    this.hotelService.editHotel(hotelId, this.hotelData)
     .subscribe((response: any) => {
       this.toastr.success(`Hotel ${this.hotel.name} is updated successfully!`, 'Success');
     },
     (error: any) => {
-      this.toastr.error(`Hotel ${this.hotel.name} updation failed ${error.message}`, 'Error');
+      this.toastr.error(`Hotel ${this.hotel.name} updation failed Error updating hotel`, 'Error');
     })
   }
 
   deleteHotel(hotelId: number) {
     console.log('Delete hotel:', this.hotelId);
-    this.hotelService.deleteHotel(this.hotelId)
+    this.hotelService.deleteHotel(hotelId)
     .subscribe(response =>{
-      this.toastr.success(`Hotel ${this.hotel.name} is deleted successfully!`, 'Success');
-      this.loadHotel(this.hotelId);
+      this.toastr.success(`Hotel is deleted successfully!`, 'Success');
+      this.router.navigate(['/admin-dashboard']);
     },
     error => {
-      this.toastr.error(`Hotel ${this.hotel.name} deletion failed ${error.message}`, 'Error');
+      this.toastr.error(`Hotel deletion failed Error deleting hotel`, 'Error');
     }
   );
   }

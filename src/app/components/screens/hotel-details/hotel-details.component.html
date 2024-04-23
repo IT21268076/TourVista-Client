@@ -7,8 +7,8 @@
   </div>
 
   <!-- Hotel Details Section -->
-<section class="flex flex-wrap items-center justify-center mb-8">
-  <div class="w-full lg:w-1/2 p-4 h-[500px]"> <!-- Fixed height added here -->
+<section class="flex flex-wrap items-center justify-center mb-8 ">
+  <div class="w-full lg:w-1/2 p-4 "> <!-- Fixed height added here -->
      <swiper-container navigation="true" pagination="true" autoplay="true" delay="3000">
        <swiper-slide *ngFor="let image of hotel.hotelImages">
           <div class="hotel-image rounded-3xl overflow-hidden">
@@ -17,7 +17,7 @@
        </swiper-slide>
       </swiper-container>
   </div>
-  <div class="w-full lg:w-1/2 p-4 h-[500px]"> <!-- Fixed height added here -->
+  <div class="w-full lg:w-1/2 p-4 "> <!-- Fixed height added here -->
      <div class="hotel-details rounded-3xl bg-gray-200 h-full p-6">
        <h2 class="text-2xl font-bold mb-4">{{ hotel.name }}</h2>
        <p class="mb-4">{{ hotel.description }}</p>

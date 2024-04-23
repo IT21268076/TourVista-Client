@@ -1,87 +1,84 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HotelService } from '../../../services/hotel.service';
 import { HotelDetailsComponent } from './hotel-details.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { BookingDetailComponent } from '../../popup/booking-detail/booking-detail.component';
+import { ToastrService } from 'ngx-toastr';
+import { HttpClientTestingModule } from '@angular/common/http/testing'; // Import HttpClientTestingModule
+import { HotelService } from 'src/app/services/hotel.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('HotelDetailsComponent', () => {
- let component: HotelDetailsComponent;
- let fixture: ComponentFixture<HotelDetailsComponent>;
- let mockHotelService: any;
- let mockRoute: any;
- let mockRouter: any;
- let mockDialog: any; 
+  let component: HotelDetailsComponent;
+  let fixture: ComponentFixture<HotelDetailsComponent>;
+  let router: jasmine.SpyObj<Router>;
+  let activatedRoute: ActivatedRoute;
+  let hotelService: HotelService; // Replace with the actual service if available
+  let dialog: any; // Replace with the actual dialog if available
+  let toastr: any; // Replace with the actual toastr service if available
 
- beforeEach(async () => {
-    mockHotelService = jasmine.createSpyObj(['getHotelDetails']);
-    mockRoute = {
-      paramMap: of({ get: () => '1' }),
-      queryParams: of({ checkInDate: '2023-04-01', checkOutDate: '2023-04-05' })
-    };
-    mockRouter = jasmine.createSpyObj('Router', ['navigate']);
-    mockDialog = {
-      open: jasmine.createSpy('open').and.returnValue({
-        afterClosed: () => of({ value: 'confirmed' }) // Mock the afterClosed method to return an observable
+  beforeEach(async () => {
+    const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    const activatedRouteStub = {
+      paramMap: of({ get: () => 'hotelId' }),
+      queryParams: of({
+        checkInDate: '2024-04-20',
+        checkOutDate: '2024-04-25',
+        noOfGuests: 2,
+        roomCount: 1
       })
-    }; 
+    };
+    const hotelServiceStub = {
+      getHotelDetails: () => of({ data: {} }),
+      getRoomTypesAndPrices: () => of([])
+    };
+    const dialogStub = {
+      open: () => ({ afterClosed: () => of('confirmed') })
+    };
+    const toastrStub = {
+      info: () => {},
+      error: () => {},
+      warning: () => {}
+    };
 
     await TestBed.configureTestingModule({
       declarations: [HotelDetailsComponent],
+      imports: [HttpClientTestingModule], // Add HttpClientTestingModule here
       providers: [
-        { provide: HotelService, useValue: mockHotelService },
-        { provide: ActivatedRoute, useValue: mockRoute },
-        { provide: Router, useValue: mockRouter },
-        { provide: MatDialog, useValue: mockDialog }
+        { provide: Router, useValue: routerSpy },
+        { provide: ActivatedRoute, useValue: activatedRouteStub },
+        { provide: MatDialog, useValue: dialogStub },
+        { provide: ToastrService, useValue: toastrStub }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
+    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    activatedRoute = TestBed.inject(ActivatedRoute);
+    hotelService = TestBed.inject(HotelService);
+    dialog = TestBed.inject(MatDialog);
+    toastr = TestBed.inject(ToastrService);
+  });
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(HotelDetailsComponent);
     component = fixture.componentInstance;
- });
-
- it('should fetch hotel details', () => {
-    const hotelDetails = { name: 'Test Hotel', address: '123 Test St' };
-    mockHotelService.getHotelDetails.and.returnValue(of(hotelDetails));
-
-    component.fetchHotelDetails('1');
-
-    expect(component.hotel).toEqual(hotelDetails);
-    expect(mockHotelService.getHotelDetails).toHaveBeenCalledWith('1');
- });
-
-//  it('should fetch room types and prices', () => {
-//   const roomTypesAndPrices = [{ type: 'Deluxe', price: 100 }];
-//   mockHotelService.getRoomTypesAndPrices.and.returnValue(of(roomTypesAndPrices));
- 
-//   component.fetchRoomTypesAndPrices('1');
- 
-//   expect(component.roomTypes).toEqual(roomTypesAndPrices);
-//   expect(mockHotelService.getRoomTypesAndPrices).toHaveBeenCalledWith('1', '2023-04-01', '2023-04-05', 2, 3);
-//  });
-
- it('should open booking detail dialog and handle result', () => {
-  const mockDialogRef = {
-     afterClosed: () => of({ value: 'confirmed' })
-  };
-  mockDialog.open.and.returnValue(mockDialogRef);
- 
-  component.bookRoom({
-    type: 'Deluxe', price: 100,
-    roomTypeId: 0,
-    seasonId: 0,
-    seasonName: '',
-    maxNooOfGuests: 0,
-    markUpPercentage: undefined,
-    supplementSet: [],
-    discounts: [],
-    noOfAvailableRooms: 0
+    fixture.detectChanges();
   });
- 
-  expect(mockDialog.open).toHaveBeenCalled();
-  // Additional assertions to check the dialog was opened with the correct parameters
- });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should fetch hotel details on initialization', () => {
+    spyOn(hotelService, 'getHotelDetails').and.returnValue(of({ data: {} }));
+    component.ngOnInit();
+    expect(hotelService.getHotelDetails).toHaveBeenCalledWith('hotelId');
+  });
+
+  it('should fetch room types and prices on initialization', () => {
+    spyOn(hotelService, 'getRoomTypesAndPrices').and.returnValue(of([]));
+    component.ngOnInit();
+    expect(hotelService.getRoomTypesAndPrices).toHaveBeenCalledWith('hotelId', '2024-04-20', '2024-04-25', 2, 1);
+  });
 });

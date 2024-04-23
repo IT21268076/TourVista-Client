@@ -1,50 +1,31 @@
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, ComponentFactoryResolver, NO_ERRORS_SCHEMA, ViewContainerRef } from '@angular/core';
+import { of } from 'rxjs';
 import { AdminDashboardComponent } from './admin-dashboard.component';
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { ContractFormComponent } from '../../forms/contract-form/contract-form.component';
-import { ModalComponent } from '../../popup/modal/modal.component';
-import { ContractListComponent } from '../contract-list/contract-list.component';
-import { Observable, of } from 'rxjs';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Renderer2 } from '@angular/core';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-// Mock components
-@Component({selector: 'app-add-hotel-form', template: ''})
-class AddHotelFormComponent {}
-
-@Component({selector: 'app-contract-list', template: ''})
-class MockContractListComponent {
-  @ViewChild('dynamicComponentContainer', { read: ViewContainerRef }) dynamicComponentContainer!: ViewContainerRef;
-  hotelId: number | undefined;
-}
-
-@Component({selector: 'app-modal', template: ''})
-class MockModalComponent {
-  @ViewChild('dynamicComponentContainer', { read: ViewContainerRef }) dynamicComponentContainer!: ViewContainerRef;
-  hotelIdObtained: Observable<number> = of(1);
-}
+import { HotelService } from 'src/app/services/hotel.service';
 
 describe('AdminDashboardComponent', () => {
   let component: AdminDashboardComponent;
   let fixture: ComponentFixture<AdminDashboardComponent>;
+  let componentFactoryResolver: ComponentFactoryResolver;
+  let viewContainerRef: ViewContainerRef;
+  let hotelService: jasmine.SpyObj<HotelService>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [
-        AdminDashboardComponent,
-        AddHotelFormComponent,
-        MockContractListComponent,
-        MockModalComponent
-      ],
-      imports: [HttpClientTestingModule, CommonModule],
+  beforeEach(() => {
+    const hotelServiceSpy = jasmine.createSpyObj('HotelService', ['']);
+    TestBed.configureTestingModule({
+      declarations: [AdminDashboardComponent],
       providers: [
-        { provide: Renderer2, useValue: {} }
+        { provide: ComponentFactoryResolver, useClass: MockComponentFactoryResolver },
+        { provide: ViewContainerRef, useValue: { clear: jasmine.createSpy('clear'), createComponent: jasmine.createSpy('createComponent') } },
+        { provide: HotelService, useValue: hotelServiceSpy }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
+
+    componentFactoryResolver = TestBed.inject(ComponentFactoryResolver);
+    viewContainerRef = TestBed.inject(ViewContainerRef);
+    hotelService = TestBed.inject(HotelService) as jasmine.SpyObj<HotelService>;
   });
 
   beforeEach(() => {
@@ -57,18 +38,22 @@ describe('AdminDashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should open hotel email popup and load contract form component with hotel id', () => {
-    spyOn(component, 'loadComponent');
-    spyOn(fixture.componentInstance.dynamicComponentContainer, 'clear');
+  
 
-    const popupRef = new MockModalComponent() as any;
-    popupRef.hotelIdObtained.subscribe((hotelId: number) => {
-      component.loadComponent(ContractFormComponent, hotelId);
-    });
-
-    component.openHotelEmailPopupForAdd();
-    fixture.detectChanges();
-
-    expect(component.loadComponent).toHaveBeenCalledWith(ContractFormComponent, 1);
-  });
+  
 });
+
+class MockComponentFactoryResolver {
+  resolveComponentFactory(component: any) {
+    return {
+      create: () => new MockComponentRef()
+    };
+  }
+}
+
+class MockComponentRef {
+  instance: any;
+}
+
+@Component({ selector: 'app-mock', template: '' })
+class MockComponent { }

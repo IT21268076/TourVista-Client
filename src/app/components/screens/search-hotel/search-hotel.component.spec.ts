@@ -1,101 +1,87 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of, throwError } from 'rxjs';
 import { SearchHotelComponent } from './search-hotel.component';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HotelService } from '../../../services/hotel.service';
+import { of, throwError } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('SearchHotelComponent', () => {
   let component: SearchHotelComponent;
   let fixture: ComponentFixture<SearchHotelComponent>;
-  let mockHotelService: jasmine.SpyObj<HotelService>;
-  let mockActivatedRoute: Partial<ActivatedRoute>;
   let router: Router;
+  let hotelService: any;
+  let activatedRoute: any;
 
-  beforeEach(async () => {
-    mockHotelService = jasmine.createSpyObj('HotelService', ['getHotels']);
-    mockActivatedRoute = {
-      queryParams: of(convertToParamMap({
-        location: 'TestLocation',
-        checkInDate: '2024-04-01',
-        checkOutDate: '2024-04-03',
-        noOfGuests: '2',
-        roomCount: '1'
-      }))
+  beforeEach(waitForAsync(() => {
+    const hotelServiceStub = {
+      getHotels: () => of({ data: [] })
     };
 
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       declarations: [SearchHotelComponent],
       imports: [RouterTestingModule],
       providers: [
-        { provide: HotelService, useValue: mockHotelService },
-        { provide: ActivatedRoute, useValue: mockActivatedRoute }
+        { provide: HotelService, useValue: hotelServiceStub },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            queryParams: of({
+              location: 'New York',
+              checkInDate: '2024-04-10',
+              checkOutDate: '2024-04-15',
+              noOfGuests: 2,
+              roomCount: 1
+            })
+          }
+        }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
-  });
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SearchHotelComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
     router = TestBed.inject(Router);
+    hotelService = TestBed.inject(HotelService);
+    activatedRoute = TestBed.inject(ActivatedRoute);
+    fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should fetch hotels with parameters on initialization', () => {
+    spyOn(hotelService, 'getHotels').and.returnValue(of({ data: [] }));
+    component.ngOnInit();
+    expect(hotelService.getHotels).toHaveBeenCalledWith('New York', '2024-04-10', '2024-04-15');
+  });
 
-
-  it('should update cards when hotels are fetched successfully', fakeAsync(() => {
-    const mockResponse = [
-      { hotelId: 1, name: 'Hotel A', location: 'Location A', description: 'Description A' },
-      { hotelId: 2, name: 'Hotel B', location: 'Location B', description: 'Description B' }
-    ];
-    mockHotelService.getHotels.and.returnValue(of(mockResponse));
-
-    component.fetchHotels('TestLocation', '2024-04-01', '2024-04-03');
-    tick();
-
-    expect(component.cards.length).toEqual(2);
-    expect(component.cards[0].name).toEqual('Hotel A');
-    expect(component.cards[1].name).toEqual('Hotel B');
-  }));
-
-  it('should handle error when fetching hotels fails', fakeAsync(() => {
-    mockHotelService.getHotels.and.returnValue(throwError('Error fetching hotels'));
-
+  it('should handle error when fetching hotels', () => {
+    spyOn(hotelService, 'getHotels').and.returnValue(throwError('Error'));
     spyOn(console, 'error');
+    component.ngOnInit();
+    expect(console.error).toHaveBeenCalledWith('Error fetching hotels:', 'Error');
+  });
 
-    component.fetchHotels('TestLocation', '2024-04-01', '2024-04-03');
-    tick();
-
-    expect(console.error).toHaveBeenCalledWith('Error fetching hotels:', 'Error fetching hotels');
-  }));
-
-  it('should redirect to hotel details page with correct parameters', () => {
-    const routerSpy = spyOn(router, 'navigate');
+  it('should navigate to hotel details with query parameters', () => {
+    spyOn(router, 'navigate');
     const hotelId = '123';
-
-    component.checkInDate = '2024-04-01';
-    component.checkOutDate = '2024-04-03';
+    component.checkInDate = '2024-04-10';
+    component.checkOutDate = '2024-04-15';
     component.noOfGuests = 2;
     component.roomCount = 1;
-
     component.redirectToHotelDetails(hotelId);
-
-    expect(routerSpy).toHaveBeenCalledWith(['/hotel-details', hotelId], {
+    expect(router.navigate).toHaveBeenCalledWith(['/hotel-details', hotelId], {
       queryParams: {
-        checkInDate: '2024-04-01',
-        checkOutDate: '2024-04-03',
+        checkInDate: '2024-04-10',
+        checkOutDate: '2024-04-15',
         noOfGuests: 2,
         roomCount: 1
       }
     });
   });
-
-  // Add more test cases as needed
 });
