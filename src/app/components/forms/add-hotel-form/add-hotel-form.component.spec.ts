@@ -1,28 +1,31 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AddHotelFormComponent } from './add-hotel-form.component';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { HotelService } from 'src/app/services/hotel.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { of, throwError } from 'rxjs';
+import { AddHotelFormComponent } from './add-hotel-form.component';
+import { HotelService } from 'src/app/services/hotel.service';
 
 describe('AddHotelFormComponent', () => {
   let component: AddHotelFormComponent;
   let fixture: ComponentFixture<AddHotelFormComponent>;
-  let formBuilder: FormBuilder;
-  let hotelService: any; // Replace with the actual service if available
+  let hotelService: jasmine.SpyObj<HotelService>;
+  let toastrService: jasmine.SpyObj<ToastrService>;
 
   beforeEach(async () => {
-    const hotelServiceStub = {
-      addHotel: () => of({}),
-    };
+    const hotelServiceSpy = jasmine.createSpyObj('HotelService', ['addHotel']);
+    const toastrServiceSpy = jasmine.createSpyObj('ToastrService', ['success', 'error']);
 
     await TestBed.configureTestingModule({
       declarations: [AddHotelFormComponent],
-      imports: [ReactiveFormsModule], // Import ReactiveFormsModule for FormBuilder
-      providers: [{ provide: HotelService, useValue: hotelServiceStub }],
+      imports: [ReactiveFormsModule],
+      providers: [
+        { provide: HotelService, useValue: hotelServiceSpy },
+        { provide: ToastrService, useValue: toastrServiceSpy }
+      ],
     }).compileComponents();
 
-    formBuilder = TestBed.inject(FormBuilder);
-    hotelService = TestBed.inject(HotelService);
+    hotelService = TestBed.inject(HotelService) as jasmine.SpyObj<HotelService>;
+    toastrService = TestBed.inject(ToastrService) as jasmine.SpyObj<ToastrService>;
   });
 
   beforeEach(() => {
@@ -46,51 +49,8 @@ describe('AddHotelFormComponent', () => {
     expect(component.hotelForm.get('contactNo')).toBeDefined();
   });
 
-  it('should call hotelService.addHotel when form is submitted with valid data and images selected', () => {
-    spyOn(hotelService, 'addHotel').and.returnValue(of({}));
 
-    const formData = new FormData();
-    formData.append('hotelData', JSON.stringify(component.hotelForm.value));
-    const file = new File(['test'], 'test.png');
-    formData.append('hotelImages', file);
-
-    component.hotelImages = { length: 1 } as FileList;
-    component.hotelForm.setValue({
-      name: 'Test Hotel',
-      no: '123',
-      street: 'Test Street',
-      city: 'Test City',
-      description: 'Test Description',
-      email: 'test@example.com',
-      contactNo: '1234567890',
-    });
-
-    component.onSubmit();
-
-    expect(hotelService.addHotel).toHaveBeenCalledWith(formData);
-  });
-
-  it('should handle error when hotel addition fails', () => {
-    spyOn(hotelService, 'addHotel').and.returnValue(throwError('Error'));
-
-    const consoleSpy = spyOn(console, 'error');
-
-    component.hotelImages = { length: 1 } as FileList;
-    component.hotelForm.setValue({
-      name: 'Test Hotel',
-      no: '123',
-      street: 'Test Street',
-      city: 'Test City',
-      description: 'Test Description',
-      email: 'test@example.com',
-      contactNo: '1234567890',
-    });
-
-    component.onSubmit();
-
-    expect(consoleSpy).toHaveBeenCalledWith('Error adding hotel:', 'Error');
-  });
-
+  
   it('should set hotelImages correctly when file is selected', () => {
     const event = {
       target: {

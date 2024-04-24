@@ -17,7 +17,7 @@ export class RoomTypeService {
    }
 
   getPriceByRoomType(roomTypeId: any): Observable<any>{
-    return this.http.get<any>(`${this.backendUrl}/roomType/${roomTypeId}`);
+    return this.http.get<any>(`${this.backendUrl}/roomType/roomType/${roomTypeId}`);
   }
    
 }

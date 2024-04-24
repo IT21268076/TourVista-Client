@@ -1,3 +1,4 @@
+import { UpdateContractComponent } from './../../forms/update-contract/update-contract.component';
 // import { Component, ComponentFactoryResolver, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
 // import { AddHotelFormComponent } from '../../forms/add-hotel-form/add-hotel-form.component';
 // import { ContractFormComponent } from '../../forms/contract-form/contract-form.component';
@@ -119,10 +120,17 @@ export class AdminDashboardComponent {
   hotelEmailPopupComponent = ModalComponent;
   hotelListComponent = HotelListComponent;
   viewHotelComponent = ViewHotelComponent;
+  updateContractComponent = UpdateContractComponent;
 
   hotelIdSubscription!: Subscription; // Subscription to handle hotelId obtained from popup
+  isExpanded: boolean = true;
+  contractId: any;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private hotelService: HotelService) {}
+
+  toggleSidebar(): void {
+    this.isExpanded = !this.isExpanded;
+  }
 
   loadComponent(component: any, hotelId?: number) {
     this.dynamicComponentContainer.clear();
@@ -132,8 +140,13 @@ export class AdminDashboardComponent {
       (componentRef.instance as ContractFormComponent).hotelId = hotelId; // Set hotelId for ContractFormComponent
     } else if (component === this.contractListComponent && hotelId){
       (componentRef.instance as ContractListComponent).hotelId = hotelId;
-    } else if (component === this.viewHotelComponent && hotelId)
+    } else if (component === this.viewHotelComponent && hotelId){
       (componentRef.instance as ViewHotelComponent).hotelId = hotelId;
+    } else if (component === this.updateContractComponent){
+      this.contractId = hotelId;
+      (componentRef.instance as UpdateContractComponent).contractId = this.contractId;
+    }
+      
   }
 
   openHotelEmailPopupForView() {

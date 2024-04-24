@@ -38,8 +38,18 @@
   </div>
 
   <div class="mb-4">
-    <label for="contactno" class="block text-gray-700">Contact No:</label>
-    <input type="text" id="contactNo" formControlName="contactNo" required class="w-full px-3 py-2 rounded-lg border-gray-700 bg-white text-gray-700 focus:outline-none focus:border-[#65B490]">
+    <label for="contactNo" class="block text-gray-700">Contact No:</label>
+    <input type="text" id="contactNo" formControlName="contactNo" required
+      class="w-full px-3 py-2 rounded-lg border-gray-700 bg-white text-gray-700 focus:outline-none focus:border-[#65B490]">
+    <div *ngIf="f['contactNo'] && (f['contactNo'].invalid && (f['contactNo'].dirty || f['contactNo'].touched))"
+      class="text-red-500 mt-1">
+      <div *ngIf="f['contactNo'].errors?.['required']">
+        Contact number is required.
+      </div>
+      <div *ngIf="f['contactNo'].errors?.['pattern']">
+        Contact number must be 10 digits.
+      </div>
+    </div>
   </div>
 
   <div class="mb-4">

@@ -1,3 +1,4 @@
+import { AdminDashboardComponent } from './../admin-dashboard/admin-dashboard.component';
 
 import { ContractService } from 'src/app/services/contract.service';
 import { Component, OnInit } from '@angular/core';
@@ -5,6 +6,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { ActivatedRoute, Router } from '@angular/router';
 import { HotelService } from 'src/app/services/hotel.service';
 import { ToastrService } from 'ngx-toastr';
+import { ViewHotelComponent } from '../view-hotel/view-hotel.component';
 
 @Component({
   selector: 'app-hotel-list',
@@ -18,7 +20,7 @@ export class HotelListComponent implements OnInit{
   image: any;
   hotelImage: any;
 
- constructor(private route: ActivatedRoute, private hotelService: HotelService, private router: Router, private toastr: ToastrService) { }
+ constructor(private route: ActivatedRoute, private hotelService: HotelService, private adminDashboardComponent: AdminDashboardComponent, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loadHotels();
@@ -68,7 +70,8 @@ export class HotelListComponent implements OnInit{
 
   editHotel(hotelId: number) {
     console.log('Edit Hotel:', hotelId);
-    this.router.navigate([`/view-hotel/${hotelId}`]);
+    this.adminDashboardComponent.loadComponent(ViewHotelComponent, hotelId);
+    //this.router.navigate([`/view-hotel/${hotelId}`]);
   }
 
   deleteHotel(contractId: number) {

@@ -40,24 +40,31 @@
             </a>
         </div>
 
-        <!-- Second Sidebar Component (Larger) -->
-        <div class="flex flex-col items-center w-48 pb-4 overflow-auto  bg-gray-200 text-[#65B490]">
-            <!-- Second Sidebar Path Texts -->
-            <p class="py-2 ">
+        <div class="flex">
+            <div class="flex flex-col items-center w-48 pb-4 overflow-auto bg-gray-200 text-[#65B490]" [ngClass]="{ 'hidden': !isExpanded }">
+              <!-- Second Sidebar Path Texts -->
+              <p class="py-2 ">
                 <img class="max-w-[70px] " src="../../../../assets/images/logoA.png" alt="Example Image">
               </p>
-            <a (click)="loadComponent(addHotelComponent)" class="block py-2 px-4 text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition duration-300">Add Hotel</a>
-            
-            <a (click)="openHotelEmailPopupForAdd()" class="block py-2 px-4  text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition duration-300">Add Contract</a>
-
-            <a (click)="openHotelEmailPopupForView()" class="block py-2 px-4  text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition duration-300">View Contracts</a>
-            
-            <a (click)="openHotelEmailPopupForViewHotel()" class="block py-2 px-4  text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition duration-300">View Hotel</a>
-
-            <a (click)="loadComponent(hotelListComponent)" class="block py-2 px-4  text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition duration-300">View Hotel List</a>
-
-            <!-- Add more path texts here -->
-        </div>
+              <a (click)="loadComponent(addHotelComponent)" class="block py-2 px-4 text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition duration-300">Add Hotel</a>
+          
+              <a (click)="openHotelEmailPopupForAdd()" class="block py-2 px-4 text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition duration-300">Add Contract</a>
+          
+              <a (click)="openHotelEmailPopupForView()" class="block py-2 px-4 text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition duration-300">View Contracts</a>
+          
+              <a (click)="openHotelEmailPopupForViewHotel()" class="block py-2 px-4 text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition duration-300">View Hotel</a>
+          
+              <a (click)="loadComponent(hotelListComponent)" class="block py-2 px-4 text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition duration-300">View Hotel List</a>
+          
+              <!-- Add more path texts here -->
+            </div>
+            <button class="border border-gray-300 bg-gray-200 text-[#65B490] rounded-full w-8 h-8 m-2" (click)="toggleSidebar()">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+          </div>
+          
 
         <!-- Main Content Area -->
         <div class="flex flex-col flex-grow">

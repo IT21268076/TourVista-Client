@@ -28,9 +28,10 @@ export class UpdateContractComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const contractId = params['contractId'];
-      if (contractId) {
-        this.fetchContractDetails(contractId);
+      // const contractId = params['contractId'];
+      this.contractId;
+      if (this.contractId) {
+        this.fetchContractDetails(this.contractId);
       } else {
         console.log("Error while fetching contractId");
       }
