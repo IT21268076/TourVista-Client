@@ -48,6 +48,7 @@ import { PaymentComponent } from './components/forms/payment/payment.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HotelListComponent } from './components/screens/hotel-list/hotel-list.component';
 import { ViewHotelComponent } from './components/screens/view-hotel/view-hotel.component';
+import { InitialAdminDashComponent } from './components/screens/initial-admin-dash/initial-admin-dash.component';
 
 
 register();
@@ -78,7 +79,8 @@ register();
     PaymentComponent,
     FooterComponent,
     HotelListComponent,
-    ViewHotelComponent
+    ViewHotelComponent,
+    InitialAdminDashComponent
   ],
   imports: [
     BrowserModule,

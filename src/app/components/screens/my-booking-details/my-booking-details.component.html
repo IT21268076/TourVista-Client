@@ -39,6 +39,14 @@
              <p class="font-bold">No of Nights:</p>
              <p class="pl-8">{{ calculateNights(booking.checkInDate, booking.checkOutDate) }}</p>
            </div>
+           <div class="w-full md:w-1/2 px-2">
+            <p class="font-bold">Payment Status</p>
+            <p class="pl-8">{{ booking.payStatus }}</p>
+          </div>
+          <div class="w-full md:w-1/2 px-2">
+            <p class="font-bold">Balance Method:</p>
+            <p class="pl-8">{{ booking.payMethod }}</p>
+          </div>
          </div>
        </div>
     </div>
@@ -73,7 +81,25 @@
            <!-- Policies -->
            <div class="bg-gray-100 p-4 rounded-lg shadow-md">
               <h3 class="font-semibold text-lg mb-2">Policies</h3>
-              <p class="text-gray-700">{{ booking.policies }}</p>
+              <div class="paymentPolicies mt-6">
+                <p class="font-bold">Payment Policies: </p>
+                <li>
+                  <span class="font-semibold">Prepayment:</span> A deposit of <span class="font-semibold">{{booking.prepaymentPercentage}}%</span> of the total stay may be charged at the time of booking.
+                </li>
+                <li>
+                  <span class="font-semibold">Balance Payment:</span> The remaining balance will be charged <span class="font-semibold">{{booking.noOfBalancePaymentDates}} days</span> prior to the arrival date. 
+                </li>
+              </div>
+
+              <div class="cancellationPolicies mt-6">
+                <p class="font-bold">Cancellation Policies: </p>
+                <li>
+                  <span class="font-semibold">Cancellation Deadline:</span> Cancellations made <span class="font-semibold">{{booking.noOfDatesOfCancellation}} days</span> prior to the arrival date are eligible for a full refund.
+                </li>
+                <li>
+                  <span class="font-semibold">Cancellation Fee:</span> Cancellations made <span class="font-semibold">{{booking.noOfDatesOfCancellation}} days</span> prior to the arrival date will be subjected to a cancellation fee of {{booking.cancellationFee}}% of the total reservation cost.
+                </li>
+              </div>
            </div>
         </div>
      </div>

@@ -16,6 +16,7 @@ import { RegisterComponent } from './components/forms/register/register.componen
 import { MyBookingDetailsComponent } from './components/screens/my-booking-details/my-booking-details.component';
 import { ContractListComponent } from './components/screens/contract-list/contract-list.component';
 import { UpdateContractComponent } from './components/forms/update-contract/update-contract.component';
+import { InitialAdminDashComponent } from './components/screens/initial-admin-dash/initial-admin-dash.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -32,7 +33,8 @@ const routes: Routes = [
   {path: 'my-booking-details/:bookingId', component: MyBookingDetailsComponent, canActivate: [AuthGuard], data: { roles: ['USER']}},
   {path: 'payment/:bookingId', component: PaymentComponent, canActivate: [AuthGuard], data: { roles: ['USER']}},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent}
+  {path: 'register', component: RegisterComponent},
+  {path: 'initial', component: InitialAdminDashComponent}
 ];
 
 @NgModule({

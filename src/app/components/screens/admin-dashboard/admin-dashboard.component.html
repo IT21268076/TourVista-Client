@@ -46,15 +46,15 @@
               <p class="py-2 ">
                 <img class="max-w-[70px] " src="../../../../assets/images/logoA.png" alt="Example Image">
               </p>
-              <a (click)="loadComponent(addHotelComponent)" class="block py-2 px-4 text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition duration-300">Add Hotel</a>
+              <a (click)="loadComponent(addHotelComponent)" class="block py-2 px-4 text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition text-md duration-300">Add Hotel</a>
           
-              <a (click)="openHotelEmailPopupForAdd()" class="block py-2 px-4 text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition duration-300">Add Contract</a>
+              <a (click)="openHotelEmailPopupForAdd()" class="block py-2 px-4 text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition text-md duration-300">Add Contract</a>
           
-              <a (click)="openHotelEmailPopupForView()" class="block py-2 px-4 text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition duration-300">View Contracts</a>
+              <a (click)="openHotelEmailPopupForView()" class="block py-2 px-4 text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition text-md duration-300">View Contracts</a>
           
-              <a (click)="openHotelEmailPopupForViewHotel()" class="block py-2 px-4 text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition duration-300">View Hotel</a>
+              <a (click)="openHotelEmailPopupForViewHotel()" class="block py-2 px-4 text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition text-md duration-300">View Hotel</a>
           
-              <a (click)="loadComponent(hotelListComponent)" class="block py-2 px-4 text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition duration-300">View Hotel List</a>
+              <a (click)="loadComponent(hotelListComponent)" class="block py-2 px-4 text-[#65B490] rounded-md border border-transparent hover:bg-gray-300 font-semibold transition text-md duration-300">View Hotel List</a>
           
               <!-- Add more path texts here -->
             </div>
@@ -90,7 +90,8 @@
 
             <div class="flex-grow p-6 overflow-auto rounded-2xl shadow-lg bg-gray-300">
                 <!-- Outlet for dynamically loaded components -->
-            <div class="dynamic-component-container" #dynamicComponentContainer></div>
+                <div class="dynamic-component-container" #dynamicComponentContainer >
+                  </div>
             </div>
         </div>
     </div>

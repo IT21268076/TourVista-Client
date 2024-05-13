@@ -63,13 +63,13 @@ style="fill:#000000;">
   <div class="bg-gray-200">
     <div class="mx-48 max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
-        <h2 class="text-2xl font-bold text-gray-900">Popular Hotels</h2>
+        <h2 class="text-2xl font-bold text-gray-900">Our Most Popular Hotels</h2>
 
-        <div class="mt-6 overflow-x-auto flex flex-nowrap">
+        <div class="mt-6 overflow-x-auto flex flex-nowrap ">
           <ng-container *ngFor="let hotel of hotels">
-            <div class="group relative bg-gray-300 rounded-3xl mr-6" (click)="navigateToHotel(hotel.hotelId)">
-              <div class="relative h-80 w-full overflow-hidden rounded-t-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
-                <img [src]="'data:image/png;base64,' + hotel.hotelImages[0]?.image" class="h-full w-full object-cover object-center">
+            <div class="group relative bg-gray-300 rounded-3xl mr-10 w-[600px]" (click)="navigateToHotel(hotel.hotelId)">
+              <div class="relative h-80 max-w-7xl overflow-hidden rounded-t-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
+                <img [src]="'data:image/png;base64,' + hotel.hotelImages[0]?.image" class="h-full  object-cover object-center">
               </div>
               <h3 class="text-sm text-gray-500 px-4">
                 <span class="absolute inset-0"></span>
@@ -79,7 +79,7 @@ style="fill:#000000;">
             </div>
           </ng-container>
         </div>
-
+                  
       </div>
     </div>
   </div>

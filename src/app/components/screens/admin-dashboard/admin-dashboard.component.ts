@@ -1,3 +1,4 @@
+import { HotelDetailsComponent } from './../hotel-details/hotel-details.component';
 import { UpdateContractComponent } from './../../forms/update-contract/update-contract.component';
 // import { Component, ComponentFactoryResolver, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
 // import { AddHotelFormComponent } from '../../forms/add-hotel-form/add-hotel-form.component';
@@ -94,7 +95,124 @@ import { UpdateContractComponent } from './../../forms/update-contract/update-co
 // }
 
 
-import { Component, ComponentFactoryResolver, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
+// import { Component, ComponentFactoryResolver, ComponentRef, ViewChild, ViewContainerRef, OnInit } from '@angular/core';
+// import { AddHotelFormComponent } from '../../forms/add-hotel-form/add-hotel-form.component';
+// import { ContractFormComponent } from '../../forms/contract-form/contract-form.component';
+// import { ContractListComponent } from '../contract-list/contract-list.component';
+// import { ModalComponent } from '../../popup/modal/modal.component';
+// import { HotelService } from 'src/app/services/hotel.service'; // Import HotelService
+// import { Subscription } from 'rxjs'; // Import Subscription
+// import { HotelListComponent } from '../hotel-list/hotel-list.component';
+// import { NavBarComponent } from '../../nav-bar/nav-bar.component';
+// import { ViewHotelComponent } from '../view-hotel/view-hotel.component';
+// import { InitialAdminDashComponent } from '../initial-admin-dash/initial-admin-dash.component';
+
+// @Component({
+//   selector: 'app-admin-dashboard',
+//   templateUrl: './admin-dashboard.component.html',
+//   styleUrls: ['./admin-dashboard.component.css']
+// })
+// export class AdminDashboardComponent {
+//   @ViewChild('dynamicComponentContainer', { read: ViewContainerRef }) dynamicComponentContainer!: ViewContainerRef;
+
+//   // Declare component properties
+//   addHotelComponent = AddHotelFormComponent;
+//   addContractComponent = ContractFormComponent;
+//   contractListComponent = ContractListComponent;
+//   hotelEmailPopupComponent = ModalComponent;
+//   hotelListComponent = HotelListComponent;
+//   viewHotelComponent = ViewHotelComponent;
+//   updateContractComponent = UpdateContractComponent;
+//   initialDash = InitialAdminDashComponent;
+
+//   hotelIdSubscription!: Subscription; // Subscription to handle hotelId obtained from popup
+//   isExpanded: boolean = true;
+//   contractId: any;
+
+//   constructor(private componentFactoryResolver: ComponentFactoryResolver, private hotelService: HotelService) {}
+
+//   ngOnInit() {
+//     this.loadComponent(InitialAdminDashComponent);
+//   }
+
+//   toggleSidebar(): void {
+//     this.isExpanded = !this.isExpanded;
+//   }
+
+//   // loadComponent(component: any, hotelId?: number) {
+//   //   this.dynamicComponentContainer.clear();
+//   //   const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
+//   //   const componentRef: ComponentRef<any> = this.dynamicComponentContainer.createComponent(componentFactory);
+//   //   if (component === this.addContractComponent && hotelId) {
+//   //     (componentRef.instance as ContractFormComponent).hotelId = hotelId; // Set hotelId for ContractFormComponent
+//   //   } else if (component === this.contractListComponent && hotelId){
+//   //     (componentRef.instance as ContractListComponent).hotelId = hotelId;
+//   //   } else if (component === this.viewHotelComponent && hotelId){
+//   //     (componentRef.instance as ViewHotelComponent).hotelId = hotelId;
+//   //   } else if (component === this.updateContractComponent){
+//   //     this.contractId = hotelId;
+//   //     (componentRef.instance as UpdateContractComponent).contractId = this.contractId;
+//   //   } else {
+//   //     (componentRef.instance as InitialAdminDashComponent);
+//   //   }
+      
+//   // }
+
+//   loadComponent(component: any, hotelId?: number) {
+//     this.dynamicComponentContainer.clear();
+//     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
+//     const componentRef: ComponentRef<any> = this.dynamicComponentContainer.createComponent(componentFactory);
+    
+//     // Default to InitialAdminDashComponent if no specific component is passed or hotelId is not provided
+//     if (!hotelId) {
+//       (componentRef.instance as InitialAdminDashComponent);
+//     } else if (component === this.addContractComponent && hotelId) {
+//       (componentRef.instance as ContractFormComponent).hotelId = hotelId; // Set hotelId for ContractFormComponent
+//     } else if (component === this.contractListComponent && hotelId){
+//       (componentRef.instance as ContractListComponent).hotelId = hotelId;
+//     } else if (component === this.viewHotelComponent && hotelId){
+//       (componentRef.instance as ViewHotelComponent).hotelId = hotelId;
+//     } else if (component === this.updateContractComponent){
+//       this.contractId = hotelId;
+//       (componentRef.instance as UpdateContractComponent).contractId = this.contractId;
+//     }
+//   }
+  
+  
+
+//   openHotelEmailPopupForView() {
+//     const popupFactory = this.componentFactoryResolver.resolveComponentFactory(this.hotelEmailPopupComponent);
+//     const popupRef = this.dynamicComponentContainer.createComponent(popupFactory);
+//     popupRef.instance.hotelIdObtained.subscribe((hotelId: number) => {
+//       // this.loadComponent(this.addContractComponent, hotelId);
+//       this.loadComponent(this.contractListComponent, hotelId);
+//       popupRef.destroy(); // Close the popup after obtaining the hotelId
+//     });
+//   }
+  
+//   openHotelEmailPopupForViewHotel() {
+//     const popupFactory = this.componentFactoryResolver.resolveComponentFactory(this.hotelEmailPopupComponent);
+//     const popupRef = this.dynamicComponentContainer.createComponent(popupFactory);
+//     popupRef.instance.hotelIdObtained.subscribe((hotelId: number) => {
+//       // this.loadComponent(this.addContractComponent, hotelId);
+//       this.loadComponent(this.viewHotelComponent, hotelId);
+//       popupRef.destroy(); // Close the popup after obtaining the hotelId
+//     });
+//   }
+
+//   openHotelEmailPopupForAdd() {
+//     const popupFactory = this.componentFactoryResolver.resolveComponentFactory(this.hotelEmailPopupComponent);
+//     const popupRef = this.dynamicComponentContainer.createComponent(popupFactory);
+//     popupRef.instance.hotelIdObtained.subscribe((hotelId: number) => {
+//       this.loadComponent(this.addContractComponent, hotelId);
+//       // this.loadComponent(this.contractListComponent, hotelId);
+//       popupRef.destroy(); // Close the popup after obtaining the hotelId
+//     });
+//   }
+// }
+
+
+import { Component, ComponentFactoryResolver, ComponentRef, ViewChild, ViewContainerRef, OnInit, AfterViewInit } from '@angular/core';
 import { AddHotelFormComponent } from '../../forms/add-hotel-form/add-hotel-form.component';
 import { ContractFormComponent } from '../../forms/contract-form/contract-form.component';
 import { ContractListComponent } from '../contract-list/contract-list.component';
@@ -104,13 +222,14 @@ import { Subscription } from 'rxjs'; // Import Subscription
 import { HotelListComponent } from '../hotel-list/hotel-list.component';
 import { NavBarComponent } from '../../nav-bar/nav-bar.component';
 import { ViewHotelComponent } from '../view-hotel/view-hotel.component';
+import { InitialAdminDashComponent } from '../initial-admin-dash/initial-admin-dash.component';
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.css']
 })
-export class AdminDashboardComponent {
+export class AdminDashboardComponent implements AfterViewInit {
   @ViewChild('dynamicComponentContainer', { read: ViewContainerRef }) dynamicComponentContainer!: ViewContainerRef;
 
   // Declare component properties
@@ -120,23 +239,35 @@ export class AdminDashboardComponent {
   hotelEmailPopupComponent = ModalComponent;
   hotelListComponent = HotelListComponent;
   viewHotelComponent = ViewHotelComponent;
-  updateContractComponent = UpdateContractComponent;
+  updateContractComponent = UpdateContractComponent; // Ensure this component is imported
+  initialDash = InitialAdminDashComponent;
 
   hotelIdSubscription!: Subscription; // Subscription to handle hotelId obtained from popup
   isExpanded: boolean = true;
   contractId: any;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private hotelService: HotelService) {}
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
+  ngAfterViewInit() {
+    this.loadComponent(this.initialDash); // Load the initial dashboard component
+  }
+  
   toggleSidebar(): void {
-    this.isExpanded = !this.isExpanded;
+    this.isExpanded =!this.isExpanded;
   }
 
   loadComponent(component: any, hotelId?: number) {
     this.dynamicComponentContainer.clear();
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
     const componentRef: ComponentRef<any> = this.dynamicComponentContainer.createComponent(componentFactory);
-    if (component === this.addContractComponent && hotelId) {
+    
+    // Example of setting hotelId for a specific component
+    if (component === this.initialDash && hotelId) {
+      (componentRef.instance as InitialAdminDashComponent);
+    } else if (component === this.addContractComponent && hotelId) {
       (componentRef.instance as ContractFormComponent).hotelId = hotelId; // Set hotelId for ContractFormComponent
     } else if (component === this.contractListComponent && hotelId){
       (componentRef.instance as ContractListComponent).hotelId = hotelId;
@@ -146,14 +277,12 @@ export class AdminDashboardComponent {
       this.contractId = hotelId;
       (componentRef.instance as UpdateContractComponent).contractId = this.contractId;
     }
-      
   }
-
+  
   openHotelEmailPopupForView() {
     const popupFactory = this.componentFactoryResolver.resolveComponentFactory(this.hotelEmailPopupComponent);
     const popupRef = this.dynamicComponentContainer.createComponent(popupFactory);
     popupRef.instance.hotelIdObtained.subscribe((hotelId: number) => {
-      // this.loadComponent(this.addContractComponent, hotelId);
       this.loadComponent(this.contractListComponent, hotelId);
       popupRef.destroy(); // Close the popup after obtaining the hotelId
     });
@@ -163,7 +292,6 @@ export class AdminDashboardComponent {
     const popupFactory = this.componentFactoryResolver.resolveComponentFactory(this.hotelEmailPopupComponent);
     const popupRef = this.dynamicComponentContainer.createComponent(popupFactory);
     popupRef.instance.hotelIdObtained.subscribe((hotelId: number) => {
-      // this.loadComponent(this.addContractComponent, hotelId);
       this.loadComponent(this.viewHotelComponent, hotelId);
       popupRef.destroy(); // Close the popup after obtaining the hotelId
     });
@@ -174,7 +302,6 @@ export class AdminDashboardComponent {
     const popupRef = this.dynamicComponentContainer.createComponent(popupFactory);
     popupRef.instance.hotelIdObtained.subscribe((hotelId: number) => {
       this.loadComponent(this.addContractComponent, hotelId);
-      // this.loadComponent(this.contractListComponent, hotelId);
       popupRef.destroy(); // Close the popup after obtaining the hotelId
     });
   }

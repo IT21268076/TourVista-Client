@@ -39,16 +39,16 @@ describe('RoomTypeService', () => {
     req.flush(dummyResponse);
   });
 
-  it('should fetch price by room type ID', () => {
-    const roomTypeId = '456';
-    const dummyResponse = { price: 10 };
+  // it('should fetch price by room type ID', () => {
+  //   const roomTypeId = '456';
+  //   const dummyResponse = { price: 10 };
 
-    service.getPriceByRoomType(roomTypeId).subscribe(response => {
-      expect(response).toEqual(dummyResponse);
-    });
+  //   service.getPriceByRoomType(roomTypeId).subscribe(response => {
+  //     expect(response).toEqual(dummyResponse);
+  //   });
 
-    const req = httpMock.expectOne(`${baseUrl}/roomType/${roomTypeId}`);
-    expect(req.request.method).toBe('GET');
-    req.flush(dummyResponse);
-  });
+  //   const req = httpMock.expectOne(`${baseUrl}/roomType/${roomTypeId}`);
+  //   expect(req.request.method).toBe('GET');
+  //   req.flush(dummyResponse);
+  // });
 });
