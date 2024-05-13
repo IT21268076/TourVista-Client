@@ -127,7 +127,7 @@ export class BookingDetailComponent implements OnInit {
     const numberOfNights = Math.ceil((checkOutDate.getTime() - checkInDate.getTime()) / (1000 * 60 * 60 * 24));
    
     // Calculate the base price without discounts
-    const basePrice = (Number(this.roomTypePrice) * this.roomCount ) * this.markUpPercentage / 100 * numberOfNights * this.noOfGuests;
+    const basePrice = (Number(this.roomTypePrice) * this.roomCount ) * numberOfNights * this.noOfGuests;
    
     // Calculate discount amount
     this.discounts.forEach(discount => {
@@ -135,7 +135,7 @@ export class BookingDetailComponent implements OnInit {
     });
    
     // Calculate the total amount
-    this.totalAmount = (basePrice * numberOfNights) + supplementsPrice - discountAmount;
+    this.totalAmount = (basePrice + supplementsPrice - discountAmount) * (this.markUpPercentage / 100);
    }
 
    proceedToPayment(bookingId: any, prepaymentPercentage: any, totalAmount: any): void {
